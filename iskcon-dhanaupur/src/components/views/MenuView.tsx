@@ -15,7 +15,7 @@ export default function MenuView({ t, lang, onSelect }: Props) {
   const carouselImages = [
     { src: '/deity1.jpg', alt: 'Sri Sri Radha ShyamSundar 1' },
     { src: '/Jagannath Darshan.jpeg', alt: 'Sri Sri Radha ShyamSundar 2' },
-    { src: '/deityy3.jpg', alt: 'Sri Sri Radha ShyamSundar 3' },
+    { src: '/Gaur Nitai.jpeg', alt: 'Sri Sri Radha ShyamSundar 3' },
     { src: '/deity.jpg', alt: 'Sri Sri Radha ShyamSundar 1 Clone' }, // Endless loop ke liye clone zaroori hai
   ];
 
