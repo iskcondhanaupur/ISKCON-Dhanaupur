@@ -38,10 +38,10 @@ export default function Navbar({ lang = 'en', onLangChange, menu = [], onMenuSel
               alt="ISKCON Dhanaupur"
               width={160}
               height={56}
-              priority 
-              style={{ 
-                objectFit: 'contain', 
-                width: 'auto', 
+              priority
+              style={{
+                objectFit: 'contain',
+                width: 'auto',
                 height: 'clamp(30px, 15vw, 40px)'
               }}
             />
@@ -88,8 +88,8 @@ export default function Navbar({ lang = 'en', onLangChange, menu = [], onMenuSel
                   <span key={i} style={{
                     display: 'block', width: 20, height: 1.6, background: '#7a1f1f', borderRadius: 2,
                     transition: 'transform 0.25s, opacity 0.25s',
-                    transform: open && i === 0 ? 'rotate(45deg) translate(4.5px,4.5px)' : open && i === 2 ? 'rotate(-45deg) translate(4.5px,-4.5px)' : 'none',
-                    opacity: open && i === 1 ? 0 : 1,
+                    transform: 'none',
+                    opacity: 1,
                   }} />
                 ))}
               </button>
@@ -106,44 +106,55 @@ export default function Navbar({ lang = 'en', onLangChange, menu = [], onMenuSel
               background: '#fdf5e6', borderRadius: 16, width: 300,
               maxHeight: '80vh', overflowY: 'auto',
               padding: '14px 14px 18px',
-              display: 'flex', flexDirection: 'column', gap: 4,
+              display: 'flex', flexDirection: 'column', gap: 0,
               boxShadow: '0 0 0 1px rgba(184,134,11,0.2), 0 12px 40px rgba(122,31,31,0.18)',
               border: '1.5px solid #c9a84c',
+              position: 'relative',
             }}
           >
-            {/* All menu items including Donation */}
-            {menu.map(item => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => { setOpen(false); onMenuSelect?.(item.id) }}
-                style={{
-                  width: '100%', textAlign: 'left', border: 'none', background: 'transparent',
-                  padding: '12px 14px', borderRadius: 8, cursor: 'pointer',
-                  fontFamily: ff, fontSize: 16, fontWeight: 600,
-                  color: '#2d1a0e', transition: 'background 0.15s, padding-left 0.15s',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#f5e6c0'; e.currentTarget.style.paddingLeft = '18px' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.paddingLeft = '14px' }}
-              >
-                {item.label}
-              </button>
-            ))}
+            {/* Close button inside drawer */}
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="Close menu"
+              style={{
+                position: 'absolute', top: 12, right: 12,
+                background: 'none', border: 'none', cursor: 'pointer',
+                width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#7a1f1f', fontSize: 20, lineHeight: 1,
+                borderRadius: 6, transition: 'background 0.15s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#f5e6c0' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'none' }}
+            >
+              ✕
+            </button>
 
-            <div style={{ marginTop: 10, paddingTop: 12, borderTop: '1px solid #e8d5a3' }}>
-              <button
-                type="button"
-                onClick={() => { setOpen(false); onMenuSelect?.('menu') }}
-                style={{
-                  width: '100%', padding: '11px 16px', borderRadius: 20,
-                  border: '1.5px solid #c9a84c', background: '#faf6ef', color: '#5c1a1a',
-                  cursor: 'pointer', fontFamily: 'Cormorant Garamond, serif',
-                  fontWeight: 700, fontSize: 15, letterSpacing: '0.04em',
-                }}
-              >
-                {lang === 'hi' ? 'होम' : 'Home'}
-              </button>
-            </div>
+            {/* Spacer for close button */}
+            <div style={{ height: 32 }} />
+
+            {/* Menu items with dividers */}
+            {menu.map((item, idx) => (
+              <div key={item.id}>
+                <button
+                  type="button"
+                  onClick={() => { setOpen(false); onMenuSelect?.(item.id) }}
+                  style={{
+                    width: '100%', textAlign: 'left', border: 'none', background: 'transparent',
+                    padding: '12px 14px', borderRadius: 8, cursor: 'pointer',
+                    fontFamily: ff, fontSize: 16, fontWeight: 600,
+                    color: '#2d1a0e', transition: 'background 0.15s, padding-left 0.15s',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = '#f5e6c0'; e.currentTarget.style.paddingLeft = '18px' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.paddingLeft = '14px' }}
+                >
+                  {item.label}
+                </button>
+                {idx < menu.length - 1 && (
+                  <div style={{ height: '1px', background: '#e8d5a3', margin: '0 14px' }} />
+                )}
+              </div>
+            ))}
           </div>
         </div>
       )}

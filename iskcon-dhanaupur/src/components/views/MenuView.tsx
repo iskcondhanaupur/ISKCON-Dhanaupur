@@ -20,7 +20,7 @@ export default function MenuView({ t, lang, onSelect }: Props) {
   ];
 
   return (
-    <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 24px 60px', background: 'transparent' }}>
+    <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 24px 28px', background: 'transparent' }}>
       
       {/* Perfect Continuous Loop Keyframes */}
       <style jsx global>{`

@@ -139,7 +139,7 @@ html, body {
   border-color: var(--gold-lt);
 }
 
-.section { padding: 48px 0; }
+.section { padding: 48px 0 28px; }
 
 /* ── Drawer overlay ── */
 .drawer-overlay {
@@ -185,6 +185,7 @@ html, body {
   gap: 14px;
   max-width: 480px;
   margin: 0 auto;
+  align-content: start;
 }
 @media (max-width: 400px) { .menu-grid { grid-template-columns: 1fr; } }
 
@@ -260,8 +261,7 @@ html, body {
   font-size: 15px; font-weight: 600;
   color: var(--maroon);
   cursor: pointer; background: none; border: none; padding: 0;
-  transition: color 0.15s;
-  letter-spacing: 0.04em;
+
 }
 .back-btn::before {
   content: '';

@@ -29,14 +29,18 @@ export default function DarshanView({ t, lang, onBack }: Props) {
 
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 20 }}>
           <p className="t-label" style={{ marginBottom: 6 }}>{isHi ? 'दैनिक कार्यक्रम' : 'Daily Schedule'}</p>
-          <h1 style={{ fontSize: 'clamp(24px, 4vw, 34px)', color: '#5c1a1a', marginBottom: 4, fontFamily: ff, fontWeight: 600 }}>{d.title}</h1>
-          <p style={{ fontSize: 17, color: '#8B6914', fontFamily: ff }}>{d.subtitle}</p>
+          <h1 style={{ fontSize: 'clamp(35px, 4vw, 34px)', color: '#5c1a1a', marginBottom: 4, fontFamily: ff, fontWeight: 600 }}>{d.title}</h1>
+          <p style={{ fontSize: 17, color: '#8B6914', fontFamily: ff }}>
+            {isHi
+              ? 'भगवान श्री श्री राधा श्यामसुंदर जी, श्री श्री जगन्नाथ बलदेव सुभद्रा जी, श्री श्री गौर निताई सुंदर जी के दिव्य दर्शन।'
+              : 'Relish beautiful, enchanting and divine darshans of Lord Shri Shri Radha Shyamsundar ji, Shri Shri Jagannath Baldev Subhadra ji, Shri Shri Gaur Nitai Sundar ji.'}
+          </p>
         </motion.div>
 
         {/* Tabs */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
           style={{ display: 'flex', justifyContent: 'center', gap: 40, marginBottom: 20, borderBottom: '1.5px solid #e8d5a3' }}>
-          {[{ key: 'story', en: 'Story', hi: 'कार्यक्रम' }, { key: 'media', en: 'Media', hi: 'मीडिया' }].map(tab => {
+          {[{ key: 'story', en: 'Daily Schedule', hi: 'दैनिक कार्यक्रम' }, { key: 'media', en: 'Gallery', hi: 'गैलरी' }].map(tab => {
             const isActive = activeTab === tab.key
             return (
               <button key={tab.key} onClick={() => setActiveTab(tab.key as any)}

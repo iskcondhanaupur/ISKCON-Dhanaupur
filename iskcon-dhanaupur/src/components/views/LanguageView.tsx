@@ -8,6 +8,22 @@ interface Props { onSelect: (l: Lang) => void }
 export default function LanguageView({ onSelect }: Props) {
   return (
     <section style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 24px', background: 'transparent' }}>
+      <style>{`
+        .lang-card {
+          border-radius: 30px;
+          min-width: 250px;
+          padding: 24px;
+          border: 2px solid #d4a574;
+          background: #fef9f3;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        .lang-card:hover {
+          border-color: #8b6914;
+          box-shadow: 0 4px 12px rgba(139, 105, 20, 0.15);
+        }
+      `}</style>
+      
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1, duration: 0.5 }} style={{ marginBottom: 20 }}>
