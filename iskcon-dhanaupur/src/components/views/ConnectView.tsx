@@ -22,23 +22,118 @@ export default function ConnectView({ t, lang, onBack }: Props) {
         </motion.div>
 
         {/* Info Cards */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 24, marginBottom: 48 }}>
-            {c.info.map((item: any, i: number) => (
-              <motion.div 
-                key={i}
-                whileHover={{ y: -4 }}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ marginBottom: 48 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+            
+            {/* Address Card */}
+            <div style={{ 
+              background: '#fef9f0', 
+              border: '1px solid #d4af8f',
+              borderRadius: 12,
+              padding: '24px 20px',
+              textAlign: 'center'
+            }}>
+              <span className="t-label" style={{ display: 'block', marginBottom: 12, color: '#b8860b', fontSize: 14 }}>
+                {isHi ? 'पता' : 'Address'}
+              </span>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7a1f1f" strokeWidth="1.5" style={{ margin: '0 auto 12px' }}>
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              <p style={{ fontSize: 14, color: '#4a3c2b', fontFamily: ff, lineHeight: 1.7 }}>
+                {isHi ? 'धनौपुर, दोस्तपुर, कादीपुर, सुलतानपुर,\nउत्तर प्रदेश – 228131' : 'Dhanaupur, Dostpur, Kadipur, Sultanpur,\nUttar Pradesh – 228131'}
+              </p>
+            </div>
+
+            {/* Phone Card */}
+            <div style={{ 
+              background: '#fef9f0', 
+              border: '1px solid #d4af8f',
+              borderRadius: 12,
+              padding: '24px 20px',
+              textAlign: 'center'
+            }}>
+              <span className="t-label" style={{ display: 'block', marginBottom: 12, color: '#b8860b', fontSize: 14 }}>
+                {isHi ? 'फोन' : 'Phone'}
+              </span>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7a1f1f" strokeWidth="1.5" style={{ margin: '0 auto 12px' }}>
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <a 
+                href="tel:+918127443777"
                 style={{ 
-                  background: '#fef9f0', 
-                  border: '1px solid #e8dcc8',
-                  borderRadius: 8,
-                  padding: 24,
-                  textAlign: 'center'
-                }}>
-                <span className="t-label" style={{ display: 'block', marginBottom: 8, color: '#b8860b' }}>{item.label}</span>
-                <p style={{ fontSize: 15, color: '#4a3c2b', fontFamily: isHi ? ff : 'Crimson Text, serif', lineHeight: 1.6 }}>{item.value}</p>
-              </motion.div>
-            ))}
+                  display: 'block',
+                  background: 'linear-gradient(135deg, #b8860b 0%, #c99a3c 100%)',
+                  color: '#2d1a0e',
+                  borderRadius: 6,
+                  padding: '12px 16px',
+                  textDecoration: 'none',
+                  fontSize: 15,
+                  fontWeight: 600,
+                  fontFamily: ff,
+                  marginBottom: 8,
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)'
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(184, 134, 11, 0.3)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
+              >
+                 +91 8127443777
+              </a>
+              <p style={{ fontSize: 12, color: '#7a6b5d' }}>{isHi ? 'कॉल करें' : 'Click to Call'}</p>
+            </div>
+
+            {/* Email Card */}
+            <div style={{ 
+              background: '#fef9f0', 
+              border: '1px solid #d4af8f',
+              borderRadius: 12,
+              padding: '24px 20px',
+              textAlign: 'center'
+            }}>
+              <span className="t-label" style={{ display: 'block', marginBottom: 12, color: '#b8860b', fontSize: 14 }}>
+                {isHi ? 'ईमेल' : 'Email'}
+              </span>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7a1f1f" strokeWidth="1.5" style={{ margin: '0 auto 12px' }}>
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              <a 
+                href="mailto:iskcondhanaaupur@gmail.com"
+                style={{ 
+                  display: 'block',
+                  background: 'linear-gradient(135deg, #b8860b 0%, #c99a3c 100%)',
+                  color: '#2d1a0e',
+                  borderRadius: 6,
+                  padding: '12px 16px',
+                  textDecoration: 'none',
+                  fontSize: 15,
+                  fontWeight: 600,
+                  fontFamily: ff,
+                  marginBottom: 8,
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer',
+                  wordBreak: 'break-all'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)'
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(184, 134, 11, 0.3)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
+              >
+                ✉ iskcondhanaaupur@gmail.com
+              </a>
+              <p style={{ fontSize: 12, color: '#7a6b5d' }}>{isHi ? 'ईमेल भेजें' : 'Send an Email'}</p>
+            </div>
+
           </div>
         </motion.div>
 

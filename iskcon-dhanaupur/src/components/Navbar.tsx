@@ -12,6 +12,16 @@ interface NavbarProps {
   showHamburger?: boolean
 }
 
+const scrollbarHideStyles = `
+  .menu-drawer::-webkit-scrollbar {
+    display: none;
+  }
+  .menu-drawer {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+`
+
 export default function Navbar({ lang = 'en', onLangChange, menu = [], onMenuSelect, showLangSwitch = true, showHamburger = true }: NavbarProps) {
   const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -22,6 +32,14 @@ export default function Navbar({ lang = 'en', onLangChange, menu = [], onMenuSel
     const onScroll = () => setScrolled(window.scrollY > 48)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    // Inject scrollbar hide styles
+    const styleTag = document.createElement('style')
+    styleTag.textContent = scrollbarHideStyles
+    document.head.appendChild(styleTag)
+    return () => styleTag.remove()
   }, [])
 
   const ff = lang === 'hi' ? 'Tiro Devanagari Hindi, serif' : 'Cormorant Garamond, serif'
@@ -101,6 +119,7 @@ export default function Navbar({ lang = 'en', onLangChange, menu = [], onMenuSel
       {open && showHamburger && (
         <div className="drawer-overlay" onClick={() => setOpen(false)}>
           <div
+            className="menu-drawer"
             onClick={e => e.stopPropagation()}
             style={{
               background: '#fdf5e6', borderRadius: 16, width: 300,
@@ -129,9 +148,6 @@ export default function Navbar({ lang = 'en', onLangChange, menu = [], onMenuSel
             >
               ✕
             </button>
-
-            {/* Spacer for close button */}
-            <div style={{ height: 32 }} />
 
             {/* Menu items with dividers */}
             {menu.map((item, idx) => (
