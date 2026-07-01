@@ -1,0 +1,15 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,52683,i=>{"use strict";var t=i.i(43476),n=i.i(71645),e=i.i(18566),a=i.i(46932),o=i.i(57688);function r({onSelect:i}){return(0,t.jsxs)("section",{style:{minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"40px 24px",background:"transparent"},children:[(0,t.jsx)("style",{children:`
+        .lang-card {
+          border-radius: 30px;
+          min-width: 250px;
+          padding: 24px;
+          border: 2px solid #d4a574;
+          background: #fef9f3;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        .lang-card:hover {
+          border-color: #8b6914;
+          box-shadow: 0 4px 12px rgba(139, 105, 20, 0.15);
+        }
+      `}),(0,t.jsxs)(a.motion.div,{initial:{opacity:0,y:24},animate:{opacity:1,y:0},transition:{duration:.5,ease:[.22,1,.36,1]},style:{textAlign:"center",display:"flex",flexDirection:"column",alignItems:"center"},children:[(0,t.jsx)(a.motion.div,{initial:{opacity:0,scale:.9},animate:{opacity:1,scale:1},transition:{delay:.1,duration:.5},style:{marginBottom:20},children:(0,t.jsx)(o.default,{src:"/welcomenote.png",alt:"ISKCON Dhanaupur",width:400,height:400,loading:"eager",style:{objectFit:"contain",width:"auto",height:400}})}),(0,t.jsx)(a.motion.div,{initial:{opacity:0},animate:{opacity:1},transition:{delay:.25},style:{width:80,height:1.5,background:"linear-gradient(to right, transparent, #8B6914, transparent)",margin:"0 auto 24px"}}),(0,t.jsx)(a.motion.p,{initial:{opacity:0},animate:{opacity:1},transition:{delay:.3},style:{fontSize:16,color:"#7a5c3a",marginBottom:28,fontFamily:"Crimson Text, serif",letterSpacing:"0.04em"},children:"Choose your language  /  भाषा चुनें"}),(0,t.jsxs)(a.motion.div,{initial:{opacity:0,y:16},animate:{opacity:1,y:0},transition:{delay:.35},style:{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"},children:[(0,t.jsxs)("button",{className:"lang-card",onClick:()=>i("en"),children:[(0,t.jsx)("div",{style:{fontSize:20,fontWeight:600,color:"#5c1a1a",fontFamily:"Cormorant Garamond, serif",marginBottom:6,letterSpacing:"0.04em"},children:"English"}),(0,t.jsx)("div",{style:{fontSize:13,color:"#7a5c3a",fontFamily:"Crimson Text, serif"},children:"Continue in English"})]}),(0,t.jsxs)("button",{className:"lang-card",onClick:()=>i("hi"),children:[(0,t.jsx)("div",{style:{fontSize:20,fontWeight:600,color:"#5c1a1a",fontFamily:"Tiro Devanagari Hindi, serif",marginBottom:6},children:"हिन्दी"}),(0,t.jsx)("div",{style:{fontSize:13,color:"#7a5c3a",fontFamily:"Tiro Devanagari Hindi, serif"},children:"हिंदी में जारी रखें"})]})]})]})]})}i.s(["default",0,function(){let i=(0,e.useRouter)(),[o,l]=(0,n.useState)(!1);return((0,n.useEffect)(()=>{let t=localStorage.getItem("iskcon-dhanaupur-lang");"en"===t||"hi"===t?i.replace("/menu"):l(!0)},[]),o)?(0,t.jsx)(a.motion.div,{initial:{opacity:0,y:24},animate:{opacity:1,y:0,transition:{duration:.45,ease:[.22,1,.36,1]}},children:(0,t.jsx)(r,{onSelect:t=>{localStorage.setItem("iskcon-dhanaupur-lang",t),i.push("/menu")}})}):null}],52683)}]);

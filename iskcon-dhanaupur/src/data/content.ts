@@ -15,6 +15,8 @@ export const content = {
       { id: 'events',      label: 'Upcoming Festivals',   sub: 'Festivals & celebrations' },
       { id: 'ekadashi',    label: 'Upcoming Ekadashi',    sub: '2026 dates & fasting guide' },
       { id: 'programs',    label: 'Weekly Programs',      sub: 'Daily schedule & seva' },
+      { id: 'course',      label: 'Courses',              sub: 'Spiritual learning programs' },
+      { id: 'iyf',         label: 'ISKCON Youth Forum',   sub: 'Community for young devotees' },
       { id: 'donation',    label: 'Donation',             sub: 'Support the temple seva' },
       { id: 'yatra',       label: 'Dham Yatras',          sub: 'Holy pilgrimages' },
       { id: 'about',       label: 'About Us',             sub: 'About ISKCON Dhanaupur' },
@@ -36,10 +38,84 @@ export const content = {
         { time: '6:45 PM',  name: 'Sandhya Arati',        desc: 'Evening arati — one of the most attended and joyful ceremonies.' },
         { time: '8:30 PM',  name: 'Shayana Arati',        desc: 'The final arati of the day — the Lord retires for the night.' },
       ],
+    },
+
+    course: {
+      title: 'Courses',
+      subtitle: 'Spiritual Learning & Development',
+      sections: [
+        {
+          id: 1,
+          name: 'ISKCON Disciple Course',
+          description:
+            'A comprehensive course designed for devotees to deepen their understanding of Krishna consciousness and the teachings of Srila Prabhupada.',
+        },
+        {
+          id: 2,
+          name: 'Bhakti Sastri Course',
+          description:
+            'An in-depth study of the principles of bhakti-yoga, covering the philosophy, practices, and scriptures of the Vaishnava tradition.',
+        },
+        {
+          id: 3,
+          name: 'Gita Diploma Course',
+          description:
+            'A structured program focused on the Bhagavad-gita, exploring its teachings, commentaries, and practical applications in daily life.',
+        },
+        {
+          id: 4,
+          name: 'Meditation & Mindfulness',
+          description:
+            'Learn meditation techniques for inner peace and spiritual development.',
+        },
+      ],
+      comingSoon: 'More courses coming soon',
+    },
+
+    iyf: {
+      title: 'ISKCON Youth Forum',
+      subtitle: 'Community for Young Devotees',
+      description:
+        'A dedicated platform for young members of ISKCON to connect, learn, and grow together in Krishna consciousness.',
+      features: [
+        {
+          id: 1,
+          name: 'Scrutinized study of Srila Prabhupada\'s Books',
+          description: 'Engage in group readings and discussions of Srila Prabhupada\'s books to deepen your understanding of Krishna consciousness.',
+        },
+        {
+          id: 2,
+          name: 'Knowledge Sharing',
+          description: 'Share spiritual insights and learn from each other\'s experiences.',
+        },
+        {
+          id: 3,
+          name: 'Youth Events',
+          description: 'Participate in exclusive events, kirtans, and spiritual activities.',
+        },
+        {
+          id: 4,
+          name: 'Mentorship',
+          description: 'Get guidance from experienced devotees in your spiritual journey.',
+        },
+        {
+          id: 5,
+          name: 'Service Opportunities',
+          description:
+            'Engage in meaningful seva and contribute to ISKCON community projects.',
+        },
+        {
+          id: 6,
+          name: 'Networking',
+          description:
+            'Build lasting friendships and connections with youth from different parts of India.',
+        },
+      ],
+      mission: 'Inspiring Youth, Building Consciousness',
       
     },
  
-     about: {
+    about: {
       title: 'About Us',
       subtitle: 'ISKCON Dhanaupur',
       sections: [
@@ -90,7 +166,6 @@ export const content = {
         { id: 'Janamasthami Abhishek',     label: 'Janamasthami Abhishek' },
         { id: 'Gau Seva',   label: 'Gau Seva' },
         { id: 'Shrimad Bhagavad-gita daan Seva',   label: 'Shrimad Bhagavad-gita daan Seva' },
-        
       ],
       amounts: [108, 251, 501, 1001, 2100, 5100, 5500, 11000, 21000, 51000],
       custom: 'Enter custom amount',
@@ -98,7 +173,6 @@ export const content = {
       email: 'Email Address',
       phone: 'Phone Number',
       proceed: 'Proceed to Pay',
-      
     },
  
     events: {
@@ -155,11 +229,11 @@ export const content = {
       subtitle: 'Stay connected with us',
       desc: 'Follow ISKCON Dhanaupur on social media for daily darshan photos, event updates, spiritual content, and more.',
       links: [
-  { platform: 'Facebook',  handle: 'ISKCON Dhanaupur',  url: 'https://facebook.com',       icon: 'F', profileImg: '/images/fb-profile.jpg' },
-  { platform: 'YouTube',   handle: 'ISKCON Dhanaupur',  url: 'https://youtube.com',        icon: 'Y', profileImg: '/images/yt-profile.jpg' },
-  { platform: 'Instagram', handle: '@iskcondhanaupur',  url: 'https://instagram.com',      icon: 'I', profileImg: '/images/ig-profile.jpg' },
-  { platform: 'WhatsApp',  handle: '+91 8127443777',    url: 'https://wa.me/918127443777', icon: 'W', profileImg: '/images/wa-profile.jpg' },
-],
+        { platform: 'Facebook',  handle: 'ISKCON Dhanaupur',  url: 'https://facebook.com',       icon: 'F', profileImg: '/images/fb-profile.jpg' },
+        { platform: 'YouTube',   handle: 'ISKCON Dhanaupur',  url: 'https://youtube.com',        icon: 'Y', profileImg: '/images/yt-profile.jpg' },
+        { platform: 'Instagram', handle: '@iskcondhanaupur',  url: 'https://instagram.com',      icon: 'I', profileImg: '/images/ig-profile.jpg' },
+        { platform: 'WhatsApp',  handle: '+91 8127443777',    url: 'https://wa.me/918127443777', icon: 'W', profileImg: '/images/wa-profile.jpg' },
+      ],
     },
  
     connect: {
@@ -232,11 +306,13 @@ export const content = {
     menuTitle: 'हम आपकी सेवा कैसे कर सकते हैं?',
     menuSubtitle: 'श्री श्री राधा श्यामसुंदर मंदिर, धनऊपुर',
  
-     menu: [
+    menu: [
       { id: 'darshan',  label: 'शुभ दर्शन',        sub: 'दर्शन के समय देखें' },
       { id: 'events',   label: 'आगामी महोत्सव',    sub: 'उत्सव और समारोह' },
       { id: 'ekadashi', label: 'आगामी एकादशी',   sub: '२०२६ तिथियाँ और व्रत विधि' },
       { id: 'programs', label: 'साप्ताहिक कार्यक्रम', sub: 'दैनिक कार्यक्रम और सेवा' },
+      { id: 'course',   label: 'पाठ्यक्रम',         sub: 'आध्यात्मिक शिक्षा कार्यक्रम' },
+      { id: 'iyf',      label: 'इस्कॉन यूथ फोरम', sub: 'युवा भक्तों का समुदाय' },
       { id: 'donation', label: 'दान कल्याण',        sub: 'मंदिर सेवा में सहयोग करें' },
       { id: 'yatra',    label: 'धाम यात्राएं',      sub: 'पवित्र तीर्थ यात्राएं' },
       { id: 'about',    label: 'हमारे बारे में',    sub: 'इस्कॉन धनऊपुर के बारे में' },
@@ -258,9 +334,75 @@ export const content = {
         { time: '6:45 PM',  name: 'संध्या आरती',      desc: 'सायंकालीन आरती — सबसे अधिक उपस्थिति वाला और आनंदमय कार्यक्रम।' },
         { time: '8:30 PM',  name: 'शयन आरती',        desc: 'दिन की अंतिम आरती — भगवान रात्रि विश्राम के लिए पधारते हैं।' },
       ],
+    },
+
+    course: {
+      title: 'पाठ्यक्रम',
+      subtitle: 'आध्यात्मिक शिक्षा और विकास',
+      sections: [
+        {
+          id: 1,
+          name: 'इस्कॉन शिष्य पाठ्यक्रम',
+          description:
+            'भक्तों के लिए डिज़ाइन किया गया एक व्यापक पाठ्यक्रम जो कृष्ण चेतना और श्रील प्रभुपाद की शिक्षाओं की गहरी समझ विकसित करने में मदद करता है।',
+        },
+        {
+          id: 2,
+          name: 'भक्ति शास्त्र पाठ्यक्रम',
+          description:
+            'भक्ति-योग के सिद्धांतों का गहन अध्ययन, जो वैष्णव परंपरा के दर्शन, प्रथाओं और शास्त्रों को कवर करता है।',
+        },
+        {
+          id: 3,
+          name: 'गीता डिप्लोमा पाठ्यक्रम',
+          description:
+            'भगवद्गीता पर केंद्रित एक संरचित कार्यक्रम, जो इसकी शिक्षाओं, व्याख्याओं और दैनिक जीवन में व्यावहारिक अनुप्रयोगों की खोज करता है।',
+        },
+      ],
+      comingSoon: 'अधिक पाठ्यक्रम जल्द आ रहे हैं',
+    },
+
+    iyf: {
+      title: 'इस्कॉन यूथ फोरम',
+      subtitle: 'युवा भक्तों के लिए समुदाय',
+      description:
+        'इस्कॉन के युवा सदस्यों के लिए एक समर्पित मंच जहां वे कृष्ण चेतना में एक साथ जुड़ सकते हैं, सीख सकते हैं और बढ़ सकते हैं।',
+      features: [
+        {
+          id: 1,
+          name: 'श्रील प्रभुपाद की पुस्तकों का गहन अध्ययन',
+          description: 'श्रील प्रभुपाद की पुस्तकों के समूह पाठ और चर्चा में भाग लें और कृष्ण चेतना की समझ को गहरा करें।',
+        },
+        {
+          id: 2,
+          name: 'ज्ञान साझाकरण',
+          description: 'आध्यात्मिक अंतर्दृष्टि साझा करें और एक दूसरे के अनुभवों से सीखें।',
+        },
+        {
+          id: 3,
+          name: 'यूथ इवेंट्स',
+          description: 'विशेष कार्यक्रमों, कीर्तनों और आध्यात्मिक गतिविधियों में भाग लें।',
+        },
+        {
+          id: 4,
+          name: 'मार्गदर्शन',
+          description: 'अपनी आध्यात्मिक यात्रा में अनुभवी भक्तों से मार्गदर्शन प्राप्त करें।',
+        },
+        {
+          id: 5,
+          name: 'सेवा के अवसर',
+          description: 'सार्थक सेवा में संलग्न हों और इस्कॉन समुदाय परियोजनाओं में योगदान दें।',
+        },
+        {
+          id: 6,
+          name: 'नेटवर्किंग',
+          description: 'भारत के विभिन्न हिस्सों से युवाओं के साथ दीर्घकालीन मित्रता और जुड़ाव बनाएं।',
+        },
+      ],
+      mission: 'यूथ को प्रेरित करना, चेतना का निर्माण करना',
      
     },
- 
+
     about: {
       title: 'हमारे बारे में',
       subtitle: 'इस्कॉन धनऊपुर',
@@ -302,17 +444,17 @@ export const content = {
       subtitle: 'सेवा ही सर्वोच्च उपासना है',
       desc: 'आपका उदार योगदान दैनिक देवी-देवता सेवा, मंदिर रखरखाव, प्रसाद वितरण और सामुदायिक शिक्षा कार्यक्रमों को संभव बनाता है।',
       categories: [
-  { id: 'General Seva', label: 'सामान्य दान ' },
-  { id: 'Rathyatra', label: 'श्री जगन्नाथ रथयात्रा' },
-  { id: 'Temple Maintenance', label: 'मंदिर रखरखाव' },
-  { id: 'Sringar Seva', label: 'श्रृंगार सेवा' },
-  { id: 'Flower Seva', label: 'फूल सेवा' },
-  { id: 'RajBhog Prasad', label: 'राज भोग प्रसाद सेवा' },
-  { id: 'Annadan', label: 'अन्नदान सेवा' },
-  { id: 'Janamasthami Abhishek', label: 'जन्माष्टमी अभिषेक' },
-  { id: 'Gau Seva', label: 'गौ सेवा' },
-  { id: 'Shrimad Bhagavad-gita daan Seva', label: 'श्रीमद् भगवद्गीता दान सेवा' },
-],
+        { id: 'General Seva', label: 'सामान्य दान ' },
+        { id: 'Rathyatra', label: 'श्री जगन्नाथ रथयात्रा' },
+        { id: 'Temple Maintenance', label: 'मंदिर रखरखाव' },
+        { id: 'Sringar Seva', label: 'श्रृंगार सेवा' },
+        { id: 'Flower Seva', label: 'फूल सेवा' },
+        { id: 'RajBhog Prasad', label: 'राज भोग प्रसाद सेवा' },
+        { id: 'Annadan', label: 'अन्नदान सेवा' },
+        { id: 'Janamasthami Abhishek', label: 'जन्माष्टमी अभिषेक' },
+        { id: 'Gau Seva', label: 'गौ सेवा' },
+        { id: 'Shrimad Bhagavad-gita daan Seva', label: 'श्रीमद् भगवद्गीता दान सेवा' },
+      ],
       amounts: [108, 251, 501, 1001, 2100, 5100, 5500, 11000, 21000, 51000],
       custom: 'अन्य राशि दर्ज करें',
       name: 'पूरा नाम',
@@ -376,11 +518,11 @@ export const content = {
       subtitle: 'हमसे जुड़े रहें',
       desc: 'इस्कॉन धनऊपुर को सोशल मीडिया पर फॉलो करें — प्रतिदिन दर्शन फोटो, आयोजन अपडेट, और आध्यात्मिक सामग्री के लिए।',
       links: [
-  { platform: 'Facebook',  handle: 'ISKCON Dhanaupur',  url: 'https://facebook.com',       icon: 'F', profileImg: '/images/fb-profile.jpg' },
-  { platform: 'YouTube',   handle: 'ISKCON Dhanaupur',  url: 'https://youtube.com',        icon: 'Y', profileImg: '/images/yt-profile.jpg' },
-  { platform: 'Instagram', handle: '@iskcondhanaupur',  url: 'https://instagram.com',      icon: 'I', profileImg: '/images/ig-profile.jpg' },
-  { platform: 'WhatsApp',  handle: '+91 8127443777',    url: 'https://wa.me/918127443777', icon: 'W', profileImg: '/images/wa-profile.jpg' },
-],
+        { platform: 'Facebook',  handle: 'ISKCON Dhanaupur',  url: 'https://facebook.com',       icon: 'F', profileImg: '/images/fb-profile.jpg' },
+        { platform: 'YouTube',   handle: 'ISKCON Dhanaupur',  url: 'https://youtube.com',        icon: 'Y', profileImg: '/images/yt-profile.jpg' },
+        { platform: 'Instagram', handle: '@iskcondhanaupur',  url: 'https://instagram.com',      icon: 'I', profileImg: '/images/ig-profile.jpg' },
+        { platform: 'WhatsApp',  handle: '+91 8127443777',    url: 'https://wa.me/918127443777', icon: 'W', profileImg: '/images/wa-profile.jpg' },
+      ],
     },
  
     connect: {
@@ -414,30 +556,30 @@ export const content = {
         'अगले दिन सूर्योदय के बाद पारण करें',
       ],
       list: [
-        { date: '14 जन',  name: 'षट्तिला एकादशी',          paran: '15 जन' },
-        { date: '29 जन',  name: 'जया एकादशी',              paran: '30 जन' },
-        { date: '13 फ़र', name: 'विजया एकादशी',            paran: '14 फ़र' },
-        { date: '27 फ़र', name: 'आमलकी एकादशी',           paran: '28 फ़र' },
-        { date: '15 मार', name: 'पापमोचनी एकादशी',        paran: '16 मार' },
-        { date: '29 मार', name: 'कामदा एकादशी',            paran: '30 मार' },
-        { date: '13 अप्र', name: 'वरूथिनी एकादशी',        paran: '14 अप्र' },
-        { date: '27 अप्र', name: 'मोहिनी एकादशी',         paran: '28 अप्र' },
-        { date: '13 मई',  name: 'अपरा एकादशी',            paran: '14 मई' },
-        { date: '27 मई',  name: 'पद्मिनी एकादशी',         paran: '28 मई' },
-        { date: '11 जून', name: 'परमा एकादशी',            paran: '12 जून' },
-        { date: '25 जून', name: 'निर्जला एकादशी',         paran: '26 जून' },
-        { date: '10 जुल', name: 'योगिनी एकादशी',          paran: '11 जुल' },
-        { date: '25 जुल', name: 'देवशयनी एकादशी',        paran: '26 जुल' },
-        { date: '09 अग',  name: 'कामिका एकादशी',          paran: '10 अग' },
-        { date: '23 अग',  name: 'श्रावण पुत्रदा एकादशी', paran: '24 अग' },
-        { date: '07 सित', name: 'अजा एकादशी',             paran: '08 सित' },
-        { date: '22 सित', name: 'पार्श्व एकादशी',         paran: '23 सित' },
-        { date: '06 अक्ट', name: 'इंदिरा एकादशी',        paran: '07 अक्ट' },
-        { date: '22 अक्ट', name: 'पापांकुशा एकादशी',     paran: '23 अक्ट' },
-        { date: '05 नव',  name: 'रामा एकादशी',            paran: '06 नव' },
-        { date: '20 नव',  name: 'देवुत्थान एकादशी',      paran: '21 नव' },
-        { date: '04 दिस', name: 'उत्पन्ना एकादशी',        paran: '05 दिस' },
-        { date: '20 दिस', name: 'मोक्षदा एकादशी',        paran: '21 दिस' },
+        { date: 'Jan 14', name: 'Shattila Ekadashi',             paran: 'Jan 15' },
+        { date: 'Jan 29', name: 'Jaya Ekadashi',                 paran: 'Jan 30' },
+        { date: 'Feb 13', name: 'Vijaya Ekadashi',               paran: 'Feb 14' },
+        { date: 'Feb 27', name: 'Amalaki Ekadashi',              paran: 'Feb 28' },
+        { date: 'Mar 15', name: 'Papamochani Ekadashi',          paran: 'Mar 16' },
+        { date: 'Mar 29', name: 'Kamada Ekadashi',               paran: 'Mar 30' },
+        { date: 'Apr 13', name: 'Varuthini Ekadashi',            paran: 'Apr 14' },
+        { date: 'Apr 27', name: 'Mohini Ekadashi',               paran: 'Apr 28' },
+        { date: 'May 13', name: 'Apara Ekadashi',                paran: 'May 14' },
+        { date: 'May 27', name: 'Padmini Ekadashi',              paran: 'May 28' },
+        { date: 'Jun 11', name: 'Parama Ekadashi',               paran: 'Jun 12' },
+        { date: 'Jun 25', name: 'Nirjala Ekadashi',              paran: 'Jun 26' },
+        { date: 'Jul 10', name: 'Yogini Ekadashi',               paran: 'Jul 11' },
+        { date: 'Jul 25', name: 'Devshayani Ekadashi',           paran: 'Jul 26' },
+        { date: 'Aug 09', name: 'Kamika Ekadashi',               paran: 'Aug 10' },
+        { date: 'Aug 23', name: 'Shravana Putrada Ekadashi',     paran: 'Aug 24' },
+        { date: 'Sep 07', name: 'Aja Ekadashi',                  paran: 'Sep 08' },
+        { date: 'Sep 22', name: 'Parsva Ekadashi',               paran: 'Sep 23' },
+        { date: 'Oct 06', name: 'Indira Ekadashi',               paran: 'Oct 07' },
+        { date: 'Oct 22', name: 'Papankusha Ekadashi',           paran: 'Oct 23' },
+        { date: 'Nov 05', name: 'Rama Ekadashi',                 paran: 'Nov 06' },
+        { date: 'Nov 20', name: 'Devutthana Ekadashi',           paran: 'Nov 21' },
+        { date: 'Dec 04', name: 'Utpanna Ekadashi',              paran: 'Dec 05' },
+        { date: 'Dec 20', name: 'Mokshada Ekadashi',             paran: 'Dec 21' },
       ],
     },
  
