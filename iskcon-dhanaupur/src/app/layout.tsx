@@ -1,5 +1,34 @@
 import type { Metadata } from 'next'
+import {
+  Cormorant_Garamond,
+  Crimson_Text,
+  Tiro_Devanagari_Hindi,
+} from 'next/font/google'
 import './globals.css'
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
+  display: 'swap',
+})
+
+const crimson = Crimson_Text({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-crimson',
+  display: 'swap',
+})
+
+const tiroDevanagari = Tiro_Devanagari_Hindi({
+  subsets: ['devanagari'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-tiro-devanagari',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://iskcondhanaupur.com"),
@@ -29,7 +58,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${crimson.variable} ${tiroDevanagari.variable}`}
+    >
       <body>{children}</body>
     </html>
   )

@@ -1,15 +1,15 @@
 export type Lang = 'en' | 'hi'
- 
+
 export const content = {
   en: {
     welcome: 'Hare Krishna',
     selectLang: 'Please select your preferred language',
     langEn: 'English',
     langHi: 'हिन्दी',
- 
+
     menuTitle: 'How may we serve you?',
     menuSubtitle: 'Sri Sri Radha ShyamSundar Mandir, Dhanaupur',
- 
+
     menu: [
       { id: 'darshan',     label: 'Auspicious Darshan',   sub: 'View deity darshan timings' },
       { id: 'events',      label: 'Upcoming Festivals',   sub: 'Festivals & celebrations' },
@@ -24,7 +24,7 @@ export const content = {
       { id: 'social',      label: 'Social Media',         sub: 'Follow us online' },
       { id: 'connect',     label: 'Contact',              sub: 'Reach out to the temple' },
     ],
- 
+
     darshan: {
       title: 'Auspicious Darshan',
       subtitle: 'Sri Sri Radha ShyamSundar',
@@ -112,9 +112,9 @@ export const content = {
         },
       ],
       mission: 'Inspiring Youth, Building Consciousness',
-      
+
     },
- 
+
     about: {
       title: 'About Us',
       subtitle: 'ISKCON Dhanaupur',
@@ -142,7 +142,7 @@ export const content = {
       phone: '+91 8127443777',
       email: 'iskcondhanaupur@gmail.com',
     },
- 
+
     iskcon: {
       title: 'About ISKCON',
       subtitle: 'International Society for Krishna Consciousness',
@@ -150,7 +150,7 @@ export const content = {
       founder: 'Founder: His Divine Grace A.C. Bhaktivedanta Swami Prabhupada',
       website: 'www.iskcondesiretree.com',
     },
- 
+
     donation: {
       title: 'Donation',
       subtitle: 'Seva is the highest form of worship',
@@ -174,21 +174,67 @@ export const content = {
       phone: 'Phone Number',
       proceed: 'Proceed to Pay',
     },
- 
+
     events: {
       title: 'Upcoming Festivals',
       subtitle: 'Festivals & Celebrations 2026',
       list: [
-        { date: '21', month: 'JUL', name: 'Rathyatra',                   desc: 'The annual chariot procession celebrating Lord Krishna\'s divine pastimes.' },
-        { date: '04', month: 'SEP', name: 'Janmashtami',                 desc: 'The most celebrated festival — Lord Krishna\'s appearance day. Midnight ceremony, drama, and grand abhishek.' },
-        { date: '05', month: 'SEP', name: 'Srila Prabhupada Appearance', desc: 'Celebration of the Founder-Acharya\'s appearance day. Guru Puja & special feast.' },
-        { date: '19', month: 'SEP', name: 'Radhastami',                  desc: 'Appearance day of Srimati Radharani. Special kirtan, abhishek, and feast.' },
-        { date: '02', month: 'NOV', name: 'Radha Kund Appearance',       desc: 'Special programme at the sacred kund. Bathing festival and extended kirtan.' },
-        { date: '09', month: 'NOV', name: 'Diwali',                      desc: 'Festival of lights — celebration of good over evil.' },
-        { date: '04', month: 'DEC', name: 'Vaikuntha Ekadashi',          desc: 'Fasting and special programmes on this most auspicious Ekadashi of the year.' },
+        { date: '21', month: 'JUL', name: 'Rathyatra',                   slug: 'rathyatra',                     active: true,  desc: 'The annual chariot procession celebrating Lord Krishna\'s divine pastimes.' },
+        { date: '04', month: 'SEP', name: 'Janmashtami',                 slug: 'janmashtami',                   active: false, desc: 'The most celebrated festival — Lord Krishna\'s appearance day. Midnight ceremony, drama, and grand abhishek.' },
+        { date: '05', month: 'SEP', name: 'Srila Prabhupada Appearance', slug: 'srila-prabhupada-appearance',   active: false, desc: 'Celebration of the Founder-Acharya\'s appearance day. Guru Puja & special feast.' },
+        { date: '19', month: 'SEP', name: 'Radhastami',                  slug: 'radhastami',                    active: false, desc: 'Appearance day of Srimati Radharani. Special kirtan, abhishek, and feast.' },
+        { date: '02', month: 'NOV', name: 'Radha Kund Appearance',       slug: 'radha-kund-appearance',         active: false, desc: 'Special programme at the sacred kund. Bathing festival and extended kirtan.' },
+        { date: '09', month: 'NOV', name: 'Diwali',                      slug: 'diwali',                        active: false, desc: 'Festival of lights — celebration of good over evil.' },
+        { date: '04', month: 'DEC', name: 'Vaikuntha Ekadashi',          slug: 'vaikuntha-ekadashi',            active: false, desc: 'Fasting and special programmes on this most auspicious Ekadashi of the year.' },
       ],
+      viewMore: 'View More',
     },
- 
+
+    rathyatra: {
+      label: 'Festival',
+      title: 'Shri Jagannath Rathyatra',
+      subtitle: 'ISKCON Dhanaupur',
+      intro: 'The ISKCON Rath Yatra is a vibrant, global chariot festival celebrating Lord Jagannath (Krishna), his brother Baladeva, and sister Subhadra. Introduced globally by ISKCON\'s founder, A.C. Bhaktivedanta Swami Prabhupada, millions of devotees pull massive, decorated chariots through city streets accompanied by ecstatic sankirtana (chanting) and dancing.',
+      local: 'Following the same, each year ISKCON Dhanaupur also organizes Shri Jagannath Rathyatra at district levels both in Ambedkarnagar and Sultanpur.',
+      tabsLabel: 'Select District',
+      locations: [
+        {
+          id: 'ambedkarnagar',
+          label: 'Ambedkarnagar',
+          date: '21 July 2026',
+          routeStops: [
+            'Start — 2:00 PM — City Palace',
+            'Jetli Vidyalaya',
+            'Shri Ram Janki Mandir',
+            'Fawwara Tiraha',
+            'Mahaprasad & Conclusion — 8:00 PM — City Palace',
+          ],
+          venue: 'ISKCON – Hare Krishna Kendra, beside Priyavar Dulhaghar, Shri Ram Mandir, Barat Ghar, Shahjadpur, Akbarpur',
+          slipImage: '/rathyatra-ambedkarnagar-slip.jpeg', // TODO: Shraddha — add this image to /public
+        },
+        {
+          id: 'sultanpur',
+          label: 'Sultanpur',
+          date: '22 July 2026',
+          routeStops: [
+            'Start — 2:00 PM — Ramkali Chauraha',
+            'Agra Mission Bhandar',
+            'Ghantaghar',
+            'Shahganj Chauraha',
+            'Post Office Chauraha',
+            'Mahaprasad & Conclusion — 9:00 PM — Ramkali Chauraha',
+          ],
+          venue: 'ISKCON Sultanpur – Hare Krishna Kendra, Dulhan Marriage Lawn, Gabhariya Road, Sultanpur',
+          slipImage: '/rathyatra-sultanpur-slip.jpg', // TODO: Shraddha — add this image to /public
+        },
+      ],
+      dateLabel: 'Date',
+      routeLabel: 'Route',
+      slipLabel: 'Collection report',
+      venueLabel: 'Venue',
+      donateCta: 'Contribute via WhatsApp',
+    },
+
     programs: {
       title: 'Weekly Programs',
       subtitle: 'Daily Schedule',
@@ -210,7 +256,7 @@ export const content = {
         { name: 'Sangini Saloni Program',  desc: 'A special program for women, focusing on devotional service and community bonding.' },
       ],
     },
- 
+
     yatra: {
       title: 'Dham Yatras',
       subtitle: 'Holy Pilgrimages',
@@ -223,7 +269,7 @@ export const content = {
       ],
       contact: 'To register or know more, contact: +91 8127443777',
     },
- 
+
     social: {
       title: 'Social Media',
       subtitle: 'Stay connected with us',
@@ -235,7 +281,7 @@ export const content = {
         { platform: 'WhatsApp',  handle: '+91 8127443777',    url: 'https://wa.me/918127443777', icon: 'W', profileImg: '/images/wa-profile.jpg' },
       ],
     },
- 
+
     connect: {
       title: 'Contact',
       subtitle: 'We are here to serve you',
@@ -253,7 +299,7 @@ export const content = {
         { label: 'Hours',   value: 'Open daily 4:30 AM – 9:00 PM' },
       ],
     },
- 
+
     ekadashi: {
       title: 'Ekadashi Vrat',
       subtitle: '2026 Ekadashi Calendar',
@@ -293,19 +339,19 @@ export const content = {
         { date: 'Dec 20', name: 'Mokshada Ekadashi',             paran: 'Dec 21' },
       ],
     },
- 
+
     back: 'Main Menu',
   },
- 
+
   hi: {
     welcome: 'हरे कृष्ण',
     selectLang: 'कृपया अपनी पसंदीदा भाषा चुनें',
     langEn: 'English',
     langHi: 'हिन्दी',
- 
+
     menuTitle: 'हम आपकी सेवा कैसे कर सकते हैं?',
     menuSubtitle: 'श्री श्री राधा श्यामसुंदर मंदिर, धनऊपुर',
- 
+
     menu: [
       { id: 'darshan',  label: 'शुभ दर्शन',        sub: 'दर्शन के समय देखें' },
       { id: 'events',   label: 'आगामी महोत्सव',    sub: 'उत्सव और समारोह' },
@@ -320,7 +366,7 @@ export const content = {
       { id: 'social',   label: 'सोशल मीडिया',      sub: 'हमसे जुड़ें' },
       { id: 'connect',  label: 'संपर्क',            sub: 'मंदिर से जुड़ें' },
     ],
- 
+
     darshan: {
       title: 'शुभ दर्शन',
       subtitle: 'श्री श्री राधा श्यामसुंदर',
@@ -400,7 +446,7 @@ export const content = {
         },
       ],
       mission: 'यूथ को प्रेरित करना, चेतना का निर्माण करना',
-     
+
     },
 
     about: {
@@ -430,7 +476,7 @@ export const content = {
       phone: '+91 8127443777',
       email: 'iskcondhanaupur@gmail.com',
     },
- 
+
     iskcon: {
       title: 'इस्कॉन संस्था के बारे में',
       subtitle: 'इंटरनेशनल सोसायटी फॉर कृष्णा कॉन्शसनेस',
@@ -438,7 +484,7 @@ export const content = {
       founder: 'संस्थापक: श्रील ए.सी. भक्तिवेदांत स्वामी प्रभुपाद',
       website: 'www.iskcondesiretree.com',
     },
- 
+
     donation: {
       title: 'दान कल्याण',
       subtitle: 'सेवा ही सर्वोच्च उपासना है',
@@ -463,21 +509,67 @@ export const content = {
       proceed: 'भुगतान करें',
       note: '₹500 से अधिक के दान पर 80G कर छूट प्रमाण पत्र मिलेगा।',
     },
- 
+
     events: {
       title: 'आगामी महोत्सव',
       subtitle: 'उत्सव और समारोह २०२६',
       list: [
-        { date: '21', month: 'जुल', name: 'रथयात्रा',                    desc: 'भगवान जगन्नाथ की वार्षिक रथ यात्रा।' },
-        { date: '04', month: 'सित', name: 'जन्माष्टमी',                  desc: 'सबसे बड़ा उत्सव — भगवान श्री कृष्ण का प्रकट उत्सव।' },
-        { date: '05', month: 'सित', name: 'श्रील प्रभुपाद प्रकट उत्सव', desc: 'संस्थापक-आचार्य का प्रकट दिवस उत्सव। गुरु पूजा और विशेष भोज।' },
-        { date: '19', month: 'सित', name: 'राधाष्टमी',                   desc: 'श्रीमती राधारानी का प्रकट उत्सव। विशेष कीर्तन, अभिषेक और भोज।' },
-        { date: '02', month: 'नव',  name: 'राधा कुण्ड प्रकट उत्सव',     desc: 'पवित्र कुण्ड पर विशेष कार्यक्रम। स्नान उत्सव और विस्तारित कीर्तन।' },
-        { date: '09', month: 'नव',  name: 'दीपावली',                      desc: 'प्रकाश का त्योहार — अच्छाई की बुराई पर विजय।' },
-        { date: '04', month: 'दिस', name: 'वैकुण्ठ एकादशी',              desc: 'वर्ष की सबसे शुभ एकादशी पर व्रत और विशेष कार्यक्रम।' },
+        { date: '21', month: 'जुल', name: 'रथयात्रा',                    slug: 'rathyatra',                   active: true,  desc: 'भगवान जगन्नाथ की वार्षिक रथ यात्रा।' },
+        { date: '04', month: 'सित', name: 'जन्माष्टमी',                  slug: 'janmashtami',                 active: false, desc: 'सबसे बड़ा उत्सव — भगवान श्री कृष्ण का प्रकट उत्सव।' },
+        { date: '05', month: 'सित', name: 'श्रील प्रभुपाद प्रकट उत्सव', slug: 'srila-prabhupada-appearance', active: false, desc: 'संस्थापक-आचार्य का प्रकट दिवस उत्सव। गुरु पूजा और विशेष भोज।' },
+        { date: '19', month: 'सित', name: 'राधाष्टमी',                   slug: 'radhastami',                  active: false, desc: 'श्रीमती राधारानी का प्रकट उत्सव। विशेष कीर्तन, अभिषेक और भोज।' },
+        { date: '02', month: 'नव',  name: 'राधा कुण्ड प्रकट उत्सव',     slug: 'radha-kund-appearance',       active: false, desc: 'पवित्र कुण्ड पर विशेष कार्यक्रम। स्नान उत्सव और विस्तारित कीर्तन।' },
+        { date: '09', month: 'नव',  name: 'दीपावली',                      slug: 'diwali',                      active: false, desc: 'प्रकाश का त्योहार — अच्छाई की बुराई पर विजय।' },
+        { date: '04', month: 'दिस', name: 'वैकुण्ठ एकादशी',              slug: 'vaikuntha-ekadashi',          active: false, desc: 'वर्ष की सबसे शुभ एकादशी पर व्रत और विशेष कार्यक्रम।' },
       ],
+      viewMore: 'अधिक जानें',
     },
- 
+
+    rathyatra: {
+      label: 'महोत्सव',
+      title: 'श्री जगन्नाथ रथयात्रा',
+      subtitle: 'इस्कॉन धनऊपुर',
+      intro: 'इस्कॉन रथयात्रा भगवान जगन्नाथ (कृष्ण), उनके भाई बलदेव और बहन सुभद्रा को समर्पित एक भव्य, वैश्विक रथ महोत्सव है। इस्कॉन के संस्थापक ए.सी. भक्तिवेदांत स्वामी प्रभुपाद द्वारा विश्वभर में प्रारंभ किया गया यह उत्सव — लाखों भक्त सजे हुए विशाल रथों को नगर की सड़कों पर संकीर्तन और नृत्य के साथ खींचते हैं।',
+      local: 'इसी परंपरा का अनुसरण करते हुए, इस्कॉन धनऊपुर प्रतिवर्ष अंबेडकरनगर और सुल्तानपुर — दोनों जिलों में श्री जगन्नाथ रथयात्रा का आयोजन करता है।',
+      tabsLabel: 'जिला चुनें',
+      locations: [
+        {
+          id: 'ambedkarnagar',
+          label: 'अंबेडकरनगर',
+          date: '21 जुलाई 2026',
+          routeStops: [
+            'शुभारंभ — दोपहर 2 बजे — सिटी पैलेस',
+            'जेटली विद्यालय',
+            'श्रीराम जानकी मंदिर',
+            'फव्वारा तिराहा',
+            'महाप्रसाद व समापन — सायं 8 बजे — सिटी पैलेस',
+          ],
+          venue: 'इस्कॉन – हरे कृष्ण केंद्र, प्रियवर दुल्हाघर के बगल, श्रीराम मंदिर, बारात घर, शहजादपुर, अकबरपुर',
+          slipImage: '/rathyatra-ambedkarnagar-slip.jpeg',
+        },
+        {
+          id: 'sultanpur',
+          label: 'सुल्तानपुर',
+          date: '22 जुलाई 2026',
+          routeStops: [
+            'शुभारंभ — दोपहर 2 बजे — रामकली चौराहा',
+            'आगरा मिशन भंडार',
+            'घंटाघर',
+            'शाहगंज चौराहा',
+            'पोस्ट ऑफिस चौराहा',
+            'महाप्रसाद व समापन — रात्रि 9 बजे — रामकली चौराहा',
+          ],
+          venue: 'इस्कॉन सुल्तानपुर – हरे कृष्ण केंद्र, दुल्हन मैरिज लॉन, गभड़िया रोड, सुल्तानपुर',
+          slipImage: '/rathyatra-sultanpur-slip.jpg',
+        },
+      ],
+      dateLabel: 'तिथि',
+      routeLabel: 'मार्ग',
+      slipLabel: 'कलेक्शन रिपोर्ट',
+      venueLabel: 'स्थान',
+      donateCta: 'WhatsApp पर सहयोग करें',
+    },
+
     programs: {
       title: 'साप्ताहिक कार्यक्रम',
       subtitle: 'दैनिक कार्यक्रम',
@@ -499,7 +591,7 @@ export const content = {
         { name: 'संगिनी सलोनी कार्यक्रम', desc: 'महिलाओं के लिए विशेष भक्ति सेवा और सामुदायिक कार्यक्रम।' },
       ],
     },
- 
+
     yatra: {
       title: 'धाम यात्राएं',
       subtitle: 'पवित्र तीर्थ यात्राएं',
@@ -512,7 +604,7 @@ export const content = {
       ],
       contact: 'पंजीकरण या अधिक जानकारी के लिए: +91 8127443777',
     },
- 
+
     social: {
       title: 'सोशल मीडिया',
       subtitle: 'हमसे जुड़े रहें',
@@ -524,7 +616,7 @@ export const content = {
         { platform: 'WhatsApp',  handle: '+91 8127443777',    url: 'https://wa.me/918127443777', icon: 'W', profileImg: '/images/wa-profile.jpg' },
       ],
     },
- 
+
     connect: {
       title: 'संपर्क',
       subtitle: 'हम आपकी सेवा के लिए उपस्थित हैं',
@@ -542,7 +634,7 @@ export const content = {
         { label: 'समय',   value: 'प्रतिदिन प्रातः 4:30 बजे से रात्रि 9:00 बजे तक' },
       ],
     },
- 
+
     ekadashi: {
       title: 'एकादशी व्रत',
       subtitle: 'एकादशी कैलेंडर २०२६',
@@ -582,7 +674,7 @@ export const content = {
         { date: 'Dec 20', name: 'Mokshada Ekadashi',             paran: 'Dec 21' },
       ],
     },
- 
+
     back: 'मुख्य मेनू',
   },
 }

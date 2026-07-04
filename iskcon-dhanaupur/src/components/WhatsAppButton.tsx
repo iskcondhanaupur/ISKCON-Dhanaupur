@@ -1,12 +1,16 @@
 'use client'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Home } from 'lucide-react'
 
 interface Props {
   lang?: 'en' | 'hi'
+  isHome?: boolean
 }
 
-export default function WhatsAppButton({ lang = 'en' }: Props) {
+export default function WhatsAppButton({ lang = 'en', isHome = false }: Props) {
   const [open, setOpen] = useState(false)
+  const router = useRouter()
 
   const phone   = '8127443777'
   const message = lang === 'hi'
@@ -17,7 +21,7 @@ export default function WhatsAppButton({ lang = 'en' }: Props) {
 
   return (
     <>
-      {/* Popup */}
+      {/* Popup — kept as WhatsApp's own brand colors (green header / bubble), not part of site theme */}
       {open && (
         <div style={{
           position: 'fixed',
@@ -31,7 +35,6 @@ export default function WhatsAppButton({ lang = 'en' }: Props) {
           overflow: 'hidden',
           fontFamily: 'Outfit, sans-serif',
         }}>
-          {/* Header — white bg, dark text */}
           <div style={{
             background: '#075e54',
             padding: '12px 14px',
@@ -54,7 +57,6 @@ export default function WhatsAppButton({ lang = 'en' }: Props) {
             </button>
           </div>
 
-          {/* Chat area — grey bg, green bubble */}
           <div style={{
             padding: '16px 14px',
             background: '#ece5dd',
@@ -81,7 +83,6 @@ export default function WhatsAppButton({ lang = 'en' }: Props) {
             </div>
           </div>
 
-          {/* CTA */}
           <div style={{ padding: '10px 14px 14px', background: '#f0f0f0' }}>
             <a
               href={waLink}
@@ -115,7 +116,42 @@ export default function WhatsAppButton({ lang = 'en' }: Props) {
         </div>
       )}
 
-      {/* Floating Button */}
+      {/* Home Button — WhatsApp button ke exact upar, sirf non-home pages pe */}
+      {!isHome && (
+        <button
+          onClick={() => router.push('/')}
+          aria-label={lang === 'hi' ? 'होम पेज पर जाएं' : 'Go to homepage'}
+          style={{
+            position: 'fixed',
+            bottom: 86,
+            right: 20,
+            width: 54,
+            height: 54,
+            borderRadius: '50%',
+            background: 'var(--maroon)',
+            border: '2px solid var(--gold)',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 4px 16px color-mix(in srgb, var(--maroon) 40%, transparent)',
+            zIndex: 1000,
+            transition: 'transform 0.2s, box-shadow 0.2s',
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.1)'
+            ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 6px 20px color-mix(in srgb, var(--maroon) 50%, transparent)'
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'
+            ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 16px color-mix(in srgb, var(--maroon) 40%, transparent)'
+          }}
+        >
+          <Home size={24} strokeWidth={2} color="var(--parchment)" />
+        </button>
+      )}
+
+      {/* Floating WhatsApp Button — kept WhatsApp's own green brand color, unrelated to site theme */}
       <button
         onClick={() => setOpen(v => !v)}
         style={{

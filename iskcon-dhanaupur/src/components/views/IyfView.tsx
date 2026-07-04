@@ -31,7 +31,6 @@ export default function IYFView({ t, lang, onBack }: IYFViewProps) {
   return (
     <section className="section" style={{ background: 'transparent' }}>
       <div className="container" style={{ maxWidth: 480 }}>
-        {/* Back Button */}
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -42,37 +41,34 @@ export default function IYFView({ t, lang, onBack }: IYFViewProps) {
           {t.back}
         </motion.button>
 
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-8"
         >
-          <h1 style={{ fontSize: 'clamp(24px, 4vw, 34px)', color: '#8B3A1F', marginBottom: 8, fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}>
+          <h1 style={{ fontSize: 'clamp(24px, 4vw, 34px)', color: 'var(--maroon)', marginBottom: 8, fontFamily: 'Cormorant Garamond, serif', fontWeight: 600 }}>
             {iyf.title}
           </h1>
-          <p style={{ fontSize: 17, color: '#B8860B', fontFamily: 'Cormorant Garamond, serif', marginBottom: 12 }}>
+          <p style={{ fontSize: 17, color: 'var(--gold)', fontFamily: 'Cormorant Garamond, serif', marginBottom: 12 }}>
             {iyf.subtitle}
           </p>
-          <p style={{ fontSize: 15, color: '#4A4A4A', lineHeight: 1.8, fontFamily: 'Crimson Text, serif' }}>
+          <p style={{ fontSize: 15, color: 'var(--text)', lineHeight: 1.8, fontFamily: 'Crimson Text, serif' }}>
             {iyf.description}
           </p>
         </motion.div>
 
-        {/* Mission */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          style={{ background: '#faf6ef', border: '1.5px solid #d4c2a5', borderRadius: 14, padding: '22px', marginBottom: 28 }}
+          style={{ background: 'var(--parchment)', border: '1.5px solid var(--border)', borderRadius: 14, padding: '22px', marginBottom: 28 }}
         >
-          <p style={{ fontSize: 18, color: '#8B3A1F', fontFamily: 'Cormorant Garamond, serif', fontWeight: 600, margin: 0 }}>
+          <p style={{ fontSize: 18, color: 'var(--maroon)', fontFamily: 'Cormorant Garamond, serif', fontWeight: 600, margin: 0 }}>
             {iyf.mission}
           </p>
         </motion.div>
 
-        {/* Features Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -84,26 +80,27 @@ export default function IYFView({ t, lang, onBack }: IYFViewProps) {
               key={feature.id}
               variants={itemVariants}
               whileHover={{ scale: 1.02, y: -5 }}
-              className="bg-white rounded-lg p-6 shadow-md border-l-4 border-[#D4AF37] hover:shadow-lg transition-all"
+              className="rounded-lg p-6 shadow-md transition-all"
+              style={{ background: 'var(--parchment)', borderLeft: '4px solid var(--gold)' }}
             >
-              <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 17, fontWeight: 600, color: '#8B3A1F', marginBottom: 8 }}>
+              <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 17, fontWeight: 600, color: 'var(--maroon)', marginBottom: 8 }}>
                 {feature.name}
               </h3>
-              <p style={{ fontFamily: 'Crimson Text, serif', fontSize: 15, color: '#4A4A4A', lineHeight: 1.8, margin: 0 }}>
+              <p style={{ fontFamily: 'Crimson Text, serif', fontSize: 15, color: 'var(--text)', lineHeight: 1.8, margin: 0 }}>
                 {feature.description}
               </p>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Coming Soon */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="text-center bg-[#F5E6D3] rounded-lg p-8 border border-[#D4AF37]"
+          className="text-center rounded-lg p-8"
+          style={{ background: 'var(--gold-pale)', border: '1px solid var(--gold)' }}
         >
-          <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 17, color: '#8B3A1F', margin: 0 }}>
+          <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 17, color: 'var(--maroon)', margin: 0 }}>
             {iyf.comingSoon}
           </p>
         </motion.div>

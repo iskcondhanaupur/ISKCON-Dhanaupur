@@ -15,6 +15,8 @@ const PlatformLogo = ({ platform }: { platform: string }) => {
   }
 }
 
+// Note: these remain the respective platforms' own brand colors, not site-theme colors —
+// kept as-is so each icon tile stays recognizable (same reasoning as the WhatsApp button).
 const platformBg: Record<string, string> = { Facebook: '#1877f2', YouTube: '#ff0000', Instagram: '#e1306c', WhatsApp: '#25d366' }
 
 export default function SocialView({ t, lang, onBack }: Props) {
@@ -28,30 +30,26 @@ export default function SocialView({ t, lang, onBack }: Props) {
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="back-btn" onClick={onBack} style={{ marginBottom: 24 }}>{t.back}</motion.button>
 
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 24 }}>
-          
-          <h1 style={{ fontSize: 'clamp(24px, 4vw, 34px)', color: '#7a1f1f', marginBottom: 4, fontFamily: ff, fontWeight: 600 }}>{s.title}</h1>
-          <p style={{ fontSize: 15, color: '#a0846c', fontFamily: isHi ? ff : 'Crimson Text, serif' }}>{s.desc}</p>
+          <h1 style={{ fontSize: 'clamp(24px, 4vw, 34px)', color: 'var(--maroon)', marginBottom: 4, fontFamily: ff, fontWeight: 600 }}>{s.title}</h1>
+          <p style={{ fontSize: 15, color: 'var(--muted)', fontFamily: isHi ? ff : 'Crimson Text, serif' }}>{s.desc}</p>
           <div className="gold-line" style={{ maxWidth: 80, marginTop: 14 }} />
         </motion.div>
 
-        
-
-        {/* Platform links */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {s.links.map((link: any, i: number) => (
             <motion.a key={i} href={link.url} target="_blank" rel="noopener noreferrer"
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 + 0.07 * i }}
-              style={{ display: 'flex', alignItems: 'center', gap: 14, background: 'rgba(253,245,230,0.9)', border: '1.5px solid #d4c2a5', borderRadius: 10, padding: '14px 16px', textDecoration: 'none', transition: 'box-shadow 0.2s, border-color 0.2s' }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = '#b8860b'; e.currentTarget.style.boxShadow = '2px 2px 8px rgba(0,0,0,0.08)' }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = '#d4c2a5'; e.currentTarget.style.boxShadow = 'none' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: 14, background: 'var(--parchment)', border: '1.5px solid var(--border)', borderRadius: 10, padding: '14px 16px', textDecoration: 'none', transition: 'box-shadow 0.2s, border-color 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--gold)'; e.currentTarget.style.boxShadow = '2px 2px 8px color-mix(in srgb, var(--maroon) 10%, transparent)' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none' }}>
               <div style={{ width: 44, height: 44, borderRadius: 10, background: platformBg[link.platform] || '#888', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <PlatformLogo platform={link.platform} />
               </div>
               <div style={{ flex: 1 }}>
-                <p style={{ fontSize: 16, fontWeight: 600, color: '#7a1f1f', fontFamily: 'Cormorant Garamond, serif', marginBottom: 2 }}>{link.platform}</p>
-                <p style={{ fontSize: 13, color: '#a0846c', fontFamily: 'Crimson Text, serif' }}>{link.handle}</p>
+                <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--maroon)', fontFamily: 'Cormorant Garamond, serif', marginBottom: 2 }}>{link.platform}</p>
+                <p style={{ fontSize: 13, color: 'var(--muted)', fontFamily: 'Crimson Text, serif' }}>{link.handle}</p>
               </div>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8860b" strokeWidth="2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </motion.a>
           ))}
         </div>
