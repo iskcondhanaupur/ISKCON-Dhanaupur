@@ -6,29 +6,34 @@
   --gold:       #b8860b;
   --gold-lt:    #d4a843;
   --gold-pale:  #f5e6c0;
-  --maroon:     #7a1f1f;
-  --maroon-lt:  #9b3030;
-  --cream:      #f7eed7;
-  --parchment:  #fdf5e6;
-  --text:       #4a3c2b;
-  --muted:      #a0846c;
-  --light:      #c9a880;
-  --border:     #d4c2a5;
-  --border-dk:  #b8a080;
-  --bg:         #f7eed7;
-  --surface:    #fdf5e6;
-  --blue:       #7a1f1f;
-  --blue-dk:    #5c1510;
-  --blue-lt:    #f5e6c0;
-  --bhagwa:     #c9620a;
-  --bhagwa-dk:  #a34d08;
-  --bhagwa-lt:  #fdf0e4;
+  --maroon:       #4a1d4a;
+  --maroon-lt:    #6b2f6b;
+  --purple:       #4a1d4a;
+  --purple-lt:    #6b2f6b;
+  --purple-dk:    #341334;
+  --lavender:     #c9a8d6;
+  --lavender-lt:  #e6d5ee;
+  --cream: #f7eed7;
+  --parchment: #fdf5e6;
+  --text: #4a3c2b;
+  --muted: #a0846c;
+  --light: #c9a880;
+  --border: #d4c2a5;
+  --border-dk: #b8a080;
+  --bg: #f7eed7;
+  --surface: #fdf5e6;
+  --blue: #4a1d4a;
+  --blue-dk: #341334;
+  --blue-lt: #f5e6c0;
+  --bhagwa: #c9620a;
+  --bhagwa-dk: #a34d08;
+  --bhagwa-lt: #fdf0e4;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
-  background-color: #ede4cf;
+  background-color: #faf9f7;
   color: var(--text);
   font-family: var(--font-crimson), 'Crimson Text', serif;
   -webkit-font-smoothing: antialiased;
@@ -119,17 +124,17 @@ html, body {
   border-bottom: 1.5px solid var(--border);
   transition: box-shadow 0.2s;
 }
-.site-nav.scrolled { box-shadow: 0 2px 16px rgba(139, 105, 20, 0.18); }
+.site-nav.scrolled { box-shadow: 0 2px 16px rgba(74, 29, 74, 0.18); }
 
 .card {
   background: var(--parchment);
   border: 1.5px solid var(--gold);
   border-radius: 14px;
-  box-shadow: 0 0 0 1px rgba(184,134,11,0.15), 2px 3px 10px rgba(122,31,31,0.08);
+  box-shadow: 0 0 0 1px rgba(184,134,11,0.15), 2px 3px 10px rgba(74,29,74,0.08);
   transition: box-shadow 0.2s, border-color 0.2s;
 }
 .card:hover {
-  box-shadow: 0 0 0 1px rgba(184,134,11,0.25), 4px 6px 16px rgba(122,31,31,0.15);
+  box-shadow: 0 0 0 1px rgba(184,134,11,0.25), 4px 6px 16px rgba(74,29,74,0.15);
   border-color: var(--gold-lt);
 }
 
@@ -162,20 +167,22 @@ html, body {
 
 .lang-card {
   cursor: pointer;
-  border: 1.5px solid var(--gold);
-  background: rgba(253,245,230,0.85);
-  border-radius: 14px;
-  padding: 28px 40px;
-  text-align: center;
+  border: 1.5px solid rgba(184,134,11,0.35);
+  background: #fffdf8;
+  border-radius: 30px;
+  padding: 18px 24px;
+  text-align: left;
   transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-  min-width: 160px;
-  box-shadow: 0 0 0 1px rgba(184,134,11,0.15), 2px 3px 10px rgba(122,31,31,0.08);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 2px 12px rgba(74,29,74,0.10);
 }
 .lang-card:hover {
   border-color: var(--gold-lt);
-  box-shadow: 0 0 0 1px rgba(184,134,11,0.25), 4px 6px 16px rgba(122,31,31,0.15);
-  background: #ffffff;
-  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(74,29,74,0.18);
+  transform: translateY(-2px);
 }
 
 .menu-grid {
@@ -197,11 +204,11 @@ html, body {
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex; flex-direction: column; gap: 4px;
-  box-shadow: 0 0 0 1px rgba(184,134,11,0.15), 2px 3px 10px rgba(122,31,31,0.08);
+  box-shadow: 0 0 0 1px rgba(184,134,11,0.15), 2px 3px 10px rgba(74,29,74,0.08);
 }
 .menu-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0 0 1px rgba(184,134,11,0.25), 4px 6px 16px rgba(122,31,31,0.15);
+  box-shadow: 0 0 0 1px rgba(184,134,11,0.25), 4px 6px 16px rgba(74,29,74,0.15);
   background: #ffffff;
   border-color: var(--gold-lt);
 }
@@ -326,4 +333,30 @@ textarea.form-input { resize: vertical; min-height: 110px; }
 @media (max-width: 768px) {
   .section { padding: 32px 0; }
   .container { padding: 0 16px; }
+}
+
+/* ============================================================
+   Force bold weight on ENGLISH content only.
+   English text on this site uses Cormorant Garamond (headings/
+   nav/buttons) and Crimson Text (body copy). Hindi content uses
+   Tiro Devanagari Hindi and is intentionally left untouched here.
+   ============================================================ */
+
+/* Class-based English text utilities */
+.t-display,
+.t-label,
+.t-body,
+.t-nav,
+.btn,
+.amount-btn,
+.back-btn,
+.pill,
+.ekadashi-cell {
+  font-weight: 700 !important;
+}
+
+/* Inline-styled English text (fontFamily set directly in components) */
+[style*="Cormorant Garamond"],
+[style*="Crimson Text"] {
+  font-weight: 700 !important;
 }

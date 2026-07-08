@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { Lang } from '@/data/content'
+import PageBackground from '@/components/PageBackground'
 
 interface Props { t: any; lang: Lang; onBack: () => void }
 
@@ -11,6 +12,7 @@ export default function ConnectView({ t, lang, onBack }: Props) {
 
   return (
     <section className="section" style={{ background: 'transparent' }}>
+     <PageBackground/>
       <div className="container" style={{ maxWidth: 600 }}>
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="back-btn" onClick={onBack} style={{ marginBottom: 32 }}>{t.back}</motion.button>
 
@@ -109,7 +111,37 @@ export default function ConnectView({ t, lang, onBack }: Props) {
               >
                 ✉ iskcondhanaaupur@gmail.com
               </a>
-              <p style={{ fontSize: 12, color: 'var(--muted)' }}>{isHi ? 'ईमेल भेजें' : 'Send an Email'}</p>
+              <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 16 }}>{isHi ? 'ईमेल भेजें' : 'Send an Email'}</p>
+
+              <a
+                href="mailto:support@iskcondhanaupur.com"
+                style={{
+                  display: 'block',
+                  background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 100%)',
+                  color: 'var(--text)',
+                  borderRadius: 6,
+                  padding: '12px 16px',
+                  textDecoration: 'none',
+                  fontSize: 15,
+                  fontWeight: 600,
+                  fontFamily: ff,
+                  marginBottom: 8,
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer',
+                  wordBreak: 'break-all'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)'
+                  e.currentTarget.style.boxShadow = '0 4px 12px color-mix(in srgb, var(--gold) 30%, transparent)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
+              >
+                ✉ support@iskcondhanaupur.com
+              </a>
+              <p style={{ fontSize: 12, color: 'var(--muted)' }}>{isHi ? 'सहायता के लिए ईमेल' : 'For Support Queries'}</p>
             </div>
 
           </div>

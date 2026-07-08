@@ -1,5 +1,6 @@
 'use client'
 import { Lang } from '@/data/content'
+import PageBackground from '@/components/PageBackground'
 
 interface Props {
   t: any
@@ -16,6 +17,7 @@ export default function EventDetailView({ t, lang, slug, onBack }: Props) {
 
   return (
     <section className="section" style={{ background: 'transparent' }}>
+      <PageBackground/>
       <div className="container" style={{ maxWidth: 480 }}>
         <button
           onClick={onBack}

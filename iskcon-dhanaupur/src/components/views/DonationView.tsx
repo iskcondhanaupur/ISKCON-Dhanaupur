@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Lang } from '@/data/content'
+import PageBackground from '@/components/PageBackground'
 
 interface Props { t: any; lang: Lang; onBack: () => void; onNavigate?: (view: string) => void }
 
@@ -101,6 +102,7 @@ export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
   if (success) {
     return (
       <section className="section" style={{ background: 'transparent', textAlign: 'center' }}>
+        <PageBackground/>
         <div className="container" style={{ maxWidth: 480 }}>
           <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', damping: 15 }}>
             <div style={{ fontSize: 72, marginBottom: 16 }}></div>
@@ -121,9 +123,6 @@ export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
             <div style={{ display: 'flex', gap: 12, flexDirection: 'column' }}>
               <button onClick={() => { setSuccess(false); setStep('SEVA_SELECT'); }} style={{ width: '100%', background: 'var(--maroon)', color: '#fff', padding: '12px 24px', border: 'none', borderRadius: 8, cursor: 'pointer', fontFamily: ff, fontWeight: 600, fontSize: 14 }}>
                 {isHi ? 'दोबारा दान करें' : 'Make Another Donation'}
-              </button>
-              <button onClick={onBack} style={{ width: '100%', background: 'transparent', color: 'var(--maroon)', padding: '12px 24px', border: '2px solid var(--maroon)', borderRadius: 8, cursor: 'pointer', fontFamily: ff, fontWeight: 600, fontSize: 14 }}>
-                {t.back}
               </button>
             </div>
           </motion.div>

@@ -1,19 +1,28 @@
 'use client'
 import { useState } from 'react'
-import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import ImageGallery from '@/components/ImageGallery'
+import {
+  Flame, Sprout, Shell, UtensilsCrossed, Building2, Sunrise, Flower2, MoonStar,
+  Calendar, Images, ExternalLink,
+} from 'lucide-react'
 import { Lang } from '@/data/content'
+import PageBackground from '@/components/PageBackground'
 
 interface Props { t: any; lang: Lang; onBack: () => void }
 
+// TODO: replace with the temple's actual public Google Photos album share link
 const GOOGLE_PHOTOS_LINK = 'https://photos.google.com/share/YOUR_ALBUM_LINK_HERE'
-const MEDIA_IMAGES = [
-  { id: 1, url: '/11.jpeg' }, { id: 2, url: '/17.jpeg' },
-  { id: 3, url: '/12.jpeg' }, { id: 4, url: '/18.jpeg' },
-  { id: 5, url: '/13.jpeg' }, { id: 6, url: '/19.jpeg' },
-  { id: 7, url: '/15.jpeg' }, { id: 8, url: '/20.jpeg' },
-  { id: 9, url: '/16.jpeg' },
+
+// Icon assigned to each schedule row, in order
+const SCHEDULE_ICONS = [Flame, Sprout, Shell, UtensilsCrossed, Building2, Sunrise, Flower2, MoonStar]
+
+// Gallery is organised as date-only sections (no title/desc) —
+// each box just shows a Calendar icon and its date. Edit dates as needed.
+const GALLERY_SECTIONS = [
+  { en: { date: 'Every day' },                hi: { date: 'प्रतिदिन' } },
+  { en: { date: 'Every evening, 6:45 PM' },   hi: { date: 'प्रतिदिन शाम 6:45 बजे' } },
+  { en: { date: 'Festival occasions' },       hi: { date: 'उत्सव अवसरों पर' } },
+  { en: { date: 'Round the year' },           hi: { date: 'वर्ष भर' } },
 ]
 
 export default function DarshanView({ t, lang, onBack }: Props) {
@@ -24,13 +33,14 @@ export default function DarshanView({ t, lang, onBack }: Props) {
 
   return (
     <section className="section" style={{ background: 'transparent' }}>
+      <PageBackground/>
       <div className="container" style={{ maxWidth: 480 }}>
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="back-btn" onClick={onBack} style={{ marginBottom: 24 }}>{t.back}</motion.button>
 
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 20 }}>
-          <p className="t-label" style={{ marginBottom: 6 }}>{isHi ? 'दैनिक कार्यक्रम' : 'Daily Schedule'}</p>
-          <h1 style={{ fontSize: 'clamp(35px, 4vw, 34px)', color: 'var(--maroon)', marginBottom: 4, fontFamily: ff, fontWeight: 600 }}>{d.title}</h1>
-          <p style={{ fontSize: 17, color: 'var(--gold)', fontFamily: ff }}>
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 20, textAlign: 'center' }}>
+          <h1 style={{ fontSize: 'clamp(35px, 4vw, 34px)', color: 'var(--maroon)', marginBottom: 8, fontFamily: ff, fontWeight: 600 }}>{d.title}</h1>
+          <div style={{ width: 90, height: 1.5, background: 'var(--border)', margin: '0 auto 16px' }} />
+          <p style={{ fontSize: 17, color: 'var(--gold)', fontFamily: ff, maxWidth: 420, margin: '0 auto' }}>
             {isHi
               ? 'भगवान श्री श्री राधा श्यामसुंदर जी, श्री श्री जगन्नाथ बलदेव सुभद्रा जी, श्री श्री गौर निताई सुंदर जी के दिव्य दर्शन।'
               : 'Relish beautiful, enchanting and divine darshans of Lord Shri Shri Radha Shyamsundar ji, Shri Shri Jagannath Baldev Subhadra ji, Shri Shri Gaur Nitai Sundar ji.'}
@@ -38,14 +48,25 @@ export default function DarshanView({ t, lang, onBack }: Props) {
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
-          style={{ display: 'flex', justifyContent: 'center', gap: 40, marginBottom: 20, borderBottom: '1.5px solid var(--border)' }}>
-          {[{ key: 'story', en: 'Daily Schedule', hi: 'दैनिक कार्यक्रम' }, { key: 'media', en: 'Gallery', hi: 'गैलरी' }].map(tab => {
+          style={{ display: 'flex', justifyContent: 'center', gap: 6, marginBottom: 24, background: 'var(--parchment)', border: '1.5px solid var(--border)', borderRadius: 999, padding: 6 }}>
+          {[
+            { key: 'story', en: 'Daily Schedule', hi: 'दैनिक कार्यक्रम', Icon: Calendar },
+            { key: 'media', en: 'Gallery', hi: 'गैलरी', Icon: Images },
+          ].map(tab => {
             const isActive = activeTab === tab.key
+            const { Icon } = tab
             return (
               <button key={tab.key} onClick={() => setActiveTab(tab.key as any)}
-                style={{ padding: '10px 8px', border: 'none', background: 'transparent', cursor: 'pointer', textAlign: 'center', borderBottom: isActive ? '2px solid var(--gold)' : '2px solid transparent', marginBottom: -1.5, transition: 'all 0.2s' }}>
-                <span style={{ display: 'block', fontSize: 16, fontWeight: 600, color: isActive ? 'var(--maroon)' : 'var(--muted)', fontFamily: ff }}>{isHi ? tab.hi : tab.en}</span>
-                <span style={{ display: 'block', fontSize: 10, marginTop: 2, color: isActive ? 'var(--gold)' : 'var(--muted)', fontFamily: 'Crimson Text, serif', letterSpacing: '0.06em' }} />
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                  padding: '10px 20px', border: 'none', borderRadius: 999, cursor: 'pointer',
+                  background: isActive ? 'var(--maroon)' : 'transparent',
+                  transition: 'all 0.2s', flex: 1,
+                }}>
+                <Icon size={16} color={isActive ? '#fff' : 'var(--muted)'} />
+                <span style={{ fontSize: 15, fontWeight: 600, color: isActive ? '#fff' : 'var(--muted)', fontFamily: ff, whiteSpace: 'nowrap' }}>
+                  {isHi ? tab.hi : tab.en}
+                </span>
               </button>
             )
           })}
@@ -54,42 +75,78 @@ export default function DarshanView({ t, lang, onBack }: Props) {
         <AnimatePresence mode="wait">
           {activeTab === 'story' && (
             <motion.div key="story" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
-              <div style={{ background: 'var(--parchment)', border: '1.5px solid var(--border)', borderRadius: 10, overflow: 'hidden', marginBottom: 16 }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '110px 1fr', background: 'var(--maroon)', padding: '10px 16px' }}>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.8)', fontFamily: 'Crimson Text, serif', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{isHi ? 'समय' : 'Time'}</span>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.8)', fontFamily: 'Crimson Text, serif', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{isHi ? 'कार्यक्रम' : 'Program'}</span>
+              <div style={{ background: 'var(--parchment)', border: '1.5px solid var(--border)', borderRadius: 14, overflow: 'hidden', marginBottom: 16 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '58px 1fr', background: 'var(--maroon)', padding: '10px 16px', alignItems: 'center' }}>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.8)', fontFamily: 'Crimson Text, serif', letterSpacing: '0.1em', textTransform: 'uppercase' }} />
+                  <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.8)', fontFamily: 'Crimson Text, serif', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{isHi ? 'दैनिक कार्यक्रम' : 'Daily Program'}</span>
                 </div>
-                {d.schedule.map((row: any, i: number) => (
-                  <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.04 * i }}
-                    style={{ display: 'grid', gridTemplateColumns: '110px 1fr', padding: '14px 16px', borderBottom: i < d.schedule.length - 1 ? '1px solid var(--border)' : 'none', background: i % 2 === 0 ? 'var(--parchment)' : 'var(--cream)', gap: 8, alignItems: 'flex-start' }}>
-                    <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--gold)', fontFamily: 'Crimson Text, serif', letterSpacing: '0.06em' }}>{row.time}</span>
-                    <div>
-                      <p style={{ fontFamily: ff, fontSize: 16, fontWeight: 600, color: 'var(--maroon)', marginBottom: 2 }}>{row.name}</p>
-                      <p style={{ fontSize: 13, color: 'var(--muted)', fontFamily: 'Crimson Text, serif', lineHeight: 1.5 }}>{row.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
+                {d.schedule.map((row: any, i: number) => {
+                  const Icon = SCHEDULE_ICONS[i % SCHEDULE_ICONS.length]
+                  return (
+                    <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.04 * i }}
+                      style={{ display: 'grid', gridTemplateColumns: '58px 1fr', padding: '14px 16px', borderBottom: i < d.schedule.length - 1 ? '1px solid var(--border)' : 'none', background: i % 2 === 0 ? 'var(--parchment)' : 'var(--cream)', gap: 8, alignItems: 'flex-start' }}>
+                      <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <div style={{
+                          width: 44, height: 44, borderRadius: '50%',
+                          background: 'color-mix(in srgb, var(--gold) 16%, transparent)',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                        }}>
+                          <Icon size={20} color="var(--gold)" strokeWidth={1.75} />
+                        </div>
+                      </div>
+                      <div>
+                        <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--gold)', fontFamily: 'Crimson Text, serif', letterSpacing: '0.06em' }}>{row.time}</span>
+                        <p style={{ fontFamily: ff, fontSize: 16, fontWeight: 600, color: 'var(--maroon)', marginTop: 2, marginBottom: 2 }}>{row.name}</p>
+                        <p style={{ fontSize: 13, color: 'var(--muted)', fontFamily: 'Crimson Text, serif', lineHeight: 1.5 }}>{row.desc}</p>
+                      </div>
+                    </motion.div>
+                  )
+                })}
               </div>
               {d.note && (
-                <p style={{ padding: '14px 16px', background: 'var(--parchment)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 14, color: 'var(--muted)', fontFamily: isHi ? ff : 'Crimson Text, serif' }}>{d.note}</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: 'var(--parchment)', border: '1px solid var(--border)', borderRadius: 8 }}>
+                  <div style={{
+                    width: 34, height: 34, borderRadius: '50%', background: 'var(--maroon)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                  }}>
+                    <Flower2 size={16} color="#fff" />
+                  </div>
+                  <p style={{ fontSize: 14, color: 'var(--muted)', fontFamily: isHi ? ff : 'Crimson Text, serif' }}>{d.note}</p>
+                </div>
               )}
             </motion.div>
           )}
+
           {activeTab === 'media' && (
             <motion.div key="media" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
-              <ImageGallery images={MEDIA_IMAGES}>
-                <div style={{ background: 'var(--parchment)', border: '1.5px solid var(--border)', borderRadius: 14, padding: 10, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
-                  {MEDIA_IMAGES.map((img, idx) => (
-                    <div key={img.id} data-lightbox-image data-image-index={idx} style={{ position: 'relative', aspectRatio: '1/1', borderRadius: 8, overflow: 'hidden', cursor: 'pointer' }}>
-                      <Image src={img.url} alt="Darshan" fill sizes="140px" style={{ objectFit: 'cover' }} />
-                    </div>
-                  ))}
-                </div>
-              </ImageGallery>
-              <div style={{ textAlign: 'center', marginTop: 16 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 20 }}>
+                {GALLERY_SECTIONS.map((sec, i) => {
+                  const c = isHi ? sec.hi : sec.en
+                  return (
+                    <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 * i }}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: 14, padding: '16px 18px',
+                        background: 'var(--parchment)', border: '1.5px solid var(--border)', borderRadius: 12,
+                      }}>
+                      <div style={{
+                        width: 46, height: 46, borderRadius: '50%',
+                        background: 'color-mix(in srgb, var(--gold) 16%, transparent)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                      }}>
+                        <Calendar size={21} color="var(--gold)" strokeWidth={1.75} />
+                      </div>
+                      <p style={{ fontFamily: ff, fontSize: 17, fontWeight: 600, color: 'var(--maroon)' }}>{c.date}</p>
+                    </motion.div>
+                  )
+                })}
+              </div>
+
+              <div style={{ textAlign: 'center' }}>
                 <a href={GOOGLE_PHOTOS_LINK} target="_blank" rel="noopener noreferrer"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--maroon)', color: '#fff', borderRadius: 4, padding: '10px 24px', textDecoration: 'none', fontSize: 15, fontWeight: 600, fontFamily: 'Cormorant Garamond, serif', letterSpacing: '0.04em' }}>
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--maroon)', color: '#fff', borderRadius: 999, padding: '12px 28px', textDecoration: 'none', fontSize: 15, fontWeight: 600, fontFamily: 'Cormorant Garamond, serif', letterSpacing: '0.04em' }}>
+                  <Images size={17} />
                   {isHi ? 'सभी दर्शन फोटो देखें' : 'View All Darshan Photos'}
+                  <ExternalLink size={14} />
                 </a>
               </div>
             </motion.div>

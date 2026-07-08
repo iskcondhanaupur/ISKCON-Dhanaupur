@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import ImageGallery from '@/components/ImageGallery'
 import { Lang } from '@/data/content'
+import PageBackground from '@/components/PageBackground'
 
 interface Props { t: any; lang: Lang; onBack: () => void }
 
@@ -27,6 +28,7 @@ export default function AboutView({ t, lang, onBack }: Props) {
 
   return (
     <section className="section" style={{ background: 'transparent' }}>
+      <PageBackground />
       <div className="container" style={{ maxWidth: 480 }}>
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="back-btn" onClick={onBack} style={{ marginBottom: 24 }}>{t.back}</motion.button>
 

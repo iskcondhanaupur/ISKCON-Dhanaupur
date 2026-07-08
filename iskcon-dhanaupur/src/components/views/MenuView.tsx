@@ -1,71 +1,91 @@
 'use client'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Play, CalendarDays, BookOpen, Users, MapPin, HeartHandshake, Info,
   ChevronDown, Hammer,
 } from 'lucide-react'
 import { Lang } from '@/data/content'
+import PageBackground from '@/components/PageBackground'
 
 interface Props { t: any; lang: Lang; onSelect: (id: string) => void }
 
-type SubItem = { id: string; label: string; sub?: string; comingSoon?: boolean }
-type Category = { id: string; label: string; icon: any; items: SubItem[] }
+type SubItem = { id: string; label: string; labelHi: string; sub?: string; subHi?: string; comingSoon?: boolean }
+type Category = { id: string; label: string; labelHi: string; icon: any; items: SubItem[] }
 
-// TODO: move labels into content.ts (t.categories) once Hindi copy is ready.
-// ids below are placeholders — map them to your actual view ids in onSelect handling.
+const ROUTE_ID_MAP: Record<string, string> = {
+  'gift-shop': 'giftshop',
+  'centers': 'centres',
+  'weekly-programs': 'weeklyprograms',
+  'house-programs': 'houseprograms',
+  'youth-forum': 'youthforum',
+  'outreach-visits': 'outreach',
+  'dham-yatras': 'yatra',
+  donate: 'donation',
+  'helping-hand': 'helpinghands',
+  'about-iskcon': 'iskcon',
+  'about-dhanaupur': 'about',
+  'contact-us': 'connect',
+}
+
 const CATEGORIES: Category[] = [
   {
-    id: 'media', label: 'Media', icon: Play,
+    id: 'media', label: 'Media', labelHi: 'मीडिया', icon: Play,
     items: [
-      { id: 'darshan', label: 'Auspicious Darshan' },
-      { id: 'gift-shop', label: 'Gift Shop' },
+      { id: 'darshan', label: 'Shubh Darshan', labelHi: 'शुभ दर्शन' },
+      { id: 'giftshop', label: 'Gift Shop', labelHi: 'गिफ्ट शॉप' },
     ],
   },
   {
-    id: 'celebrations', label: 'Celebrations', icon: CalendarDays,
+    id: 'celebrations', label: 'Celebrations', labelHi: 'उत्सव', icon: CalendarDays,
     items: [
-      { id: 'events', label: 'Upcoming Festivals' },
-      { id: 'ekadashi', label: 'Upcoming Ekadashi' },
+      { id: 'events', label: 'Upcoming Festivals', labelHi: 'आगामी उत्सव' },
+      { id: 'ekadashi', label: 'Upcoming Ekadashi', labelHi: 'आगामी एकादशी' },
     ],
   },
   {
-    id: 'preaching', label: 'Preaching & Education', icon: BookOpen,
+    id: 'preaching', label: 'Preaching & Education', labelHi: 'प्रचार एवं शिक्षा', icon: BookOpen,
     items: [
-      { id: 'preachers', label: 'Our Preachers' },
-      { id: 'centers', label: 'Centres' },
-      { id: 'weekly-programs', label: 'Weekly Programs' },
-      { id: 'house-programs', label: 'House Programs' },
-      { id: 'youth-forum', label: 'ISKCON Youth Forum' },
+      { id: 'preachers', label: 'Our Preachers', labelHi: 'हमारे प्रचारक' },
+      { id: 'centres', label: 'Centres', labelHi: 'केंद्र' },
+      { id: 'weeklyprograms', label: 'Weekly Programs', labelHi: 'साप्ताहिक कार्यक्रम' },
+      { id: 'houseprograms', label: 'House Programs', labelHi: 'गृह कार्यक्रम' },
+      { id: 'iyf', label: 'ISKCON Youth Forum', labelHi: 'इस्कॉन युवा मंच' },
+      { id: 'course', label: 'Courses', labelHi: 'पाठ्यक्रम' },
     ],
   },
   {
-    id: 'outreach', label: 'Outreach', icon: Users,
+    id: 'outreach', label: 'Outreach', labelHi: 'आउटरीच', icon: Users,
     items: [
-      { id: 'outreach-visits', label: 'Visits', sub: 'HG Gaurang Das Prabhuji, Devkinandan Das Prabhuji' },
-      { id: 'outreach-programs', label: 'Jail & School Programs', comingSoon: true },
+      {
+        id: 'outreach-visits', label: 'Visits', labelHi: 'यात्राएं',
+       
+      },
+      { id: 'outreach-programs', label: 'Jail & School Programs', labelHi: 'जेल एवं विद्यालय कार्यक्रम', comingSoon: true },
     ],
   },
   {
-    id: 'tours', label: 'Tours & Explorations', icon: MapPin,
+    id: 'tours', label: 'Tours & Explorations', labelHi: 'यात्रा एवं भ्रमण', icon: MapPin,
     items: [
-      { id: 'dham-yatras', label: 'Dham Yatras' },
+      { id: 'yatra', label: 'Dham Yatras', labelHi: 'धाम यात्राएं' },
     ],
   },
   {
-    id: 'contribute', label: 'Contribute', icon: HeartHandshake,
+    id: 'contribute', label: 'Contribute', labelHi: 'योगदान करें', icon: HeartHandshake,
     items: [
-      { id: 'donate', label: 'Donate' },
-      { id: 'helping-hand', label: 'Helping Hand' },
+      { id: 'donation', label: 'Donate', labelHi: 'दान करें' },
+      { id: 'helpinghands', label: 'Helping Hand', labelHi: 'मददगार हाथ' },
     ],
   },
   {
-    id: 'about', label: 'Getting to Know Us', icon: Info,
+    id: 'about', label: 'Getting to Know Us', labelHi: 'हमें जानिए', icon: Info,
     items: [
-      { id: 'about-iskcon', label: 'About ISKCON' },
-      { id: 'about-dhanaupur', label: 'About ISKCON Dhanaupur' },
-      { id: 'contact-us', label: 'Contact Us' },
+      { id: 'iskcon', label: 'About ISKCON', labelHi: 'इस्कॉन के बारे में' },
+      { id: 'about', label: 'About ISKCON Dhanaupur', labelHi: 'इस्कॉन धनौपुर के बारे में' },
+      { id: 'social', label: 'Social Media', labelHi: 'सोशल मीडिया' },
+      { id: 'connect', label: 'Contact Us', labelHi: 'संपर्क करें' },
+      { id: 'contributors', label: 'Contributors', labelHi: 'योगदानकर्ता' },
     ],
   },
 ]
@@ -73,52 +93,164 @@ const CATEGORIES: Category[] = [
 const stagger = { animate: { transition: { staggerChildren: 0.06 } } }
 const item = { initial: { opacity: 0, y: 16 }, animate: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } } }
 
+const carouselImages = [
+  { src: '/deity1.jpg', alt: 'Sri Sri Radha ShyamSundar' },
+  { src: '/Jagannath Darshan.jpeg', alt: 'Jagannath Darshan' },
+  { src: '/Gaur Nitai.jpeg', alt: 'Gaur Nitai' },
+  { src: '/alter.jpg', alt: 'Temple Altar' },
+]
+
 export default function MenuView({ t, lang, onSelect }: Props) {
   const isHi = lang === 'hi'
   const ff = isHi ? 'Tiro Devanagari Hindi, serif' : 'Cormorant Garamond, serif'
   const fb = isHi ? 'Tiro Devanagari Hindi, serif' : 'Crimson Text, serif'
 
-  // multiple categories can stay open at once — plain array of open ids
   const [openIds, setOpenIds] = useState<string[]>([])
   const toggle = (id: string) =>
     setOpenIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]))
 
-  const carouselImages = [
-    { src: '/deity1.jpg', alt: 'Sri Sri Radha ShyamSundar 1' },
-    { src: '/Jagannath Darshan.jpeg', alt: 'Sri Sri Radha ShyamSundar 2' },
-    { src: '/Gaur Nitai.jpeg', alt: 'Sri Sri Radha ShyamSundar 3' },
-    { src: '/deity.jpg', alt: 'Sri Sri Radha ShyamSundar 1 Clone' },
-  ]
+  const realCount = carouselImages.length
+  // Append a clone of the first slide at the end so the loop can continue
+  // seamlessly forward instead of snapping back to slide 1.
+  const trackImages = [...carouselImages, carouselImages[0]]
+  const trackCount = trackImages.length
+
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [transitionEnabled, setTransitionEnabled] = useState(true)
+
+  // Auto-advance every 4s.
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => prev + 1)
+    }, 4000)
+    return () => clearInterval(timer)
+  }, [])
+
+  // When we land on the trailing clone, wait for the slide transition to
+  // finish, then silently (no transition) jump back to the real first slide.
+  useEffect(() => {
+    if (activeIndex === trackCount - 1) {
+      const t = setTimeout(() => {
+        setTransitionEnabled(false)
+        setActiveIndex(0)
+      }, 620)
+      return () => clearTimeout(t)
+    }
+  }, [activeIndex, trackCount])
+
+  // Re-enable the transition right after the silent jump so future slides
+  // (auto or dot-click) animate normally again.
+  useEffect(() => {
+    if (!transitionEnabled) {
+      const raf1 = requestAnimationFrame(() => {
+        const raf2 = requestAnimationFrame(() => setTransitionEnabled(true))
+        return () => cancelAnimationFrame(raf2)
+      })
+      return () => cancelAnimationFrame(raf1)
+    }
+  }, [transitionEnabled])
+
+  const activeDot = activeIndex % realCount
+  const goToSlide = (i: number) => {
+    setTransitionEnabled(true)
+    setActiveIndex(i)
+  }
 
   return (
     <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 20px 40px', background: 'transparent' }}>
-
+      <PageBackground />
       <style jsx global>{`
-        @keyframes continuousCarousel {
-          0%, 28% { transform: translateX(0); }
-          33%, 61% { transform: translateX(-25%); }
-          66%, 94% { transform: translateX(-50%); }
-          100% { transform: translateX(-75%); }
+        .rect-frame-container {
+          position: relative;
+          width: 100%;
+          margin: 0 auto 16px;
+          aspect-ratio: 16/9;
+          border-radius: 16px;
+          overflow: hidden;
+          border: 2px solid var(--gold);
+          box-shadow: 0 8px 24px color-mix(in srgb, var(--maroon) 15%, transparent);
         }
-        .sliding-track { display: flex; width: 400%; height: 100%; animation: continuousCarousel 12s infinite linear; }
+        .sliding-track {
+          display: flex;
+          height: 100%;
+        }
+        .slide-item {
+          flex-shrink: 0;
+          height: 100%;
+          position: relative;
+        }
+        .carousel-dots {
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+          margin-bottom: 24px;
+        }
+        .carousel-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          border: 1.5px solid var(--gold);
+          background: transparent;
+          cursor: pointer;
+          padding: 0;
+          transition: all 0.25s ease;
+        }
+        .carousel-dot.active {
+          background: var(--gold);
+          width: 22px;
+          border-radius: 5px;
+        }
       `}</style>
 
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-        style={{ textAlign: 'center', marginBottom: 28, width: '100%', maxWidth: 480 }}>
+        style={{ textAlign: 'center', marginBottom: 28, width: '100%', maxWidth: 560 }}>
 
-        <div style={{
-          width: '100%', margin: '0 auto 20px', borderRadius: 20, overflow: 'hidden',
-          background: 'var(--cream)', position: 'relative', aspectRatio: '16/9',
-          boxShadow: '0 0 18px 6px color-mix(in srgb, var(--gold) 25%, transparent), 0 0 40px 14px color-mix(in srgb, var(--maroon) 15%, transparent)',
-        }}>
-          <div className="sliding-track">
-            {carouselImages.map((img, index) => (
-              <div key={index} style={{ width: '25%', height: '100%', position: 'relative' }}>
+        {/* Rectangular single-image carousel */}
+        <div className="rect-frame-container">
+          <div
+            className="sliding-track"
+            style={{
+              width: `${trackCount * 100}%`,
+              transform: `translateX(-${(100 / trackCount) * activeIndex}%)`,
+              transition: transitionEnabled ? 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)' : 'none',
+            }}
+          >
+            {trackImages.map((img, index) => (
+              <div key={index} className="slide-item" style={{ width: `${100 / trackCount}%` }}>
                 <Image src={img.src} alt={img.alt} fill sizes="(max-width: 600px) 100vw, 480px"
-                  loading={index === 0 ? 'eager' : 'lazy'} style={{ objectFit: 'cover', zIndex: 1 }} />
+                  loading={index === 0 ? 'eager' : 'lazy'} style={{ objectFit: 'cover' }} />
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Selectable dots (always reflect the 4 real slides) */}
+        <div className="carousel-dots">
+          {carouselImages.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              aria-label={`Slide ${index + 1}`}
+              onClick={() => goToSlide(index)}
+              className={`carousel-dot${activeDot === index ? ' active' : ''}`}
+            />
+          ))}
+        </div>
+
+        {/* New hero text block */}
+        <div style={{ marginBottom: 22 }}>
+          <h2 style={{
+            fontSize: 'clamp(18px, 3vw, 23px)', fontWeight: 700, color: 'var(--maroon)',
+            marginBottom: 10, fontFamily: ff, letterSpacing: '0.01em',
+          }}>
+            {t.hero.templeName}
+          </h2>
+          <p style={{ fontSize: 15, color: 'var(--maroon-lt)', fontFamily: fb, lineHeight: 1.75, marginBottom: 14 }}>
+            {t.hero.description}
+          </p>
+          <p style={{ fontSize: 15.5, fontWeight: 600, color: 'var(--gold)', fontFamily: fb }}>
+            {t.hero.cta}
+          </p>
         </div>
 
         <h1 style={{ fontSize: 'clamp(20px, 3.5vw, 30px)', fontWeight: 700, color: 'var(--maroon)', marginBottom: 6, fontFamily: ff, letterSpacing: '0.02em' }}>
@@ -149,7 +281,7 @@ export default function MenuView({ t, lang, onSelect }: Props) {
                   <Icon size={21} color="var(--gold-lt)" strokeWidth={1.9} />
                 </div>
                 <span style={{ flex: 1, fontFamily: ff, fontWeight: 700, fontSize: isHi ? 19 : 18.5, color: 'var(--maroon)' }}>
-                  {cat.label}
+                  {isHi ? cat.labelHi : cat.label}
                 </span>
                 <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
                   <ChevronDown size={18} color="var(--gold)" />
@@ -173,19 +305,25 @@ export default function MenuView({ t, lang, onSelect }: Props) {
                           }}>
                             <Hammer size={16} color="var(--gold)" strokeWidth={1.8} />
                             <div>
-                              <div style={{ fontFamily: fb, fontSize: 15.5, color: 'var(--maroon)', fontWeight: 600 }}>Hold on, work in progress</div>
-                              <div style={{ fontFamily: fb, fontSize: 13.5, color: 'var(--muted)' }}>{sub.label}</div>
+                              <div style={{ fontFamily: fb, fontSize: 15.5, color: 'var(--maroon)', fontWeight: 600 }}>
+                                {isHi ? 'रुकिए, कार्य प्रगति पर है' : 'Hold on, work in progress'}
+                              </div>
+                              <div style={{ fontFamily: fb, fontSize: 13.5, color: 'var(--muted)' }}>{isHi ? sub.labelHi : sub.label}</div>
                             </div>
                           </div>
                         ) : (
-                          <button key={sub.id} onClick={() => onSelect(sub.id)}
+                          <button key={sub.id} onClick={() => onSelect(ROUTE_ID_MAP[sub.id] || sub.id)}
                             style={{
                               display: 'block', width: '100%', textAlign: 'left', background: 'transparent',
                               border: 'none', cursor: 'pointer', padding: '8px 10px', borderRadius: 8,
                             }}>
-                            <div style={{ fontFamily: fb, fontSize: 15.5, color: 'var(--maroon-lt)', fontWeight: 600 }}>{sub.label}</div>
+                            <div style={{ fontFamily: fb, fontSize: 15.5, color: 'var(--maroon-lt)', fontWeight: 600 }}>
+                              {isHi ? sub.labelHi : sub.label}
+                            </div>
                             {sub.sub && (
-                              <div style={{ fontFamily: fb, fontSize: 13.5, color: 'var(--muted)', marginTop: 2 }}>{sub.sub}</div>
+                              <div style={{ fontFamily: fb, fontSize: 13.5, color: 'var(--muted)', marginTop: 2 }}>
+                                {isHi ? sub.subHi : sub.sub}
+                              </div>
                             )}
                           </button>
                         )

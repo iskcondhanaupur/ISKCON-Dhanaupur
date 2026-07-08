@@ -34,7 +34,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://iskcondhanaupur.com"),
   title: 'ISKCON Dhanaupur — Sri Sri Radha ShyamSundar Mandir',
   description: 'दुनिया की भाग-दौड़ और चकाचौंध से दूर आइये श्रीजगन्नाथ जी के आश्रय में, मनमोहक दर्शन, पतित पावन हरिनाम संकीर्तन, मुक्ति प्रदान करनेवाला भक्तों का संग और जीवन बदल देने वाला महाप्रसाद - आपके बहुत पास - आपके अपने इस्कॉन धनऊपुर में',
-  icons: { icon: '/favicon.ico' },
+  icons: {
+    icon: '/logo2.png',
+    shortcut: '/logo2.png',
+    apple: '/logo2.png',
+  },
   openGraph: {
     title: 'ISKCON Dhanaupur — Sri Sri Radha ShyamSundar Mandir',
     description: 'दुनिया की भाग-दौड़ और चकाचौंध से दूर आइये श्रीजगन्नाथ जी के आश्रय में, मनमोहक दर्शन, पतित पावन हरिनाम संकीर्तन, मुक्ति प्रदान करनेवाला भक्तों का संग और जीवन बदल देने वाला महाप्रसाद - आपके बहुत पास - आपके अपने इस्कॉन धनऊपुर में',
@@ -49,6 +53,12 @@ export const metadata: Metadata = {
       },
     ],
     type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ISKCON Dhanaupur — Sri Sri Radha ShyamSundar Mandir',
+    description: 'दुनिया की भाग-दौड़ और चकाचौंध से दूर आइये श्रीजगन्नाथ जी के आश्रय में, मनमोहक दर्शन, पतित पावन हरिनाम संकीर्तन, मुक्ति प्रदान करनेवाला भक्तों का संग और जीवन बदल देने वाला महाप्रसाद - आपके बहुत पास - आपके अपने इस्कॉन धनऊपुर में',
+    images: ["/Thumbnail.png"],
   },
 }
 

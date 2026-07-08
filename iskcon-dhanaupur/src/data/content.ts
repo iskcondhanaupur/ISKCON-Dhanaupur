@@ -10,19 +10,33 @@ export const content = {
     menuTitle: 'How may we serve you?',
     menuSubtitle: 'Sri Sri Radha ShyamSundar Mandir, Dhanaupur',
 
+    hero: {
+      templeName: 'Sri Sri Radha ShyamSundar Mandir, ISKCON Dhanaupur',
+      description:
+        'Step away from the rush and glare of the world into the shelter of Sri Jagannath Ji — enchanting darshan, purifying Harinam Sankirtan, the liberating company of devotees, and life-transforming Mahaprasad — all very close to you, right here at your own ISKCON Dhanaupur.',
+      cta: 'Come, begin your journey with the excellent choice:',
+    },
+
     menu: [
       { id: 'darshan',     label: 'Auspicious Darshan',   sub: 'View deity darshan timings' },
       { id: 'events',      label: 'Upcoming Festivals',   sub: 'Festivals & celebrations' },
       { id: 'ekadashi',    label: 'Upcoming Ekadashi',    sub: '2026 dates & fasting guide' },
-      { id: 'programs',    label: 'Weekly Programs',      sub: 'Daily schedule & seva' },
+      { id: 'weeklyprograms', label: 'Weekly Programs',   sub: 'Daily schedule & seva' },
+      { id: 'houseprograms',  label: 'House Programs',    sub: 'Individual programs & home aratis' },
       { id: 'course',      label: 'Courses',              sub: 'Spiritual learning programs' },
       { id: 'iyf',         label: 'ISKCON Youth Forum',   sub: 'Community for young devotees' },
+      { id: 'preachers',   label: 'Our Preachers',        sub: 'Meet our devotee preachers' },
+      { id: 'centres',     label: 'Our Centres',          sub: 'ISKCON centres near you' },
+      { id: 'outreach',    label: 'Outreach',             sub: 'VIP visits & community outreach' },
+      { id: 'giftshop',    label: 'Gift Shop',            sub: 'Spiritual books & items' },
       { id: 'donation',    label: 'Donation',             sub: 'Support the temple seva' },
+      { id: 'helpinghands', label: 'Helping Hand',        sub: 'Partner with our mission' },
       { id: 'yatra',       label: 'Dham Yatras',          sub: 'Holy pilgrimages' },
       { id: 'about',       label: 'About Us',             sub: 'About ISKCON Dhanaupur' },
       { id: 'iskcon',      label: 'About ISKCON',         sub: 'About the organisation' },
       { id: 'social',      label: 'Social Media',         sub: 'Follow us online' },
       { id: 'connect',     label: 'Contact',              sub: 'Reach out to the temple' },
+      { id: 'contributors', label: 'Contributors',        sub: 'Site devs & contributors' },
     ],
 
     darshan: {
@@ -113,6 +127,125 @@ export const content = {
       ],
       mission: 'Inspiring Youth, Building Consciousness',
 
+    },
+
+    preachers: {
+      title: 'Our Preachers',
+      subtitle: 'Meet the Devotees Who Guide Us',
+      // en.preachers.list
+list: [
+  { 
+    name: 'HG SriShyam Prabhuji', 
+    image: '/images/preachers/srishyam.svg', 
+    desc: `Designation: Temple President
+Role: Founder of ISKCON Dhanaupur
+Counselor: HG Shri Prem Harinam Das, HG Shri Shyam Charan Das
+Guru Maharaj: HH Radhanath Swami Maharaj
+Harinam Initiation: 2009
+Brahmin Initiation: 2023
+Scope of services: Preaching in Rural areas, Sankirtan, Counselling, Personal Coach, Temple management, Kitchen, Deity etc.`
+  },
+  { 
+    name: 'HG Madhuri Mohini Mataji', 
+    image: '/images/preachers/mataji.svg', 
+    desc: `Designation: 
+Role: 
+Counselor: 
+Guru Maharaj: 
+Harinam Initiation: 
+Brahmin Initiation: 
+Scope of services: `
+  },
+  { 
+    name: 'HG Kushal Govind Prabhuji', 
+    image: '/images/preachers/kushal.svg', 
+    desc: `Designation: 
+Role: 
+Counselor: 
+Guru Maharaj: 
+Harinam Initiation: 
+Brahmin Initiation: 
+Scope of services: `
+  },
+  { 
+    name: 'HG Vivekanand Prabhuji', 
+    image: '/images/preachers/vivekanand.svg', 
+    desc: `Designation: 
+Role: 
+Counselor: 
+Guru Maharaj: 
+Harinam Initiation: 
+Brahmin Initiation: 
+Scope of services: `
+  },
+],
+},
+
+    centres: {
+      title: 'Our Centres',
+      subtitle: 'ISKCON Presence Near You',
+      list: [
+        { name: 'Akbarpur',  address: '' },
+        { name: 'Sultanpur', address: '' },
+        { name: 'Kadipur',   address: '' },
+        { name: 'Malipur',   address: '' },
+      ],
+      addressPlaceholder: 'Address coming soon.',
+    },
+
+    outreach: {
+      title: 'Outreach',
+      subtitle: 'Visits & Community Programs',
+      desc: 'ISKCON Dhanaupur has been blessed with the visits of senior devotees and preachers, whose association enriches our community.',
+      guestsLabel: 'Our VIP Guests',
+      guests: [
+         { name: 'HH Bhakti Ashraya Swami Maharaj',  desc: '' },
+        { name: 'HG Gaurang Das Prabhuji',      desc: '' },
+        { name: 'HG Devkinandan Das Prabhuji',  desc: '' },
+        
+      ],
+      wipTitle: 'Hold on, work in progress',
+      wipDesc: 'Our Jail Programs, School Programs and other community outreach initiatives will be featured here soon.',
+    },
+
+    giftShop: {
+      title: 'Gift Shop',
+      subtitle: 'Spiritual Books & Items',
+      comingSoonLabel: 'Coming Soon',
+      message: 'We are working on bringing spiritual books, deity outfits, japa malas and more to this Gift Shop. Please check back soon.',
+    },
+
+    housePrograms: {
+      title: 'House Programs',
+      subtitle: 'Individual Programs & Home Aratis',
+      desc: 'We visit devotee homes to conduct personal programs and arati ceremonies, bringing the temple\'s blessings directly into your household.',
+      list: [
+        { name: 'Individual Programs',    desc: '' },
+        { name: 'Sunday Mangal Aratis',   desc: '' },
+      ],
+      contact: 'To arrange a house program, contact: +91 8127443777',
+    },
+
+    helpingHands: {
+      title: 'Helping Hand',
+      subtitle: 'Extend Our Temple\'s Network',
+      desc: 'Help us extend the temple\'s reach by connecting us with potential donors, government officials, or any relevant contacts who can empower ISKCON\'s mission.',
+      features: [
+        { title: 'Build Connections', desc: 'Introduce us to the right contacts' },
+        { title: 'Expand the Network', desc: 'Strengthen the temple\'s mission' },
+        { title: 'Partner in Seva', desc: 'Contribute to spreading dharma' },
+      ],
+      donateCta: 'Donate Now',
+      connectCta: 'Connect via WhatsApp',
+    },
+
+    contributors: {
+      title: 'Contributors',
+      subtitle: 'Site Developers & Contributors',
+      list: [
+        { name: '', role: 'Developer', desc: '' },
+      ],
+      descPlaceholder: 'Details coming soon.',
     },
 
     about: {
@@ -210,7 +343,7 @@ export const content = {
             'Mahaprasad & Conclusion — 8:00 PM — City Palace',
           ],
           venue: 'ISKCON – Hare Krishna Kendra, beside Priyavar Dulhaghar, Shri Ram Mandir, Barat Ghar, Shahjadpur, Akbarpur',
-          slipImage: '/rathyatra-ambedkarnagar-slip.jpeg', // TODO: Shraddha — add this image to /public
+          slipImage: '/rathyatra-ambedkarnagar-slip.jpeg',
         },
         {
           id: 'sultanpur',
@@ -225,7 +358,7 @@ export const content = {
             'Mahaprasad & Conclusion — 9:00 PM — Ramkali Chauraha',
           ],
           venue: 'ISKCON Sultanpur – Hare Krishna Kendra, Dulhan Marriage Lawn, Gabhariya Road, Sultanpur',
-          slipImage: '/rathyatra-sultanpur-slip.jpg', // TODO: Shraddha — add this image to /public
+          slipImage: '/rathyatra-sultanpur-slip.jpg',
         },
       ],
       dateLabel: 'Date',
@@ -279,6 +412,7 @@ export const content = {
         { platform: 'YouTube',   handle: 'ISKCON Dhanaupur',  url: 'https://youtube.com',        icon: 'Y', profileImg: '/images/yt-profile.jpg' },
         { platform: 'Instagram', handle: '@iskcondhanaupur',  url: 'https://instagram.com',      icon: 'I', profileImg: '/images/ig-profile.jpg' },
         { platform: 'WhatsApp',  handle: '+91 8127443777',    url: 'https://wa.me/918127443777', icon: 'W', profileImg: '/images/wa-profile.jpg' },
+        { platform: 'Twitter',   handle: '@iskcondhanaupur',  url: 'https://twitter.com',        icon: 'T', profileImg: '/images/tw-profile.jpg' },
       ],
     },
 
@@ -340,7 +474,7 @@ export const content = {
       ],
     },
 
-    back: 'Main Menu',
+    back: 'Back',
   },
 
   hi: {
@@ -352,19 +486,33 @@ export const content = {
     menuTitle: 'हम आपकी सेवा कैसे कर सकते हैं?',
     menuSubtitle: 'श्री श्री राधा श्यामसुंदर मंदिर, धनऊपुर',
 
+    hero: {
+      templeName: 'श्री श्री राधा श्यामसुंदर मंदिर, इस्कॉन धनऊपुर',
+      description:
+        'दुनिया की भाग-दौड़ और चकाचौंध से दूर आइये श्रीजगन्नाथ जी के आश्रय में, मनमोहक दर्शन, पतित पावन हरिनाम संकीर्तन, मुक्ति प्रदान करनेवाला भक्तों का संग और जीवन बदल देने वाला महाप्रसाद - आपके बहुत पास - आपके अपने इस्कॉन धनऊपुर में',
+      cta: 'आइये, अपनी यात्रा आरम्भ करिये एक उत्तम चुनाव के साथ:',
+    },
+
     menu: [
       { id: 'darshan',  label: 'शुभ दर्शन',        sub: 'दर्शन के समय देखें' },
       { id: 'events',   label: 'आगामी महोत्सव',    sub: 'उत्सव और समारोह' },
       { id: 'ekadashi', label: 'आगामी एकादशी',   sub: '२०२६ तिथियाँ और व्रत विधि' },
-      { id: 'programs', label: 'साप्ताहिक कार्यक्रम', sub: 'दैनिक कार्यक्रम और सेवा' },
+      { id: 'weeklyprograms', label: 'साप्ताहिक कार्यक्रम', sub: 'दैनिक कार्यक्रम और सेवा' },
+      { id: 'houseprograms',  label: 'गृह कार्यक्रम',       sub: 'व्यक्तिगत कार्यक्रम व घर आरती' },
       { id: 'course',   label: 'पाठ्यक्रम',         sub: 'आध्यात्मिक शिक्षा कार्यक्रम' },
       { id: 'iyf',      label: 'इस्कॉन यूथ फोरम', sub: 'युवा भक्तों का समुदाय' },
+      { id: 'preachers', label: 'हमारे प्रचारक',   sub: 'हमारे भक्त प्रचारकों से मिलें' },
+      { id: 'centres',   label: 'हमारे केंद्र',      sub: 'आपके निकट इस्कॉन केंद्र' },
+      { id: 'outreach',  label: 'प्रचार भ्रमण',      sub: 'विशिष्ट अतिथि व सामुदायिक कार्यक्रम' },
+      { id: 'giftshop',  label: 'गिफ्ट शॉप',        sub: 'आध्यात्मिक पुस्तकें व वस्तुएं' },
       { id: 'donation', label: 'दान कल्याण',        sub: 'मंदिर सेवा में सहयोग करें' },
+      { id: 'helpinghands', label: 'सहयोग हस्त',    sub: 'हमारे मिशन से जुड़ें' },
       { id: 'yatra',    label: 'धाम यात्राएं',      sub: 'पवित्र तीर्थ यात्राएं' },
       { id: 'about',    label: 'हमारे बारे में',    sub: 'इस्कॉन धनऊपुर के बारे में' },
       { id: 'iskcon',   label: 'इस्कॉन संस्था',    sub: 'संस्था के बारे में जानें' },
       { id: 'social',   label: 'सोशल मीडिया',      sub: 'हमसे जुड़ें' },
       { id: 'connect',  label: 'संपर्क',            sub: 'मंदिर से जुड़ें' },
+      { id: 'contributors', label: 'योगदानकर्ता',   sub: 'साइट डेवलपर्स व योगदानकर्ता' },
     ],
 
     darshan: {
@@ -447,6 +595,121 @@ export const content = {
       ],
       mission: 'यूथ को प्रेरित करना, चेतना का निर्माण करना',
 
+    },
+
+    preachers: {
+      title: 'हमारे प्रचारक',
+      subtitle: 'हमारा मार्गदर्शन करने वाले भक्त',
+      // hi.preachers.list
+list: [
+  { 
+    name: 'HG श्रीश्याम प्रभु', 
+    desc: `पदनाम: मंदिर अध्यक्ष
+भूमिका: इस्कॉन धनौपुर के संस्थापक
+काउंसलर: HG श्री प्रेम हरिनाम दास, HG श्री श्याम चरण दास
+गुरु महाराज: HH राधानाथ स्वामी महाराज
+हरिनाम दीक्षा: 2009
+ब्राह्मण दीक्षा: 2023
+सेवा क्षेत्र: ग्रामीण क्षेत्रों में प्रचार, संकीर्तन, काउंसलिंग, पर्सनल कोच, मंदिर प्रबंधन, रसोई, विग्रह सेवा आदि।`
+  },
+  { 
+    name: 'HG मधुरी मोहिनी माताजी', 
+    desc: `पदनाम: 
+भूमिका: 
+काउंसलर: 
+गुरु महाराज: 
+हरिनाम दीक्षा: 
+ब्राह्मण दीक्षा: 
+सेवा क्षेत्र: `
+  },
+  { 
+    name: 'HG कुशल गोविंद प्रभु', 
+    desc: `पदनाम: 
+भूमिका: 
+काउंसलर: 
+गुरु महाराज: 
+हरिनाम दीक्षा: 
+ब्राह्मण दीक्षा: 
+सेवा क्षेत्र: `
+  },
+  { 
+    name: 'HG विवेकानंद प्रभु', 
+    desc: `पदनाम: 
+भूमिका: 
+काउंसलर: 
+गुरु महाराज: 
+हरिनाम दीक्षा: 
+ब्राह्मण दीक्षा: 
+सेवा क्षेत्र: `
+  },
+],
+
+    },
+
+    centres: {
+      title: 'हमारे केंद्र',
+      subtitle: 'आपके निकट इस्कॉन की उपस्थिति',
+      list: [
+        { name: 'अकबरपुर',  address: '' },
+        { name: 'सुल्तानपुर', address: '' },
+        { name: 'कादीपुर',   address: '' },
+        { name: 'मलिपुर',    address: '' },
+      ],
+      addressPlaceholder: 'पता शीघ्र उपलब्ध होगा।',
+    },
+
+    outreach: {
+      title: 'प्रचार भ्रमण',
+      subtitle: 'भ्रमण और सामुदायिक कार्यक्रम',
+      desc: 'इस्कॉन धनऊपुर वरिष्ठ भक्तों और प्रचारकों की भ्रमण-कृपा से धन्य हुआ है, जिनके सत्संग से हमारा समुदाय समृद्ध होता है।',
+      guestsLabel: 'हमारे विशिष्ट अतिथि',
+      guests: [
+        { name: 'श्रील भक्ति आश्रय स्वामी महाराज', desc: '' },
+        { name: 'HG गौरांग दास प्रभुजी',      desc: '' },
+        { name: 'HG देवकीनंदन दास प्रभुजी',  desc: '' },
+      ],
+      wipTitle: 'रुकिए, कार्य प्रगति पर है',
+      wipDesc: 'हमारे जेल कार्यक्रम, विद्यालय कार्यक्रम और अन्य सामुदायिक प्रचार गतिविधियाँ शीघ्र यहाँ प्रस्तुत की जाएंगी।',
+    },
+
+    giftShop: {
+      title: 'गिफ्ट शॉप',
+      subtitle: 'आध्यात्मिक पुस्तकें व वस्तुएं',
+      comingSoonLabel: 'शीघ्र आ रहा है',
+      message: 'हम इस गिफ्ट शॉप में आध्यात्मिक पुस्तकें, विग्रह वस्त्र, जप माला और अन्य वस्तुएं लाने पर कार्य कर रहे हैं। कृपया शीघ्र पुनः देखें।',
+    },
+
+    housePrograms: {
+      title: 'गृह कार्यक्रम',
+      subtitle: 'व्यक्तिगत कार्यक्रम व घर आरती',
+      desc: 'हम भक्तों के घर जाकर व्यक्तिगत कार्यक्रम और आरती संपन्न करते हैं, जिससे मंदिर का आशीर्वाद सीधे आपके घर तक पहुँचता है।',
+      list: [
+        { name: 'व्यक्तिगत कार्यक्रम',   desc: '' },
+        { name: 'रविवार मंगल आरती',    desc: '' },
+      ],
+      contact: 'गृह कार्यक्रम आयोजित करने हेतु संपर्क करें: +91 8127443777',
+    },
+
+    helpingHands: {
+      title: 'सहयोग हस्त',
+      subtitle: 'मंदिर के नेटवर्क का विस्तार करें',
+      desc: 'संभावित दानदाताओं, सरकारी अधिकारियों या इस्कॉन के मिशन को सशक्त बनाने वाले किसी भी संपर्क से हमें जोड़कर मंदिर के नेटवर्क का विस्तार करने में सहयोग करें।',
+      features: [
+        { title: 'संबंध बनाएं', desc: 'उचित संपर्क हमें प्रदान करें' },
+        { title: 'नेटवर्क विस्तार करें', desc: 'मंदिर के मिशन को मजबूत करें' },
+        { title: 'सेवा में सभागी बनें', desc: 'धर्म के प्रचार में योगदान दें' },
+      ],
+      donateCta: 'अभी दान करें',
+      connectCta: 'व्हाट्सएप पर संपर्क करें',
+    },
+
+    contributors: {
+      title: 'योगदानकर्ता',
+      subtitle: 'साइट डेवलपर्स व योगदानकर्ता',
+      list: [
+        { name: '', role: 'डेवलपर', desc: '' },
+      ],
+      descPlaceholder: 'विवरण शीघ्र उपलब्ध होगा।',
     },
 
     about: {
@@ -614,6 +877,7 @@ export const content = {
         { platform: 'YouTube',   handle: 'ISKCON Dhanaupur',  url: 'https://youtube.com',        icon: 'Y', profileImg: '/images/yt-profile.jpg' },
         { platform: 'Instagram', handle: '@iskcondhanaupur',  url: 'https://instagram.com',      icon: 'I', profileImg: '/images/ig-profile.jpg' },
         { platform: 'WhatsApp',  handle: '+91 8127443777',    url: 'https://wa.me/918127443777', icon: 'W', profileImg: '/images/wa-profile.jpg' },
+        { platform: 'Twitter',   handle: '@iskcondhanaupur',  url: 'https://twitter.com',        icon: 'T', profileImg: '/images/tw-profile.jpg' },
       ],
     },
 
@@ -675,6 +939,6 @@ export const content = {
       ],
     },
 
-    back: 'मुख्य मेनू',
+    back: 'पीछे जाएँ',
   },
 }
