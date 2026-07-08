@@ -7,6 +7,7 @@ interface NavbarProps {
   lang?: 'en' | 'hi'
   onLangChange?: (lang: 'en' | 'hi') => void
   showLangSwitch?: boolean
+  showHamburger?: boolean;
 }
 
 export default function Navbar({ lang = 'en', onLangChange, showLangSwitch = true }: NavbarProps) {
