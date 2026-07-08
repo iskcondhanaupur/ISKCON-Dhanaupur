@@ -7,10 +7,12 @@ interface NavbarProps {
   lang?: 'en' | 'hi'
   onLangChange?: (lang: 'en' | 'hi') => void
   showLangSwitch?: boolean
-  showHamburger?: boolean;
+  showHamburger?: boolean
+  menu?: { id: string; label: string; sub: string }[]
+  onMenuSelect?: (id: string) => void
 }
 
-export default function Navbar({ lang = 'en', onLangChange, showLangSwitch = true }: NavbarProps) {
+export default function Navbar({ lang = 'en', onLangChange, showLangSwitch = true, showHamburger, menu, onMenuSelect }: NavbarProps) {
   const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
