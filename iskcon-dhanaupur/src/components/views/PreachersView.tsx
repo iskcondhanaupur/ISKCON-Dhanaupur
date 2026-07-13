@@ -46,6 +46,24 @@ function useIsDesktop() {
   return isDesktop
 }
 
+// Parses a multi-line "Label: Value" string into rows, skipping rows
+// where the value is empty (so incomplete profiles don't show blank lines).
+function parseDescRows(desc: string): { label: string; value: string }[] {
+  return desc
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const idx = line.indexOf(':')
+      if (idx === -1) return { label: '', value: line }
+      return {
+        label: line.slice(0, idx).trim(),
+        value: line.slice(idx + 1).trim(),
+      }
+    })
+    .filter((row) => row.value !== '')
+}
+
 export default function PreachersView({ t, lang, onBack }: Props) {
   const pr = t.preachers
   const isHi = lang === 'hi'
@@ -73,6 +91,8 @@ export default function PreachersView({ t, lang, onBack }: Props) {
           {pr.list.map((person: any, i: number) => {
             const imgSrc = PUBLIC_PREACHER_IMAGES[i]
             const tags: { icon: string; label: string }[] = person.tags || (isHi ? DEFAULT_TAGS_HI : DEFAULT_TAGS_EN)
+            const rawDesc: string = person.desc || pr.descPlaceholder || ''
+            const rows = parseDescRows(rawDesc)
 
             return (
               <motion.div
@@ -83,7 +103,7 @@ export default function PreachersView({ t, lang, onBack }: Props) {
                 style={{
                   display: 'flex',
                   flexDirection: isDesktop ? 'row' : 'column',
-                  alignItems: 'center',
+                  alignItems: isDesktop ? 'flex-start' : 'center',
                   textAlign: isDesktop ? 'left' : 'center',
                   gap: isDesktop ? 36 : 22,
                   padding: isDesktop ? '36px 40px' : '30px 22px',
@@ -159,16 +179,62 @@ export default function PreachersView({ t, lang, onBack }: Props) {
                     marginRight: isDesktop ? 0 : 'auto',
                   }} />
 
-                  <p style={{
-                    fontSize: 15.5,
-                    color: 'var(--muted)',
-                    fontFamily: bodyFF,
-                    lineHeight: 1.75,
-                    marginBottom: 18,
-                    whiteSpace: 'pre-line',
-                  }}>
-                    {person.desc || pr.descPlaceholder}
-                  </p>
+                  {rows.length > 0 ? (
+                    <div style={{ overflowX: 'auto', marginBottom: 18 }}>
+                      <table
+                        style={{
+                          width: '100%',
+                          borderCollapse: 'collapse',
+                          fontFamily: bodyFF,
+                        }}
+                      >
+                        <tbody>
+                          {rows.map((row, ri) => (
+                            <tr
+                              key={ri}
+                              style={{
+                                borderBottom: ri !== rows.length - 1 ? '1px solid var(--border)' : 'none',
+                              }}
+                            >
+                              <td
+                                style={{
+                                  padding: '8px 14px 8px 0',
+                                  fontSize: 14.5,
+                                  fontWeight: 600,
+                                  color: 'var(--maroon)',
+                                  verticalAlign: 'top',
+                                  whiteSpace: 'nowrap',
+                                }}
+                              >
+                                {row.label}
+                              </td>
+                              <td
+                                style={{
+                                  padding: '8px 0',
+                                  fontSize: 14.5,
+                                  color: 'var(--muted)',
+                                  lineHeight: 1.6,
+                                  textAlign: 'left',
+                                }}
+                              >
+                                {row.value}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ) : (
+                    <p style={{
+                      fontSize: 15.5,
+                      color: 'var(--muted)',
+                      fontFamily: bodyFF,
+                      lineHeight: 1.75,
+                      marginBottom: 18,
+                    }}>
+                      {pr.descPlaceholder}
+                    </p>
+                  )}
 
                   <div style={{ borderTop: '1px solid var(--border)', paddingTop: 14 }}>
                     <div style={{

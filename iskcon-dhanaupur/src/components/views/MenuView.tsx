@@ -237,6 +237,27 @@ export default function MenuView({ t, lang, onSelect }: Props) {
           ))}
         </div>
 
+        {/* 60th anniversary button */}
+        <button
+          onClick={() => onSelect('anniversary60')}
+          style={{
+            display: 'inline-block',
+            margin: '0 auto 22px',
+            padding: '10px 22px',
+            borderRadius: 999,
+            border: '1.5px solid var(--gold)',
+            background: 'var(--maroon)',
+            color: 'var(--gold-lt)',
+            fontFamily: ff,
+            fontWeight: 700,
+            fontSize: 15,
+            letterSpacing: '0.02em',
+            cursor: 'pointer',
+          }}
+        >
+          {isHi ? 'इस्कॉन के 60 वर्षों का उत्सव' : 'Celebrating 60 Years of ISKCON'}
+        </button>
+
         {/* New hero text block */}
         <div style={{ marginBottom: 22 }}>
           <h2 style={{
