@@ -14,8 +14,8 @@ export default function WhatsAppButton({ lang = 'en', isHome = false }: Props) {
 
   const phone   = '8127443777'
   const message = lang === 'hi'
-    ? 'हरे कृष्ण! हम आपकी कैसे सेवा कर सकते हैं?'
-    : 'Hare Krishna! How can we help you?'
+    ? 'हरे कृष्ण! मुझे मदद की ज़रूरत है।?'
+    : 'Hare Krishna! I need help'
 
   const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
 
