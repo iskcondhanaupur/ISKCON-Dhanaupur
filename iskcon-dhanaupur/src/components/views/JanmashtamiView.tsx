@@ -326,16 +326,6 @@ export default function JanmashtamiView({ lang, onBack }: Props) {
             <p style={{ color: 'var(--gold)', fontWeight: 600, fontSize: 16, fontFamily: ff, marginBottom: 4 }}>{c.ctaTitle}</p>
             <p style={{ color: '#fff', opacity: 0.85, fontSize: 13, fontFamily: 'Crimson Text, serif', lineHeight: 1.6 }}>{c.ctaDesc}</p>
           </div>
-          <button
-            style={{
-              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 4,
-              background: 'var(--gold)', color: 'var(--maroon)', border: 'none', borderRadius: 20,
-              padding: '10px 18px', fontSize: 14, fontWeight: 600, fontFamily: ff, cursor: 'pointer',
-              alignSelf: 'flex-start',
-            }}
-          >
-            
-          </button>
         </motion.div>
 
         {/* Closing shloka */}

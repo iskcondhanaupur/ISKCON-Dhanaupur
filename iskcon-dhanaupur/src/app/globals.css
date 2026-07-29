@@ -118,7 +118,7 @@ html, body {
   height: 68px;
   display: flex;
   align-items: center;
-  background: rgba(253, 245, 230, 0.96);
+  background: rgba(251, 249, 246, 0.96);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom: 1.5px solid var(--border);
