@@ -54,13 +54,13 @@ const highlights = {
     { icon: Sparkles, label: 'Special Abhishek', desc: 'Divine bathing of Sri Sri Radha ShyamSundar' },
     { icon: Music4, label: 'Kirtan & Bhajans', desc: 'Soulful kirtans throughout the day & night' },
     { icon: UtensilsCrossed, label: 'Bhog Offering', desc: '56 Bhog & special offerings to Sri Krishna' },
-    { icon: Moon, label: 'Midnight Celebration', desc: 'Grand aarati, kirtan & dressing of Laddu Gopal at midnight' },
+    { icon: Moon, label: 'Midnight Celebration', desc: 'Grand aarati, kirtan & dressing of Sri Sri Radha ShyamSundar at midnight' },
   ],
   hi: [
     { icon: Sparkles, label: 'विशेष अभिषेक', desc: 'श्री श्री राधा श्यामसुंदर का दिव्य स्नान' },
     { icon: Music4, label: 'कीर्तन व भजन', desc: 'दिन-रात मधुर कीर्तन' },
     { icon: UtensilsCrossed, label: 'भोग अर्पण', desc: '56 भोग व विशेष अर्पण श्री कृष्ण को' },
-    { icon: Moon, label: 'मध्यरात्रि उत्सव', desc: 'भव्य आरती, कीर्तन व मध्यरात्रि लड्डू गोपाल श्रृंगार' },
+    { icon: Moon, label: 'मध्यरात्रि उत्सव', desc: 'भव्य आरती, कीर्तन व मध्यरात्रि श्री श्री राधा श्यामसुंदर का श्रृंगार' },
   ],
 }
 
