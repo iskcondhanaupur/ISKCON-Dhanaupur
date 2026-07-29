@@ -123,7 +123,6 @@ export default function JanmashtamiView({ lang, onBack }: Props) {
   const experiences = devoteeExperiences[lang]
   const hl = highlights[lang]
   const schedule = scheduleItems[lang]
-
   return (
     <section className="section" style={{ background: 'transparent' }}>
       <PageBackground />
@@ -335,7 +334,7 @@ export default function JanmashtamiView({ lang, onBack }: Props) {
               alignSelf: 'flex-start',
             }}
           >
-            {c.ctaBtn} <ChevronRight size={15} />
+            
           </button>
         </motion.div>
 
