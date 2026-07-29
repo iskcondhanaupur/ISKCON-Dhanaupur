@@ -11,7 +11,13 @@ interface Props {
 
 export default function EventDetailView({ t, lang, slug, onBack }: Props) {
   const ev = t.events
-  const item = ev?.list?.find((entry: any) => entry.slug === slug)
+  const normalizedSlug = typeof slug === 'string' ? slug.trim().toLowerCase() : String(slug).trim().toLowerCase()
+  const availableSlugs = ev?.list?.map((entry: any) => entry.slug)
+  console.log('EventDetailView slug:', slug, 'normalizedSlug:', normalizedSlug, 'type:', typeof slug, 'availableSlugs:', availableSlugs)
+  const item = ev?.list?.find((entry: any) => {
+    const entrySlug = typeof entry.slug === 'string' ? entry.slug.trim().toLowerCase() : String(entry.slug).trim().toLowerCase()
+    return entrySlug === normalizedSlug
+  })
   const isHi = lang === 'hi'
   const ff = isHi ? 'Tiro Devanagari Hindi, serif' : 'Cormorant Garamond, serif'
 

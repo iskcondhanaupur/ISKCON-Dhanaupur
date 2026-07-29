@@ -312,8 +312,8 @@ Scope of services: `
       title: 'Upcoming Festivals',
       subtitle: 'Festivals & Celebrations 2026',
       list: [
-        { date: '21', month: 'JUL', name: 'Rathyatra',                   slug: 'rathyatra',                     active: true,  desc: 'The annual chariot procession celebrating Lord Krishna\'s divine pastimes.' },
-        { date: '04', month: 'SEP', name: 'Janmashtami',                 slug: 'janmashtami',                   active: false, desc: 'The most celebrated festival — Lord Krishna\'s appearance day. Midnight ceremony, drama, and grand abhishek.' },
+        { date: '21', month: 'JUL', name: 'Rathyatra',                   slug: 'rathyatra',                     active: false, desc: 'The annual chariot procession celebrating Lord Krishna\'s divine pastimes.' },
+        { date: '04', month: 'SEP', name: 'Janmashtami',                 slug: 'janmashtami',                   active: true,  desc: 'The most celebrated festival — Lord Krishna\'s appearance day. Midnight ceremony, drama, and grand abhishek.' },
         { date: '05', month: 'SEP', name: 'Srila Prabhupada Appearance', slug: 'srila-prabhupada-appearance',   active: false, desc: 'Celebration of the Founder-Acharya\'s appearance day. Guru Puja & special feast.' },
         { date: '19', month: 'SEP', name: 'Radhastami',                  slug: 'radhastami',                    active: false, desc: 'Appearance day of Srimati Radharani. Special kirtan, abhishek, and feast.' },
         { date: '02', month: 'NOV', name: 'Radha Kund Appearance',       slug: 'radha-kund-appearance',         active: false, desc: 'Special programme at the sacred kund. Bathing festival and extended kirtan.' },
@@ -777,8 +777,8 @@ list: [
       title: 'आगामी महोत्सव',
       subtitle: 'उत्सव और समारोह २०२६',
       list: [
-        { date: '21', month: 'जुल', name: 'रथयात्रा',                    slug: 'rathyatra',                   active: true,  desc: 'भगवान जगन्नाथ की वार्षिक रथ यात्रा।' },
-        { date: '04', month: 'सित', name: 'जन्माष्टमी',                  slug: 'janmashtami',                 active: false, desc: 'सबसे बड़ा उत्सव — भगवान श्री कृष्ण का प्रकट उत्सव।' },
+        { date: '21', month: 'जुल', name: 'रथयात्रा',                    slug: 'rathyatra',                   active: false, desc: 'भगवान जगन्नाथ की वार्षिक रथ यात्रा।' },
+        { date: '04', month: 'सित', name: 'जन्माष्टमी',                  slug: 'janmashtami',                 active: true,  desc: 'सबसे बड़ा उत्सव — भगवान श्री कृष्ण का प्रकट उत्सव।' },
         { date: '05', month: 'सित', name: 'श्रील प्रभुपाद प्रकट उत्सव', slug: 'srila-prabhupada-appearance', active: false, desc: 'संस्थापक-आचार्य का प्रकट दिवस उत्सव। गुरु पूजा और विशेष भोज।' },
         { date: '19', month: 'सित', name: 'राधाष्टमी',                   slug: 'radhastami',                  active: false, desc: 'श्रीमती राधारानी का प्रकट उत्सव। विशेष कीर्तन, अभिषेक और भोज।' },
         { date: '02', month: 'नव',  name: 'राधा कुण्ड प्रकट उत्सव',     slug: 'radha-kund-appearance',       active: false, desc: 'पवित्र कुण्ड पर विशेष कार्यक्रम। स्नान उत्सव और विस्तारित कीर्तन।' },
