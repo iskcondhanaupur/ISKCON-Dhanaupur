@@ -69,13 +69,13 @@ const scheduleItems = {
     { time: '', event: 'Mangala Aarti & Darshan' },
     { time: ' PM', event: 'Special Abhishek & Alankar' },
     { time: ' PM', event: 'Kirtan, Bhagwad Katha' },
-    { time: '08:00 AM', event: 'Janma Aarti & Maha Abhishek' },
+    { time: '08:00 PM', event: 'Janma Aarti & Maha Abhishek' },
   ],
   hi: [
     { time: '', event: 'मंगला आरती व दर्शन' },
     { time: '', event: 'विशेष अभिषेक व अलंकार' },
     { time: '', event: 'कीर्तन, भागवत कथा' },
-    { time: '08:00 AM', event: 'जन्म आरती व महाभिषेक' },
+    { time: '08:00 PM', event: 'जन्म आरती व महाभिषेक' },
   ],
 }
 
