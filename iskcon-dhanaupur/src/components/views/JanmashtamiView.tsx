@@ -15,36 +15,59 @@ interface Props {
 const devoteeExperiences = {
   en: [
     {
-      quote: '',
-      name: '',
-      role: '',
+      quote: 'I first visited ISKCON Dhanaupur in 2023 , and since then, it has become a very special place for me. For the last three years, I have been attending the Janmashtami festival here, and every visit has been a wonderful experience. The kirtans fill the whole temple with devotion, and the darshan of Sri Sri Radha Shyam Sundar Ji is always mesmerizing . Seeing the beautifully decorated Deities brings so much peace and happiness. I also love that every devotee gets a chance to perform the Abhishek of Lord Krishna, which makes the celebration even more special.',
+      name: 'Vaishnavi Singh',
+      
     },
     {
-      quote: '',
-      name: '',
-      role: '',
+      quote: ' I had the opportunity to celebrate Janmashtami at ISKCON Dhanaupur. It was a wonderful experience featuring beautiful kirtan 🥳 and various Vaishnava bhajans, alongside the magnificent *darshan* of Sri Sri Radha Shyam Sundar and Gaur Nitai Sundar, as well as the supremely merciful Jagannath, Baladev, and Subhadra Maharani—all in the company of their loving devotees. The most captivating aspect of the temple is that Sri Shyam Prabhu Ji gives devotees—including all visiting devotees—the chance to perform the *Abhishek* of Lord Sri Radha Shyam Sundar 🪷.',
+      name: 'Shivani Mishra',
     },
     {
-      quote: '',
-      name: '',
-      role: '',
+      quote: 'Attending the Janmashtami celebration at the temple of Shri Shri Radha Shyam sundar mandir was a truly divine and memorable experience. The temple was beautifully decorated with flowers and lights, creating a peaceful and spiritual atmosphere. The devotional bhajans, kirtans, and the midnight celebration of Lord Krishnas birth filled everyones heart with joy and devotion. I learned that Janmashtami is not only a festival but also a reminder to follow the teachings of Lord Krishna, such as truth, kindness, and selfless service',
+      name: 'Pranjal Dubey',
+    },
+    {
+
+      quote: 'Even though thousands of devotees come, the crowd management is excellent . The volunteers serve everyone with a smiling face, proper dress code is maintained, and the separate seating arrangement for Matajis and Prabhujis helps keep the atmosphere peaceful and devotional . Every Janmashtami at ISKCON Dhanaupur leaves me with beautiful memories and inspires me to come back again. My heartfelt gratitude to all the devotees and volunteers for organizing such a wonderful festival.',
+      name: 'Vaishnavi Singh',
+    },
+    {
+      quote: 'It was a moment that truly heightened my happiness. My sister and I were laid low by a fever, yet our pain vanished amidst such a beautiful festival. We even had the opportunity to decorate some of the pots for the *Abhishek*, and receiving the *Mahaprasad* after the birth celebration added even more to our joy. 🙌🏼 It was my first festival at the temple, and now I make it a point to attend every celebration there. Jai Prabhupada 🪷',
+      name: 'Shivani Mishra',
+    },
+    {
+      quote: 'We celebrated the occasion with prayers, reading from the Bhagavad Gita, and the distribution of prasadam. The event inspired me to live a life of compassion, discipline, and devotion. I sincerely thank the temple authorities and all the volunteers for organizing such a wonderful and meaningful celebration. This Janmashtami has strengthened my faith and encouraged me to celebrate every festival with devotion and gratitude.',
+      name: 'Pranjal Dubey',
     },
   ],
   hi: [
     {
-      quote: '',
-      name: '',
-      role: '',
+      quote: 'मैं पहली बार 2023 में इस्कॉन धनऊपुर गई थी, और तब से यह मेरे लिए एक बहुत खास जगह बन गई है। पिछले तीन सालों से मैं यहाँ जन्माष्टमी का उत्सव मना रही हूँ, और हर बार का अनुभव बहुत शानदार रहा है। यहाँ के कीर्तन पूरे मंदिर को भक्तिमय बना देते हैं, और श्री श्री राधा श्याम सुंदर जी के दर्शन हमेशा मनमोहक होते हैं। सुंदर ढंग से सजाई गई विग्रह को देखकर बहुत शांति और खुशी मिलती है। मुझे यह बात भी बहुत अच्छी लगती है कि हर भक्त को भगवान कृष्ण का अभिषेक करने का मौका मिलता है, जिससे यह उत्सव और भी खास हो जाता है।',
+      name: 'वैष्णवी सिंह',
+      
     },
     {
-      quote: '',
-      name: '',
-      role: '',
+      quote: 'मुझे मिला इस्कॉन धनऊपुर में जन्माष्टमी मनाने का अवसर यहां सुंदर कीर्तन🥳,अनेक वैष्णव भजनों के साथ अद्भुत दर्शन श्री श्री राधा श्याम सुंदर जी, गौर निताई सुंदर,साथ में बहुत ही कृपा से भरे जगन्नाथ बलदेव सुभद्रा महारानी और उनके प्यारे भक्तों के संग मिला मंदिर की सबसे आकर्षक बात,श्री श्याम प्रभु जी भक्तों से भगवान श्री राधाश्याम सुंदर का अभिषेक करने का मौका देते है  वो भी सभी आगंतुक भक्तों को🪷',
+      name: 'शिवानी मिश्रा',
     },
     {
-      quote: '',
-      name: '',
-      role: '',
+      quote: 'श्री श्री राधा श्याम सुंदर मंदिर में जन्माष्टमी के जश्न में शामिल होना सचमुच एक दिव्य और यादगार अनुभव था। मंदिर को फूलों और रोशनी से बहुत खूबसूरती से सजाया गया था, जिससे वहाँ का माहौल शांत और आध्यात्मिक बन गया था। भक्तिपूर्ण भजन, कीर्तन और आधी रात को भगवान कृष्ण के जन्म का उत्सव - इन सबने सभी के दिलों को खुशी और भक्ति से भर दिया। मुझे यह एहसास हुआ कि जन्माष्टमी सिर्फ़ एक त्योहार नहीं है, बल्कि भगवान कृष्ण की शिक्षाओं - जैसे सच्चाई, दया और निस्वार्थ सेवा - को अपनाने की याद दिलाने वाला एक मौका भी है।',
+      name: 'प्रांजल दुबे',
+    },
+    {
+      quote: 'भले ही यहाँ हज़ारों भक्त आते हैं, लेकिन भीड़ का प्रबंधन बहुत बढ़िया होता है। स्वयंसेवक हमेशा मुस्कुराते हुए सबकी सेवा करते हैं, *यहाँ सही ड्रेस कोड का पालन किया जाता है, और माताओं व प्रभुजी के लिए अलग-अलग बैठने की व्यवस्था से माहौल शांत और भक्तिपूर्ण बना रहता है। इस्कॉन धनऊपुर में मनाई गई हर जन्माष्टमी मेरे लिए खूबसूरत यादें छोड़ जाती है और मुझे दोबारा आने के लिए प्रेरित करती है। इतने शानदार उत्सव का आयोजन करने के लिए सभी भक्तों और स्वयंसेवकों का दिल से आभार। हरे कृष्ण🌸',
+      name: 'वैष्णवी सिंह',
+    },
+    {
+
+      quote: 'ये मेरी खुशी को ओर बढ़ाने वाला पल था, मैं और मेरी दीदी बुखार से लस्त थे लेकिन इतने सुंदर महोत्सव में हमारा दर्द गायब हो गया था उसमें अभिषेक के कुछ मटकियों को भी सजाने का मौका और जन्मोत्सव के बाद महाप्रसाद मिला जिससे हमारा आनंद और बढ़ गया  🙌🏼मंदिर में मेरा पहला उत्सव था और अब मैं सभी उत्सवों में यहां पहुंचने की कोशिश करती हूं जय प्रभुपाद 🪷',
+      name: 'शिवानी मिश्रा',
+    },
+    {
+
+      quote: ' हमने प्रार्थना करके, भगवद गीता का पाठ करके और प्रसाद बाँटकर यह त्योहार मनाया। इस कार्यक्रम ने मुझे दया, अनुशासन और भक्ति से भरा जीवन जीने की प्रेरणा दी। इतने शानदार और सार्थक आयोजन के लिए मैं मंदिर के अधिकारियों और सभी स्वयंसेवकों का दिल से धन्यवाद करता हूँ। इस जन्माष्टमी ने मेरी आस्था को और मज़बूत किया है और मुझे हर त्योहार को पूरी श्रद्धा और कृतज्ञता के साथ मनाने के लिए प्रेरित किया है।',
+      name: 'प्रांजल दुबे',
     },
   ],
 }
@@ -203,8 +226,8 @@ export default function JanmashtamiView({ lang, onBack }: Props) {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.07 * i }}
                 style={{
-                  width: 220,
-                  height: 220,
+                  width: 330,
+                  height: 330,
                   flex: '0 0 auto',
                   scrollSnapAlign: 'center',
                   background: 'var(--parchment)',
@@ -235,7 +258,7 @@ export default function JanmashtamiView({ lang, onBack }: Props) {
                 </p>
                 <div>
                   <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--maroon)', fontFamily: ff }}>{d.name}</p>
-                  <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'Crimson Text, serif' }}>{d.role}</p>
+                  
                 </div>
               </motion.div>
             ))}

@@ -1,15 +1,13 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import WhatsAppButton from '@/components/WhatsAppButton'
-import EventDetailView from '@/components/views/EventDetailView'
+import JanmashtamiView from '@/components/views/JanmashtamiView'
 import { content, Lang } from '@/data/content'
 
-export default function EventDetailPage() {
+export default function JanmashtamiPage() {
   const router = useRouter()
-  const params = useParams()
-  const slug = params.slug as string
   const [lang, setLang] = useState<Lang>('en')
   const [mounted, setMounted] = useState(false)
 
@@ -39,7 +37,7 @@ export default function EventDetailPage() {
         onMenuSelect={(id) => router.push(`/${id}`)}
       />
       <main style={{ flex: 1, paddingTop: 68 }}>
-        <EventDetailView t={t} lang={lang} slug={slug} onBack={() => router.push('/events')} />
+        <JanmashtamiView lang={lang} onBack={() => router.back()} />
       </main>
       <div className="floating-footer" style={{ borderTop: '1.5px solid #d4c2a5', padding: '32px 24px', textAlign: 'center', background: 'rgba(253,245,230,0.8)' }}>
         <span style={{ fontSize: 13, color: '#a0846c', fontFamily: 'Crimson Text, serif', letterSpacing: '0.06em', display: 'block', lineHeight: '1.6' }}>
