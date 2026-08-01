@@ -99,12 +99,12 @@ const scheduleNotes = {
   en: [
     'Volunteers are expected to follow a different timeline, please consult with your leader.',
     'Want to be a Volunteer \u2014 Reach us out! (*Subject to approval)',
-    'The timeline below is subject to change without prior notice, please keep checking frequently to stay informed.',
+    'The timeline is subject to change without prior notice, please keep checking frequently to stay informed.',
   ],
   hi: [
     'स्वयंसेवकों को एक अलग समय-सारणी का पालन करना होगा, कृपया अपने लीडर से संपर्क करें।',
     'स्वयंसेवक बनना चाहते हैं — हमसे संपर्क करें! (*अनुमोदन के अधीन)',
-    'नीचे दी गई समय-सारणी बिना पूर्व सूचना के बदली जा सकती है, कृपया नियमित रूप से जाँचते रहें।',
+    'समय-सारणी बिना पूर्व सूचना के बदली जा सकती है, कृपया नियमित रूप से जाँचते रहें।',
   ],
 }
 
