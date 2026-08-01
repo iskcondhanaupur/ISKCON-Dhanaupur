@@ -26,6 +26,7 @@ const nextConfig = {
     ],
   },
   allowedDevOrigins: [
+    '172.26.128.1',
     'astute-elliptic-speed.ngrok-free.dev',
     'astute-elliptic-speed.ngrok-free.app',
     'https://astute-elliptic-speed.ngrok-free.dev',

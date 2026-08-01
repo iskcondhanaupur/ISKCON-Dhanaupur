@@ -1,13 +1,15 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { Suspense, useEffect, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import DonationView from '@/components/views/DonationView'
 import { content, Lang } from '@/data/content'
 
-export default function DonationPage() {
+function DonationPageInner() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const initialCategory = searchParams.get('category') || undefined
   const [lang, setLang] = useState<Lang>('en')
   const [mounted, setMounted] = useState(false)
 
@@ -37,7 +39,13 @@ export default function DonationPage() {
         onMenuSelect={(id) => router.push(`/${id}`)}
       />
       <main style={{ flex: 1, paddingTop: 68 }}>
-        <DonationView t={t} lang={lang} onBack={() => router.push('/menu')} onNavigate={(view) => router.push(`/${view}`)} />
+        <DonationView
+          t={t}
+          lang={lang}
+          initialCategory={initialCategory}
+          onBack={() => router.push('/menu')}
+          onNavigate={(view) => router.push(`/${view}`)}
+        />
       </main>
       <div className="floating-footer" style={{ borderTop: '1.5px solid #d4c2a5', padding: '32px 24px', textAlign: 'center', background: 'rgba(253,245,230,0.8)' }}>
         <span style={{ fontSize: 13, color: '#a0846c', fontFamily: 'Crimson Text, serif', letterSpacing: '0.06em', display: 'block', lineHeight: '1.6' }}>
@@ -49,5 +57,13 @@ export default function DonationPage() {
       </div>
       <WhatsAppButton lang={lang} />
     </div>
+  )
+}
+
+export default function DonationPage() {
+  return (
+    <Suspense fallback={null}>
+      <DonationPageInner />
+    </Suspense>
   )
 }

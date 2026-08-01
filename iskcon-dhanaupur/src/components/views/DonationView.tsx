@@ -4,11 +4,34 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Lang } from '@/data/content'
 import PageBackground from '@/components/PageBackground'
 
-interface Props { t: any; lang: Lang; onBack: () => void; onNavigate?: (view: string) => void }
+interface Props { t: any; lang: Lang; onBack: () => void; onNavigate?: (view: string) => void; initialCategory?: string }
 
 type Step = 'SEVA_SELECT' | 'DETAILS' | 'PAYMENT'
 
-export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
+const abhishekSamagri = {
+  en: {
+    label: 'Abhishek Samagri',
+    items: [
+      { name: 'Milk', qty: '200 Litre', amount: '\u20B9 13,000/-' },
+      { name: 'Curd', qty: '200 Kg', amount: '\u20B9 16,000/-' },
+      { name: 'Honey', qty: '21 Kg', amount: '\u20B9 14,700/-' },
+      { name: 'Ghee', qty: '21 Kg', amount: '\u20B9 16,800/-' },
+    ],
+    total: { name: 'Total (Abhishek Samagri)', amount: '\u20B9 61,000/-' },
+  },
+  hi: {
+    label: 'अभिषेक सामग्री',
+    items: [
+      { name: 'दूध', qty: '200 लीटर', amount: '₹ 13,000/-' },
+      { name: 'दही', qty: '200 किग्रा', amount: '₹ 16,000/-' },
+      { name: 'मधु', qty: '21 किग्रा', amount: '₹ 14,700/-' },
+      { name: 'घी', qty: '21 किग्रा', amount: '₹ 16,800/-' },
+    ],
+    total: { name: 'कुल (अभिषेक सामग्री)', amount: '₹ 61,000/-' },
+  },
+}
+
+export default function DonationView({ t, lang, onBack, onNavigate, initialCategory }: Props) {
   const d = t.donation
   const isHi = lang === 'hi'
   const ff = isHi ? 'Tiro Devanagari Hindi, serif' : 'Cormorant Garamond, serif'
@@ -23,8 +46,25 @@ export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
 
   const [step, setStep] = useState<Step>('SEVA_SELECT')
   const [frequency, setFrequency] = useState<'once' | 'monthly'>('once')
-  const [carouselIndex, setCarouselIndex] = useState(0)
-  const [selectedCategory, setSelectedCategory] = useState(d.categories[0]?.id || 'general')
+
+  const initialSelectedCategory =
+    initialCategory && d.categories.some((c: any) => c.id === initialCategory)
+      ? initialCategory
+      : (d.categories[0]?.id || 'general')
+
+  const [selectedCategory, setSelectedCategory] = useState<string>(initialSelectedCategory)
+
+  const visibleCards = 2
+  const totalCards = d.categories.length
+  const maxIndex = Math.max(0, totalCards - visibleCards)
+
+  const initialCarouselIndex = (() => {
+    const idx = d.categories.findIndex((c: any) => c.id === initialSelectedCategory)
+    if (idx < 0) return 0
+    return Math.min(maxIndex, idx)
+  })()
+
+  const [carouselIndex, setCarouselIndex] = useState(initialCarouselIndex)
   const [amount, setAmount] = useState<number>(501)
   const [customAmount, setCustomAmount] = useState('')
   const [useCustom, setUseCustom] = useState(false)
@@ -35,10 +75,9 @@ export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
   const [success, setSuccess] = useState(false)
 
   const finalAmount = useCustom ? parseInt(customAmount || '0') : amount
-  const visibleCards = 2
-  const totalCards = d.categories.length
-  const maxIndex = Math.max(0, totalCards - visibleCards)
   const selectedSevaLabel = d.categories.find((c: any) => c.id === selectedCategory)?.label || 'General Seva'
+  const isAbhishekSelected = selectedCategory === 'Janamasthami Abhishek'
+  const samagri = abhishekSamagri[lang]
 
   const scrollCarousel = (direction: 'left' | 'right') => {
     if (direction === 'left') setCarouselIndex(Math.max(0, carouselIndex - 1))
@@ -88,7 +127,7 @@ export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
         border: `1px solid ${copied === fieldKey ? '#2d7a2d' : 'var(--border)'}`,
         borderRadius: 6,
         cursor: 'pointer',
-        fontFamily: ff,
+        fontFamily: 'Arial, Helvetica, sans-serif',
         fontWeight: 600,
         whiteSpace: 'nowrap',
         transition: 'all 0.2s'
@@ -187,6 +226,45 @@ export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
                   </div>
                   <button onClick={() => scrollCarousel('right')} disabled={carouselIndex >= maxIndex} style={{ background: 'none', border: 'none', fontSize: 24, color: carouselIndex >= maxIndex ? 'var(--border)' : 'var(--maroon)', cursor: carouselIndex >= maxIndex ? 'not-allowed' : 'pointer' }}>›</button>
                 </div>
+
+                {/* Abhishek Samagri — expands inline when this seva is selected */}
+                <AnimatePresence>
+                  {isAbhishekSelected && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      <div style={{ marginTop: 16, paddingTop: 14, borderTop: '1px dashed var(--border)' }}>
+                        <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--maroon)', fontFamily: ff, marginBottom: 8 }}>
+                          {samagri.label}
+                        </p>
+                        {samagri.items.map((item, i) => (
+                          <div
+                            key={i}
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                              padding: '7px 0',
+                              borderTop: i === 0 ? 'none' : '1px dashed var(--border)',
+                            }}
+                          >
+                            <span style={{ fontSize: 13, color: 'var(--text)', fontFamily: ff }}>
+                              {item.name} <span style={{ color: 'var(--muted)', fontSize: 11.5 }}>({item.qty})</span>
+                            </span>
+                            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--gold)', fontFamily: ff }}>{item.amount}</span>
+                          </div>
+                        ))}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0 0', borderTop: '1.5px solid var(--gold)', marginTop: 4 }}>
+                          <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--maroon)', fontFamily: ff }}>{samagri.total.name}</span>
+                          <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--maroon)', fontFamily: ff }}>{samagri.total.amount}</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {frequency === 'monthly' ? (
@@ -245,7 +323,7 @@ export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
                   {isHi ? 'QR कोड स्कैन करें' : 'Scan QR Code'}
                 </p>
                 <img
-                  src="/qr.png"
+                  src="/qr.jpeg"
                   alt="UPI QR Code"
                   style={{ width: 190, height: 190, margin: '0 auto', display: 'block', borderRadius: 12, border: '2px solid var(--border)', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}
                 />
@@ -260,12 +338,12 @@ export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
                 <div style={{ flex: 1, height: 1, background: 'var(--border)' }} />
               </div>
 
-              <div style={{ background: 'var(--parchment)', border: '1.5px solid var(--border)', borderRadius: 10, padding: '16px', marginBottom: 20, display: 'grid', gap: 12 }}>
+              <div style={{ background: 'var(--parchment)', border: '1.5px solid var(--border)', borderRadius: 10, padding: '16px', marginBottom: 20, display: 'grid', gap: 12, fontFamily: 'Arial, Helvetica, sans-serif' }}>
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
                   <div>
-                    <p style={{ margin: 0, fontSize: 11, color: 'var(--muted)', fontFamily: ff, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{isHi ? 'UPI ID' : 'UPI ID'}</p>
-                    <p style={{ margin: '2px 0 0 0', fontSize: 14, color: 'var(--maroon)', fontFamily: ff, fontWeight: 700 }}>{BANK_DETAILS.upi}</p>
+                    <p style={{ margin: 0, fontSize: 11, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{isHi ? 'UPI ID' : 'UPI ID'}</p>
+                    <p style={{ margin: '2px 0 0 0', fontSize: 14, color: 'var(--maroon)', fontWeight: 700 }}>{BANK_DETAILS.upi}</p>
                   </div>
                   <CopyBtn value={BANK_DETAILS.upi} fieldKey="upi" />
                 </div>
@@ -274,8 +352,8 @@ export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
                   <div>
-                    <p style={{ margin: 0, fontSize: 11, color: 'var(--muted)', fontFamily: ff, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{isHi ? 'खाता संख्या' : 'Account Number'}</p>
-                    <p style={{ margin: '2px 0 0 0', fontSize: 14, color: 'var(--maroon)', fontFamily: ff, fontWeight: 700 }}>{BANK_DETAILS.accountNumber}</p>
+                    <p style={{ margin: 0, fontSize: 11, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{isHi ? 'खाता संख्या' : 'Account Number'}</p>
+                    <p style={{ margin: '2px 0 0 0', fontSize: 14, color: 'var(--maroon)', fontWeight: 700 }}>{BANK_DETAILS.accountNumber}</p>
                   </div>
                   <CopyBtn value={BANK_DETAILS.accountNumber} fieldKey="acc" />
                 </div>
@@ -284,8 +362,8 @@ export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
                   <div>
-                    <p style={{ margin: 0, fontSize: 11, color: 'var(--muted)', fontFamily: ff, textTransform: 'uppercase', letterSpacing: '0.04em' }}>IFSC</p>
-                    <p style={{ margin: '2px 0 0 0', fontSize: 14, color: 'var(--maroon)', fontFamily: ff, fontWeight: 700 }}>{BANK_DETAILS.ifsc}</p>
+                    <p style={{ margin: 0, fontSize: 11, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>IFSC</p>
+                    <p style={{ margin: '2px 0 0 0', fontSize: 14, color: 'var(--maroon)', fontWeight: 700 }}>{BANK_DETAILS.ifsc}</p>
                   </div>
                   <CopyBtn value={BANK_DETAILS.ifsc} fieldKey="ifsc" />
                 </div>
@@ -294,8 +372,8 @@ export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
                   <div>
-                    <p style={{ margin: 0, fontSize: 11, color: 'var(--muted)', fontFamily: ff, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{isHi ? 'खाताधारक नाम' : 'Account Holder'}</p>
-                    <p style={{ margin: '2px 0 0 0', fontSize: 14, color: 'var(--maroon)', fontFamily: ff, fontWeight: 700 }}>{BANK_DETAILS.name}</p>
+                    <p style={{ margin: 0, fontSize: 11, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{isHi ? 'खाताधारक नाम' : 'Account Holder'}</p>
+                    <p style={{ margin: '2px 0 0 0', fontSize: 14, color: 'var(--maroon)', fontWeight: 700 }}>{BANK_DETAILS.name}</p>
                   </div>
                   <CopyBtn value={BANK_DETAILS.name} fieldKey="name" />
                 </div>
@@ -304,8 +382,8 @@ export default function DonationView({ t, lang, onBack, onNavigate }: Props) {
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
                   <div>
-                    <p style={{ margin: 0, fontSize: 11, color: 'var(--muted)', fontFamily: ff, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{isHi ? 'शाखा' : 'Branch'}</p>
-                    <p style={{ margin: '2px 0 0 0', fontSize: 14, color: 'var(--maroon)', fontFamily: ff, fontWeight: 700 }}>{BANK_DETAILS.branch}</p>
+                    <p style={{ margin: 0, fontSize: 11, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{isHi ? 'शाखा' : 'Branch'}</p>
+                    <p style={{ margin: '2px 0 0 0', fontSize: 14, color: 'var(--maroon)', fontWeight: 700 }}>{BANK_DETAILS.branch}</p>
                   </div>
                   <CopyBtn value={BANK_DETAILS.branch} fieldKey="branch" />
                 </div>
