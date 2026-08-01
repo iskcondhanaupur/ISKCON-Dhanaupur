@@ -413,7 +413,7 @@ export default function JanmashtamiView({ lang, onBack }: Props) {
             <p style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--maroon)', fontFamily: ff, marginBottom: 8 }}>
               {isHi ? 'कृपया ध्यान दें' : 'Please note'}
             </p>
-            <ul style={{ margin: 0, paddingLeft: 18 }}>
+            <ul style={{ margin: 0, paddingLeft: 18, listStyle: 'disc' }}>
               {scheduleNotes[lang].map((note, i) => (
                 <li key={i} style={{ fontSize: 12, color: 'var(--muted)', fontFamily: isHi ? ff : 'Crimson Text, serif', lineHeight: 1.6, marginBottom: 4 }}>
                   {note}
