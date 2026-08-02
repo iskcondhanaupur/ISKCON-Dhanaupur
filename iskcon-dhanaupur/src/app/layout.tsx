@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     siteName: "ISKCON Dhanaupur",
     images: [
       {
-        url: "/Thumbnail.png",
+        url: "/Thumbnaill.png",
         width: 1200,
         height: 630,
         alt: "ISKCON Dhanaupur Sri Sri Radha ShyamSundar Mandir",
