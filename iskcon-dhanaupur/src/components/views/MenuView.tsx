@@ -1,17 +1,18 @@
 'use client'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Play, CalendarDays, BookOpen, Users, MapPin, HeartHandshake, Info,
-  ChevronDown, Hammer,
+  ChevronDown, Hammer, Trophy,
 } from 'lucide-react'
 import { Lang } from '@/data/content'
 import PageBackground from '@/components/PageBackground'
 
 interface Props { t: any; lang: Lang; onSelect: (id: string) => void }
 
-type SubItem = { id: string; label: string; labelHi: string; sub?: string; subHi?: string; comingSoon?: boolean }
+type SubItem = { id: string; label: string; labelHi: string; sub?: string; subHi?: string; comingSoon?: boolean; href?: string }
 type Category = { id: string; label: string; labelHi: string; icon: any; items: SubItem[] }
 
 const ROUTE_ID_MAP: Record<string, string> = {
@@ -42,6 +43,13 @@ const CATEGORIES: Category[] = [
     items: [
       { id: 'events', label: 'Upcoming Festivals', labelHi: 'आगामी उत्सव' },
       { id: 'ekadashi', label: 'Upcoming Ekadashi', labelHi: 'आगामी एकादशी' },
+    ],
+  },
+  {
+    id: 'competitions', label: 'Competitions', labelHi: 'प्रतियोगिताएं', icon: Trophy,
+    items: [
+      { id: 'gokuldham-pratiyogita', label: 'Gokuldham Pratiyogita', labelHi: 'गोकुलधाम प्रतियोगिता', href: '/gokuldham-pratiyogita' },
+      { id: 'quiz-results', label: 'Quiz Results', labelHi: 'क्विज़ परिणाम', href: '/quiz-results' },
     ],
   },
   {
@@ -332,6 +340,21 @@ export default function MenuView({ t, lang, onSelect }: Props) {
                               <div style={{ fontFamily: fb, fontSize: 13.5, color: 'var(--muted)' }}>{isHi ? sub.labelHi : sub.label}</div>
                             </div>
                           </div>
+                        ) : sub.href ? (
+                          <Link key={sub.id} href={sub.href}
+                            style={{
+                              display: 'block', width: '100%', textAlign: 'left', background: 'transparent',
+                              border: 'none', cursor: 'pointer', padding: '8px 10px', borderRadius: 8,
+                            }}>
+                            <div style={{ fontFamily: fb, fontSize: 15.5, color: 'var(--maroon-lt)', fontWeight: 600 }}>
+                              {isHi ? sub.labelHi : sub.label}
+                            </div>
+                            {sub.sub && (
+                              <div style={{ fontFamily: fb, fontSize: 13.5, color: 'var(--muted)', marginTop: 2 }}>
+                                {isHi ? sub.subHi : sub.sub}
+                              </div>
+                            )}
+                          </Link>
                         ) : (
                           <button key={sub.id} onClick={() => onSelect(ROUTE_ID_MAP[sub.id] || sub.id)}
                             style={{

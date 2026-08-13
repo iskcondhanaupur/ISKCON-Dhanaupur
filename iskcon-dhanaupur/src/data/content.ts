@@ -1,3 +1,5 @@
+import { truncate } from "fs/promises"
+
 export type Lang = 'en' | 'hi'
 
 export const content = {
@@ -32,6 +34,8 @@ export const content = {
       { id: 'donation',    label: 'Donation',             sub: 'Support the temple seva' },
       { id: 'helpinghands', label: 'Helping Hand',        sub: 'Partner with our mission' },
       { id: 'yatra',       label: 'Dham Yatras',          sub: 'Holy pilgrimages' },
+      { id: 'gokuldham-pratiyogita', label: 'Gokuldham Pratiyogita', sub: 'Express your devotion & creativity' },
+      { id: 'quiz-results', label: 'Quiz Results',        sub: 'Daily quiz, monthly results' },
       { id: 'about',       label: 'About Us',             sub: 'About ISKCON Dhanaupur' },
       { id: 'iskcon',      label: 'About ISKCON',         sub: 'About the organisation' },
       { id: 'social',      label: 'Social Media',         sub: 'Follow us online' },
@@ -314,8 +318,8 @@ Scope of services: `
       list: [
         { date: '21', month: 'JUL', name: 'Rathyatra',                   slug: 'rathyatra',                     active: false, desc: 'The annual chariot procession celebrating Lord Krishna\'s divine pastimes.' },
         { date: '04', month: 'SEP', name: 'Janmashtami',                 slug: 'janmashtami',                   active: true,  desc: 'The most celebrated festival — Lord Krishna\'s appearance day. Midnight ceremony, drama, and grand abhishek.' },
-        { date: '05', month: 'SEP', name: 'Srila Prabhupada Appearance', slug: 'srila-prabhupada-appearance',   active: false, desc: 'Celebration of the Founder-Acharya\'s appearance day. Guru Puja & special feast.' },
-        { date: '19', month: 'SEP', name: 'Radhastami',                  slug: 'radhastami',                    active: false, desc: 'Appearance day of Srimati Radharani. Special kirtan, abhishek, and feast.' },
+        { date: '05', month: 'SEP', name: 'Srila Prabhupada Appearance', slug: 'srila-prabhupada-appearance',   active: true, desc: 'Celebration of the Founder-Acharya\'s appearance day. Guru Puja & special feast.' },
+        { date: '19', month: 'SEP', name: 'Radhastami',                  slug: 'radhastami',                    active: true, desc: 'Appearance day of Srimati Radharani. Special kirtan, abhishek, and feast.' },
         { date: '02', month: 'NOV', name: 'Radha Kund Appearance',       slug: 'radha-kund-appearance',         active: false, desc: 'Special programme at the sacred kund. Bathing festival and extended kirtan.' },
         { date: '09', month: 'NOV', name: 'Diwali',                      slug: 'diwali',                        active: false, desc: 'Festival of lights — celebration of good over evil.' },
         { date: '04', month: 'DEC', name: 'Vaikuntha Ekadashi',          slug: 'vaikuntha-ekadashi',            active: false, desc: 'Fasting and special programmes on this most auspicious Ekadashi of the year.' },
@@ -474,6 +478,61 @@ Scope of services: `
       ],
     },
 
+    quiz: {
+      label: 'Quiz',
+      title: 'Quiz',
+      subtitle: 'Daily Quiz • Monthly Results',
+      intro: 'Participate in our daily quiz in the WhatsApp group and test your knowledge of Krishna Consciousness, Srila Prabhupada\'s teachings, scriptures and more.',
+      basedOn: 'This quiz is based on Srimad Bhagavatam.',
+      features: [
+        { title: 'Daily Quiz', desc: 'Join our WhatsApp group and participate every day.' },
+        { title: 'Monthly Results', desc: 'Results are declared at the end of every month.' },
+        { title: 'Learn & Grow', desc: 'Keep learning, keep growing in devotion.' },
+      ],
+      resultsTitle: 'Monthly Results',
+      categories: [
+        {
+          id: 'prabhuji',
+          label: 'Prabhuji Category',
+          winners: [
+            { place: '1st Place', name: '' },
+            { place: '2nd Place', name: '' },
+          ],
+        },
+        {
+          id: 'mataji',
+          label: 'Mataji Category',
+          winners: [
+            { place: '1st Place', name: '' },
+            { place: '2nd Place', name: '' },
+          ],
+        },
+      ],
+      winnerPlaceholder: 'To be announced',
+      viewAll: 'View All Monthly Results',
+      hideAll: 'Hide Monthly Results',
+      archiveTitle: 'Past Months',
+      archiveEmpty: 'Previous months\' results will be added here soon.',
+      contact: 'To join the daily quiz group, contact: +91 8127443777',
+    },
+
+    gokuldhamPratiyogita: {
+      label: 'Competition',
+      title: 'Gokuldham Pratiyogita',
+      subtitle: 'Express Your Devotion, Illuminate Your Vision',
+      poster: '/gokuldham-pratiyogita-poster.jpg',
+      posterAlt: 'Gokuldham Pratiyogita — A Platform to Express Devotion & Creativity',
+      intro: 'Participate in the Gokuldham Pratiyogita and pour your creativity, devotion and talent into various spiritual categories. Stay tuned for exciting themes and opportunities to glorify the Lord through your art.',
+      howToParticipate: 'How to Participate?',
+      howToParticipateDesc: 'Click the button below to connect with us on WhatsApp and get all the details.',
+      whatsappCta: 'Contact on WhatsApp',
+      features: [
+        { title: 'Multiple Categories', desc: 'Different themes for all age groups' },
+        { title: 'Choose or Vote', desc: 'Showcase your talent and devotion' },
+        { title: 'Spiritual Growth', desc: 'Grow in devotion and creativity' },
+      ],
+    },
+
     back: 'Back',
   },
 
@@ -508,6 +567,8 @@ Scope of services: `
       { id: 'donation', label: 'दान कल्याण',        sub: 'मंदिर सेवा में सहयोग करें' },
       { id: 'helpinghands', label: 'सहयोग हस्त',    sub: 'हमारे मिशन से जुड़ें' },
       { id: 'yatra',    label: 'धाम यात्राएं',      sub: 'पवित्र तीर्थ यात्राएं' },
+      { id: 'gokuldham-pratiyogita', label: 'गोकुलधाम प्रतियोगिता', sub: 'अपनी भक्ति व रचनात्मकता व्यक्त करें' },
+      { id: 'quiz-results', label: 'क्विज़ परिणाम', sub: 'दैनिक क्विज़, मासिक परिणाम' },
       { id: 'about',    label: 'हमारे बारे में',    sub: 'इस्कॉन धनऊपुर के बारे में' },
       { id: 'iskcon',   label: 'इस्कॉन संस्था',    sub: 'संस्था के बारे में जानें' },
       { id: 'social',   label: 'सोशल मीडिया',      sub: 'हमसे जुड़ें' },
@@ -779,8 +840,8 @@ list: [
       list: [
         { date: '21', month: 'जुल', name: 'रथयात्रा',                    slug: 'rathyatra',                   active: false, desc: 'भगवान जगन्नाथ की वार्षिक रथ यात्रा।' },
         { date: '04', month: 'सित', name: 'जन्माष्टमी',                  slug: 'janmashtami',                 active: true,  desc: 'सबसे बड़ा उत्सव — भगवान श्री कृष्ण का प्रकट उत्सव।' },
-        { date: '05', month: 'सित', name: 'श्रील प्रभुपाद प्रकट उत्सव', slug: 'srila-prabhupada-appearance', active: false, desc: 'संस्थापक-आचार्य का प्रकट दिवस उत्सव। गुरु पूजा और विशेष भोज।' },
-        { date: '19', month: 'सित', name: 'राधाष्टमी',                   slug: 'radhastami',                  active: false, desc: 'श्रीमती राधारानी का प्रकट उत्सव। विशेष कीर्तन, अभिषेक और भोज।' },
+        { date: '05', month: 'सित', name: 'श्रील प्रभुपाद प्रकट उत्सव', slug: 'srila-prabhupada-appearance', active: true, desc: 'संस्थापक-आचार्य का प्रकट दिवस उत्सव। गुरु पूजा और विशेष भोज।' },
+        { date: '19', month: 'सित', name: 'राधाष्टमी',                   slug: 'radhastami',                  active: true, desc: 'श्रीमती राधारानी का प्रकट उत्सव। विशेष कीर्तन, अभिषेक और भोज।' },
         { date: '02', month: 'नव',  name: 'राधा कुण्ड प्रकट उत्सव',     slug: 'radha-kund-appearance',       active: false, desc: 'पवित्र कुण्ड पर विशेष कार्यक्रम। स्नान उत्सव और विस्तारित कीर्तन।' },
         { date: '09', month: 'नव',  name: 'दीपावली',                      slug: 'diwali',                      active: false, desc: 'प्रकाश का त्योहार — अच्छाई की बुराई पर विजय।' },
         { date: '04', month: 'दिस', name: 'वैकुण्ठ एकादशी',              slug: 'vaikuntha-ekadashi',          active: false, desc: 'वर्ष की सबसे शुभ एकादशी पर व्रत और विशेष कार्यक्रम।' },
@@ -936,6 +997,61 @@ list: [
         { date: 'Nov 20', name: 'Devutthana Ekadashi',           paran: 'Nov 21' },
         { date: 'Dec 04', name: 'Utpanna Ekadashi',              paran: 'Dec 05' },
         { date: 'Dec 20', name: 'Mokshada Ekadashi',             paran: 'Dec 21' },
+      ],
+    },
+
+    quiz: {
+      label: 'क्विज़',
+      title: 'क्विज़',
+      subtitle: 'दैनिक क्विज़ • मासिक परिणाम',
+      intro: 'हमारे व्हाट्सएप समूह में प्रतिदिन होने वाले क्विज़ में भाग लें और कृष्ण भावनामृत, श्रील प्रभुपाद की शिक्षाओं, शास्त्रों आदि के बारे में अपने ज्ञान को परखें।',
+      basedOn: 'यह क्विज़ श्रीमद् भागवतम् पर आधारित है।',
+      features: [
+        { title: 'दैनिक क्विज़', desc: 'हमारे व्हाट्सएप समूह से जुड़ें और प्रतिदिन भाग लें।' },
+        { title: 'मासिक परिणाम', desc: 'हर महीने के अंत में परिणाम घोषित किए जाते हैं।' },
+        { title: 'सीखें और बढ़ें', desc: 'सीखते रहें, भक्ति में बढ़ते रहें।' },
+      ],
+      resultsTitle: 'मासिक परिणाम',
+      categories: [
+        {
+          id: 'prabhuji',
+          label: 'प्रभुजी वर्ग',
+          winners: [
+            { place: 'प्रथम स्थान', name: '' },
+            { place: 'द्वितीय स्थान', name: '' },
+          ],
+        },
+        {
+          id: 'mataji',
+          label: 'माताजी वर्ग',
+          winners: [
+            { place: 'प्रथम स्थान', name: '' },
+            { place: 'द्वितीय स्थान', name: '' },
+          ],
+        },
+      ],
+      winnerPlaceholder: 'शीघ्र घोषित होगा',
+      viewAll: 'सभी मासिक परिणाम देखें',
+      hideAll: 'मासिक परिणाम छुपाएं',
+      archiveTitle: 'पिछले महीने',
+      archiveEmpty: 'पिछले महीनों के परिणाम शीघ्र यहाँ जोड़े जाएंगे।',
+      contact: 'दैनिक क्विज़ समूह से जुड़ने हेतु संपर्क करें: +91 8127443777',
+    },
+
+    gokuldhamPratiyogita: {
+      label: 'प्रतियोगिता',
+      title: 'गोकुलधाम प्रतियोगिता',
+      subtitle: 'अपनी भक्ति व्यक्त करें, अपनी दृष्टि उजागर करें',
+      poster: '/gokuldham-pratiyogita-poster.jpg',
+      posterAlt: 'गोकुलधाम प्रतियोगिता — भक्ति एवं रचनात्मकता व्यक्त करने का मंच',
+      intro: 'गोकुलधाम प्रतियोगिता में भाग लें और विभिन्न आध्यात्मिक श्रेणियों में अपनी रचनात्मकता, भक्ति और प्रतिभा प्रस्तुत करें। भगवान की महिमा के लिए अपनी कला के माध्यम से रोमांचक विषयों और अवसरों की प्रतीक्षा करें।',
+      howToParticipate: 'कैसे भाग लें?',
+      howToParticipateDesc: 'सभी जानकारी और हमसे व्हाट्सएप पर जुड़ने के लिए नीचे दिए गए बटन पर क्लिक करें।',
+      whatsappCta: 'व्हाट्सएप पर संपर्क करें',
+      features: [
+        { title: 'विविध श्रेणियाँ', desc: 'सभी आयु वर्ग के लिए अलग-अलग विषय' },
+        { title: 'चुनें और सहभागी बनें', desc: 'अपनी प्रतिभा और भक्ति दिखाएं' },
+        { title: 'आध्यात्मिक विकास', desc: 'भक्ति और रचनात्मकता में बढ़ें' },
       ],
     },
 
