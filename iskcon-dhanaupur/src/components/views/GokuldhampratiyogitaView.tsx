@@ -26,7 +26,7 @@ const features = {
 
 const copy = {
   en: {
-    
+    label: 'Festival',
     title: 'Gokuldham Pratiyogita',
     subtitle: 'Express Your Devotion, Illuminate Your Vision',
     poster: '/gdp.jpeg',
@@ -40,7 +40,7 @@ const copy = {
     back: 'Back',
   },
   hi: {
-   
+    label: 'उत्सव',
     title: 'गोकुलधाम प्रतियोगिता',
     subtitle: 'अपनी भक्ति व्यक्त करें, अपनी दृष्टि उजागर करें',
     poster: '/gdp.jpeg',
@@ -78,7 +78,7 @@ export default function GokuldhamPratiyogitaView({ lang, onBack }: Props) {
 
         {/* Hero */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 28 }}>
-          <p className="t-label" style={{ marginBottom: 6 }}>{c.label}</p>
+         
           <h1 style={{ fontSize: 'clamp(24px, 4vw, 34px)', color: 'var(--maroon)', marginBottom: 4, fontFamily: ff, fontWeight: 600 }}>
             {c.title}
           </h1>
