@@ -208,7 +208,7 @@ Scope of services: `
         { name: 'HG Devkinandan Das Prabhuji',  desc: '' },
         
       ],
-      wipTitle: 'Hold on, work in progress',
+      
       wipDesc: 'Our Jail Programs, School Programs and other community outreach initiatives will be featured here soon.',
     },
 
@@ -729,7 +729,7 @@ list: [
         { name: 'HG गौरांग दास प्रभुजी',      desc: '' },
         { name: 'HG देवकीनंदन दास प्रभुजी',  desc: '' },
       ],
-      wipTitle: 'रुकिए, कार्य प्रगति पर है',
+      
       wipDesc: 'हमारे जेल कार्यक्रम, विद्यालय कार्यक्रम और अन्य सामुदायिक प्रचार गतिविधियाँ शीघ्र यहाँ प्रस्तुत की जाएंगी।',
     },
 

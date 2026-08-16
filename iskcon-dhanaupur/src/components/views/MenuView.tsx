@@ -123,8 +123,8 @@ const FESTIVALS: FestivalHighlight[] = [
     dateLabel: '04 Sept', dateLabelHi: '04 सित',
     image: '/j.png',
     imageFit: 'contain',
-    description: 'Midnight abhishek, kirtan, radha-krishna dress-up and celebrations.',
-    descriptionHi: 'मध्यरात्रि अभिषेक, कीर्तन, राधा-कृष्ण वेशभूषा एवं उत्सव।',
+    description: 'Enchanting darshan, continuous Harinam Sankirtan, abhishek, jhanki, mahaprasad, and Sri Krishna\'s birth celebration in the company of devotees',
+    descriptionHi: 'मनमोहक दर्शन, अखंड हरिनाम संकीर्तन, अभिषेक, झांकी, महाप्रसाद और भक्तों के संग श्रीकृष्ण जन्मोत्सव',
     href: '/janmashtami',
   },
   {
@@ -155,7 +155,7 @@ const FESTIVALS: FestivalHighlight[] = [
     imageFit: 'contain',
     description: 'Srimati Radharani glorification, abhishek, kirtan and festive darshan.',
     descriptionHi: 'श्रीमती राधारानी का गुणगान, अभिषेक, कीर्तन और मनमोहक दर्शन',
-    href: '/radhastami',
+    href: '/events/radhastami',
   },
 ]
 
