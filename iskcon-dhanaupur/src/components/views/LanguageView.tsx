@@ -132,7 +132,7 @@ export default function LanguageView({ onSelect }: Props) {
           style={{ marginBottom: 24 }}
         >
           <Image
-            src="/n.png"
+            src="/nt.png"
             alt="ISKCON Dhanaupur"
             width={380}
             height={280}
