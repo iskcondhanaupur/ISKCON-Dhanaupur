@@ -22,7 +22,7 @@ const content = {
     fastLabel: 'Fasting until 12 Noon',
     fastDesc:
       'A fast will be observed until noon, after which preparations for the program will continue with Anna Prasad.',
-    venue: 'Sri Sri Radha ShyamSundar Mandir, ISKCON Dhanaupur',
+    venue: 'Sri Sri Radha ShyamSundar Mandir, ISKCON Dhanaupur, Dostpur, Sultanpur',
     mapCta: 'View on Map',
     highlightsTitle: 'Festival Highlights',
     scheduleTitle: 'Festival Schedule',
@@ -52,7 +52,7 @@ const content = {
     fastLabel: 'दोपहर 12 बजे तक',
     fastDesc:
       'उपवास रखा जाएगा, जिसके पश्चात अन्न प्रसाद के साथ कार्यक्रम की तैयारियां आगे बढ़ाई जाएंगी।',
-    venue: 'श्री श्री राधा श्यामसुंदर मंदिर, इस्कॉन धनऊपुर',
+    venue: 'श्री श्री राधा श्यामसुंदर मंदिर,इस्कॉन धनऊपुर , दोस्तपुर, सुल्तानपुर',
     mapCta: 'मानचित्र पर देखें',
     highlightsTitle: 'उत्सव की झलकियाँ',
     scheduleTitle: 'उत्सव कार्यक्रम',
