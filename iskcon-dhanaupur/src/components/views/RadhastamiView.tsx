@@ -240,28 +240,34 @@ export default function RadhashtamiView({ lang, onBack }: RadhashtamiViewProps) 
             </p>
           </div>
 
-          {/* Map card — link stays hidden, only the card is shown */}
+          {/* Map preview — link stays hidden, only the map + card is shown */}
           <a
             href={MAP_LINK}
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
-              background: 'var(--parchment)',
+              display: 'block',
+              position: 'relative',
+              width: '100%',
+              height: 220,
+              borderRadius: 16,
+              overflow: 'hidden',
               border: '1.5px solid var(--gold)',
-              borderRadius: 14,
-              padding: '14px 20px',
               margin: '0 0 24px',
               textDecoration: 'none',
-              color: 'var(--maroon)',
-              fontFamily: ff,
-              fontWeight: 600,
             }}
           >
-            <MapPin size={18} /> {t.mapCta}
+            <iframe
+              src="https://www.google.com/maps?q=ISKCON+Dhanaupur&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0, pointerEvents: 'none' }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title={t.venue}
+            />
+            {/* transparent overlay so the whole card is clickable */}
+            <div style={{ position: 'absolute', inset: 0 }} />
           </a>
 
           <div className="gold-line" />
