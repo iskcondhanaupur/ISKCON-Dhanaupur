@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion';
 import { CalendarDays, MapPin, Sparkles, Music4, Moon, UtensilsCrossed } from 'lucide-react';
 
+const MAP_LINK = 'https://maps.app.goo.gl/faUuMqCapKZ1wrFR8';
+
 interface RadhashtamiViewProps {
   lang: 'en' | 'hi';
   onBack: () => void;
@@ -21,7 +23,7 @@ const content = {
     fastDesc:
       'A fast will be observed until noon, after which preparations for the program will continue with Anna Prasad.',
     venue: 'Sri Sri Radha ShyamSundar Mandir, ISKCON Dhanaupur',
-    
+    mapCta: 'View on Map',
     highlightsTitle: 'Festival Highlights',
     scheduleTitle: 'Festival Schedule',
     highlights: [
@@ -32,8 +34,10 @@ const content = {
     ],
     schedule: [
       { time: 'Until 12:00 PM', event: 'Fasting observed by all devotees' },
-      
-      { time: '5:00 PM', event: 'Program begins' },
+      { time: '5:00 PM', event: 'kirtan' },
+      { time: '5:30 PM', event: 'Abhishek' },
+      { time: '6:30 PM', event: 'Katha' },
+      { time: '7:15 PM', event: 'Prasad Distribution' },
       { time: '7:30 PM', event: 'Program concludes' },
     ],
   },
@@ -48,11 +52,8 @@ const content = {
     fastLabel: 'दोपहर 12 बजे तक',
     fastDesc:
       'उपवास रखा जाएगा, जिसके पश्चात अन्न प्रसाद के साथ कार्यक्रम की तैयारियां आगे बढ़ाई जाएंगी।',
-   
-    
-    
-    
-    
+    venue: 'श्री श्री राधा श्यामसुंदर मंदिर, इस्कॉन धनऊपुर',
+    mapCta: 'मानचित्र पर देखें',
     highlightsTitle: 'उत्सव की झलकियाँ',
     scheduleTitle: 'उत्सव कार्यक्रम',
     highlights: [
@@ -63,8 +64,10 @@ const content = {
     ],
     schedule: [
       { time: 'दोपहर 12 बजे तक', event: 'सभी भक्तों द्वारा उपवास' },
-     
-      { time: 'सायं 5 बजे', event: 'कार्यक्रम प्रारंभ' },
+      { time: 'सायं 5:00 बजे', event: 'कीर्तन' },
+      { time: 'सायं 5:30 बजे', event: 'अभिषेक' },
+      { time: 'सायं 6:30 बजे', event: 'कथा' },
+      { time: 'सायं 7:15 बजे', event: 'प्रसाद वितरण' },
       { time: 'सायं 7:30 बजे', event: 'कार्यक्रम समाप्त' },
     ],
   },
@@ -104,24 +107,25 @@ export default function RadhashtamiView({ lang, onBack }: RadhashtamiViewProps) 
             {t.title}
           </h1>
           <div className="gold-line" style={{ maxWidth: 60, marginTop: 14 }} />
+
           {/* Hero image */}
-<div
-  style={{
-    width: '100%',
-    aspectRatio: '4 / 3',
-    borderRadius: 16,
-    overflow: 'hidden',
-    border: '1.5px solid var(--gold)',
-    margin: '20px 0',
-    background: 'var(--parchment)',
-  }}
->
-  <img
-    src="/radharani.jpeg"
-    alt={t.title}
-    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-  />
-</div>
+          <div
+            style={{
+              width: '100%',
+              aspectRatio: '4 / 3',
+              borderRadius: 16,
+              overflow: 'hidden',
+              border: '1.5px solid var(--gold)',
+              margin: '20px 0',
+              background: 'var(--parchment)',
+            }}
+          >
+            <img
+              src="/radharani.jpeg"
+              alt={t.title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </div>
 
           {/* Event info card */}
           <div
@@ -136,7 +140,7 @@ export default function RadhashtamiView({ lang, onBack }: RadhashtamiViewProps) 
             <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, color: 'var(--maroon)', fontFamily: ff }}>
               <CalendarDays size={16} /> {t.dateLabel}
             </span>
-            
+
             <p
               style={{
                 marginTop: 12,
@@ -220,34 +224,47 @@ export default function RadhashtamiView({ lang, onBack }: RadhashtamiViewProps) 
             ))}
           </div>
 
-          {/* Venue / contact */}
+          {/* Venue */}
           <div
             style={{
               display: 'grid',
               gap: 6,
-              marginBottom: 24,
+              marginBottom: 16,
               paddingTop: 18,
               borderTop: '1.5px solid var(--gold)',
               textAlign: 'center',
             }}
           >
-           
+            <p style={{ fontWeight: 700, color: 'var(--maroon)', fontFamily: ff }}>
+              {t.venue}
+            </p>
           </div>
 
-          <div className="gold-line" />
-
-          <p
+          {/* Map card — link stays hidden, only the card is shown */}
+          <a
+            href={MAP_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
-              textAlign: 'center',
-              marginTop: 24,
-              fontFamily: ff,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+              background: 'var(--parchment)',
+              border: '1.5px solid var(--gold)',
+              borderRadius: 14,
+              padding: '14px 20px',
+              margin: '0 0 24px',
+              textDecoration: 'none',
               color: 'var(--maroon)',
-              fontSize: '1.4rem',
+              fontFamily: ff,
               fontWeight: 600,
             }}
           >
-            
-          </p>
+            <MapPin size={18} /> {t.mapCta}
+          </a>
+
+          <div className="gold-line" />
         </motion.div>
       </div>
     </section>
