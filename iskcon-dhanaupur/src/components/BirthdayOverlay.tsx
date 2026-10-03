@@ -318,7 +318,7 @@ export default function BirthdayOverlay({
     };
   }, []);
 
-  const title = lang === 'hi' ? 'जन्मदिन की हार्दिक शुभकामनाएँ!' : 'Happy Birthday!';
+  const title = lang === 'hi' ? 'जन्मदिन की हार्दिक शुभकामनाएँ!' : 'जन्मदिन की हार्दिक शुभकामनाएँ!';
   let dl = 5.3;
   const next = () => `${(dl += 0.45).toFixed(2)}s`; // har agla card/bullet thoda baad me pop hoga
 
