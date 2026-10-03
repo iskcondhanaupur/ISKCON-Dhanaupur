@@ -105,7 +105,52 @@ const SoundIcon = ({ on }: { on: boolean }) => (
   </svg>
 );
 
-export default function BirthdayOverlay({
+// Pehle sirf ye message dikhega. Volume button par tap karte hi asli page khulega
+export default function BirthdayOverlay(props: Props) {
+  const [started, setStarted] = useState(false);
+
+  // gate dikhte waqt peeche ka page scroll na ho
+  useEffect(() => {
+    if (started) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [started]);
+
+  if (started) return <BirthdayOverlayInner {...props} />;
+
+  const hi = props.lang === 'hi';
+  return (
+    <div
+      id={props.id}
+      className="bdg-root"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Sound"
+      style={{ ['--hf' as string]: props.headFont, ['--bf' as string]: props.bodyFont }}
+    >
+      <style>{gateCss}</style>
+      <div className="bdg-box">
+        <p className="bdg-msg">
+          {hi
+            ? 'वॉल्यूम बटन पर टैप करें'
+            : 'Tap the volume button'}
+        </p>
+        <button className="bdg-btn" onClick={() => setStarted(true)} aria-label={hi ? 'वॉल्यूम' : 'Volume'}>
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M11 5 6 9H3v6h3l5 4V5z" />
+            <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+            <path d="M18.5 5.5a9 9 0 0 1 0 13" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function BirthdayOverlayInner({
   name,
   subtitle,
   blessing,
@@ -398,6 +443,17 @@ export default function BirthdayOverlay({
     </div>
   );
 }
+
+// "Volume button par tap karein" wale pehle screen ki styling
+const gateCss = `
+.bdg-root{--bm:var(--maroon,#4a1a4a);--bg:var(--gold,#b8860b);--bc:var(--cream,#fdf9f3);--bp:var(--parchment,#f6ecdb);
+  position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;color:var(--bm);font-family:var(--bf,Georgia,serif);
+  background:linear-gradient(180deg,var(--bc) 0%,var(--bp) 100%)}
+.bdg-box{max-width:420px;width:100%;text-align:center;padding:32px 24px;border:1.5px solid color-mix(in srgb,var(--bg) 60%,transparent);border-radius:20px;background:rgba(255,255,255,.72);box-shadow:0 6px 24px color-mix(in srgb,var(--bm) 10%,transparent)}
+.bdg-msg{font-family:var(--hf,Georgia,serif);font-size:clamp(18px,4.5vw,22px);line-height:1.6;margin:0 0 24px}
+.bdg-btn{width:88px;height:88px;border-radius:50%;border:2px solid var(--bg);background:var(--bm);color:var(--bg);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 14px color-mix(in srgb,var(--bm) 25%,transparent);animation:bdg-pulse 1.6s ease-in-out infinite}
+@keyframes bdg-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+`;
 
 const css = `
 /* Website ke colors (--maroon, --gold, --cream, --parchment) use hote hain; na mile to ye fallback */
