@@ -4,8 +4,61 @@ import { motion } from 'framer-motion'
 import { Flower2, Megaphone, User } from 'lucide-react'
 import { Lang } from '@/data/content'
 import PageBackground from '@/components/PageBackground'
+import BirthdayOverlay from '@/components/BirthdayOverlay' // NEW
 
 interface Props { t: any; lang: Lang; onBack: () => void }
+
+// ───────── NEW: Birthday settings (yahan apni details badlo) ─────────
+// 24 ghante ka window. IST (+05:30). Ye time khatam hote hi purana content wapas aa jayega.
+const BIRTHDAY_START = new Date('2026-10-03T09:00:00+05:30').getTime()
+const BIRTHDAY_END = new Date('2026-10-04T09:00:00+05:30').getTime()
+const BIRTHDAY_PHOTO = '/mataji.png' // public/ me photo rakh ke path likho, jaise '/mataji.png'. Khali = photo nahi dikhegi
+const BIRTHDAY_HI = {
+  name: 'श्रीमती माधुरी मोहिनी माताजी',
+  subtitle: '55 वाँ जन्मदिन',
+  blessing: 'हरे कृष्ण ',
+  intro: 'प्रिय भक्तों, आज हम हमारी प्रिय वरिष्ठ भक्तसेविका श्रीमती माधुरी मोहिनी माताजी का 55 वाँ जन्मदिन मना रहे हैं।',
+  sections: [
+    {
+      title: 'माताजी के बारे में',
+      items: [
+        'माताजी श्रीमान भास्कर दूबे प्रभुजी की धर्म पत्नी हैं, और सहपरिवार पिछले 20+ वर्षों से तन, मन और धन से इस्कॉन के आंदोलन में सहयोग प्रदान कर रही हैं। माताजी से हमे गुरु एवं भगवान की सेवा के प्रति समर्पण तथा सेवा करने के उत्साह से प्रेरणा लेनी चाहिए।',
+        'आपके द्वारा की गईं अनन्य सेवाएं जिनमे कुछ हैं विग्रह, उत्सव, किचन, प्रचार, किड्स फोरम, हाउस प्रोग्राम, एवं नगर संकीर्तन आदि अति प्रशंसनीय हैं, हम सब भक्तवृंद सराहना एवं आपका उत्साहवर्धन करते हैं।',
+        'आप जैसे वरिष्ठ, अनुभवी और शुद्ध भक्त का संग पाकर इस्कॉन धनऊपुर भक्तवृंद अत्यंत धन्य एवं सौभाग्यशाली अनुभव करता है, आपके द्वारा की गई विविध सेवाएं, अमूल्य शिक्षाएं एवं प्रेरणादायक आचरण हम सबके लिए मार्गदर्शक हैं।',
+      ],
+    },
+    {
+      title: 'प्रार्थनाएं',
+      items: [
+        'हम सभी श्री श्री राधा श्यामसुंदर भगवान जी के चरणों में प्रार्थना करते हैं की आपका इसी प्रकार श्रीभगवान के चरणों में आनंद प्राप्त करते रहें एवं हम सबका मार्गदर्शन एवं कल्याण करें।',
+      ],
+    },
+  ],
+}
+
+const BIRTHDAY_EN = {
+  name: 'Srimati Madhuri Mohini Mataji',
+  subtitle: '55th Birthday',
+  blessing: 'Hare Krishna ',
+  intro: "Dear devotees, today we are celebrating the 55th birthday of our dear senior devotee, Srimati Madhuri Mohini Mataji.",
+  sections: [
+    {
+      title: 'About Mataji',
+      items: [
+        "Mataji is the wife of Sriman Bhaskar Dubey Prabhuji, and together with her family she has been supporting ISKCON's movement with her body, mind and wealth for more than 20 years. From Mataji we should take inspiration, from her dedication to the service of Guru and Bhagavan and her enthusiasm in serving.",
+        "Her exceptional services, including Deity worship, festivals, kitchen, preaching, Kids Forum, house programs and nagar sankirtan, are highly commendable. All of us devotees appreciate her and offer her our encouragement.",
+        "ISKCON Dhanaupur's devotees feel immensely blessed and fortunate to have the association of a senior, experienced and pure devotee like you. Your varied services, invaluable teachings and inspiring conduct are a guiding light for all of us.",
+      ],
+    },
+    {
+      title: 'Prayers',
+      items: [
+        "We all pray at the lotus feet of Sri Sri Radha ShyamSundar that you may continue to relish bliss at the Lord's feet in this same way, and continue to guide us and bless us with welfare.",
+      ],
+    },
+  ],
+}
+// ─────────────────────────────────────────────────────────────────────
 
 // If `person.image` is not provided, use images placed in `public/` root
 const PUBLIC_PREACHER_IMAGES = [
@@ -71,6 +124,33 @@ export default function PreachersView({ t, lang, onBack }: Props) {
   const ff = isHi ? 'Tiro Devanagari Hindi, serif' : 'Cormorant Garamond, serif'
   const bodyFF = isHi ? ff : 'Crimson Text, serif'
 
+  // NEW: birthday window check (hooks hamesha early return se pehle)
+  const [showBirthday, setShowBirthday] = useState(false)
+  useEffect(() => {
+    const now = Date.now()
+    if (now >= BIRTHDAY_START && now < BIRTHDAY_END) {
+      setShowBirthday(true)
+      // page khula ho aur time khatam ho jaye to apne aap purana content aa jaye
+      const timer = setTimeout(() => setShowBirthday(false), BIRTHDAY_END - now)
+      return () => clearTimeout(timer)
+    }
+  }, [])
+
+  // NEW: 24 ghante ke liye sirf birthday content (full screen, header/footer/back button nahi)
+  if (showBirthday) {
+    return (
+      <BirthdayOverlay
+        id="birthday"
+        photo={BIRTHDAY_PHOTO || undefined}
+        lang={isHi ? 'hi' : 'en'}
+        headFont={ff}
+        bodyFont={bodyFF}
+        {...(isHi ? BIRTHDAY_HI : BIRTHDAY_EN)}
+      />
+    )
+  }
+
+  // ───────── Neeche ka sab kuch aapka purana code, bilkul same ─────────
   return (
     <section className="section" style={{ background: 'transparent' }}>
       <PageBackground/>
