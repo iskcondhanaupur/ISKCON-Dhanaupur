@@ -12,6 +12,7 @@ type Props = {
   id?: string;
   headFont?: string;
   bodyFont?: string;
+  soundSrc?: string; // crackers ki awaaz ki file (public/ me), jaise '/crackers.mp3'
 };
 type Balloon = { left: number; color: string; dur: number; delay: number; scale: number };
 type Star = { x: number; y: number; s: number; d: number };
@@ -29,6 +30,81 @@ const Lotus = () => (
   </svg>
 );
 
+type SFX = { launch: () => void; boom: () => void };
+
+// Rocket upar jaane ki seeti
+function whistle(ctx: AudioContext, out: AudioNode) {
+  const t = ctx.currentTime;
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.type = 'sine';
+  o.frequency.setValueAtTime(500, t);
+  o.frequency.exponentialRampToValueAtTime(1800, t + 0.7);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(0.05, t + 0.05);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.7);
+  o.connect(g).connect(out);
+  o.start(t);
+  o.stop(t + 0.75);
+}
+
+// Dhamaka + chhote crackles
+function boom(ctx: AudioContext, out: AudioNode, noise: AudioBuffer) {
+  const t = ctx.currentTime;
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.type = 'sine';
+  o.frequency.setValueAtTime(140, t);
+  o.frequency.exponentialRampToValueAtTime(40, t + 0.35);
+  g.gain.setValueAtTime(0.35, t);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+  o.connect(g).connect(out);
+  o.start(t);
+  o.stop(t + 0.45);
+
+  const n = ctx.createBufferSource();
+  n.buffer = noise;
+  const lp = ctx.createBiquadFilter();
+  lp.type = 'lowpass';
+  lp.frequency.setValueAtTime(2500, t);
+  lp.frequency.exponentialRampToValueAtTime(300, t + 0.5);
+  const ng = ctx.createGain();
+  ng.gain.setValueAtTime(0.25, t);
+  ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+  n.connect(lp).connect(ng).connect(out);
+  n.start(t);
+  n.stop(t + 0.55);
+
+  for (let i = 0; i < 8; i++) {
+    const tt = t + 0.1 + Math.random() * 0.6;
+    const c = ctx.createBufferSource();
+    c.buffer = noise;
+    const hp = ctx.createBiquadFilter();
+    hp.type = 'highpass';
+    hp.frequency.value = 3000;
+    const cg = ctx.createGain();
+    cg.gain.setValueAtTime(0.08, tt);
+    cg.gain.exponentialRampToValueAtTime(0.0001, tt + 0.04);
+    c.connect(hp).connect(cg).connect(out);
+    c.start(tt, Math.random() * 0.5);
+    c.stop(tt + 0.05);
+  }
+}
+
+const SoundIcon = ({ on }: { on: boolean }) => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M11 5 6 9H3v6h3l5 4V5z" />
+    {on ? (
+      <>
+        <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+        <path d="M18.5 5.5a9 9 0 0 1 0 13" />
+      </>
+    ) : (
+      <path d="m16 9 5 6m0-6-5 6" />
+    )}
+  </svg>
+);
+
 export default function BirthdayOverlay({
   name,
   subtitle,
@@ -40,11 +116,19 @@ export default function BirthdayOverlay({
   id,
   headFont,
   bodyFont,
+  soundSrc = '/crackers.mp3',
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const [balloons, setBalloons] = useState<Balloon[]>([]);
   const [stars, setStars] = useState<Star[]>([]);
+  const ctxRef = useRef<AudioContext | null>(null);
+  const masterRef = useRef<GainNode | null>(null);
+  const sfxRef = useRef<SFX>({ launch: () => {}, boom: () => {} });
+  const [soundOn, setSoundOn] = useState(true);
+  const [needsTap, setNeedsTap] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const fileOkRef = useRef(false); // asli awaaz ki file mil gayi to code wali awaaz band
 
   // random values sirf client pe (hydration mismatch se bachne ke liye)
   useEffect(() => {
@@ -76,6 +160,76 @@ export default function BirthdayOverlay({
     };
   }, []);
 
+  // Fireworks ki awaaz (Web Audio se browser me hi banti hai, koi audio file nahi => 0 KB)
+  useEffect(() => {
+    const AC = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AC) return;
+    const ctx: AudioContext = new AC();
+    const master = ctx.createGain();
+    master.gain.value = 0.8;
+    master.connect(ctx.destination);
+    const noise = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+    const d = noise.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    ctxRef.current = ctx;
+    masterRef.current = master;
+    sfxRef.current = {
+      launch: () => ctx.state === 'running' && !fileOkRef.current && whistle(ctx, master),
+      boom: () => ctx.state === 'running' && !fileOkRef.current && boom(ctx, master, noise),
+    } as SFX;
+    setNeedsTap(ctx.state !== 'running');
+
+    // Browser bina tap ke awaaz allow nahi karta: pehle tap/click/key par chalu ho jayegi
+    const unlock = () => { ctx.resume().then(() => setNeedsTap(false)).catch(() => {}); };
+    const evs = ['pointerdown', 'touchstart', 'keydown'];
+    evs.forEach((e) => window.addEventListener(e, unlock, { once: true }));
+    return () => {
+      evs.forEach((e) => window.removeEventListener(e, unlock));
+      sfxRef.current = { launch: () => {}, boom: () => {} };
+      ctx.close().catch(() => {});
+    };
+  }, []);
+
+  // Asli crackers ki awaaz (public/crackers.mp3). File na mile to upar wali code-wali awaaz chalti rahegi
+  useEffect(() => {
+    if (!soundSrc) return;
+    const a = new Audio(soundSrc);
+    a.loop = true;
+    a.volume = 0.7; // awaaz kam/zyada karne ke liye 0 se 1 ke beech
+    a.preload = 'auto';
+    audioRef.current = a;
+    const ok = () => { fileOkRef.current = true; };
+    a.addEventListener('canplay', ok);
+    a.play().then(() => setNeedsTap(false)).catch(() => {}); // blocked ho to pehle tap par chalegi
+    const unlock = () => { a.play().then(() => setNeedsTap(false)).catch(() => {}); };
+    const evs = ['pointerdown', 'touchstart', 'keydown'];
+    evs.forEach((e) => window.addEventListener(e, unlock, { once: true }));
+    return () => {
+      evs.forEach((e) => window.removeEventListener(e, unlock));
+      a.removeEventListener('canplay', ok);
+      a.pause();
+      a.src = '';
+      audioRef.current = null;
+      fileOkRef.current = false;
+    };
+  }, [soundSrc]);
+
+  useEffect(() => {
+    if (masterRef.current) masterRef.current.gain.value = soundOn ? 0.8 : 0;
+    if (audioRef.current) audioRef.current.muted = !soundOn;
+  }, [soundOn]);
+
+  const toggleSound = () => {
+    if (needsTap) {
+      ctxRef.current?.resume().catch(() => {});
+      audioRef.current?.play().catch(() => {});
+      setNeedsTap(false);
+      setSoundOn(true);
+      return;
+    }
+    setSoundOn((v) => !v);
+  };
+
   // Fireworks (canvas script)
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -95,14 +249,17 @@ export default function BirthdayOverlay({
     const rockets: Rocket[] = [];
     const sparks: Spark[] = [];
 
-    const launch = () =>
+    const launch = () => {
+      sfxRef.current.launch();
       rockets.push({
         x: w * (0.1 + Math.random() * 0.8),
         y: h,
         ty: h * (0.12 + Math.random() * 0.33),
         color: COLORS[Math.floor(Math.random() * COLORS.length)],
       });
+    };
     const explode = (r: Rocket) => {
+      sfxRef.current.boom();
       for (let i = 0; i < 80; i++) {
         const ang = (Math.PI * 2 * i) / 80;
         const sp = 1.5 + Math.random() * 3.5;
@@ -192,6 +349,11 @@ export default function BirthdayOverlay({
         />
       ))}
       <canvas ref={canvasRef} className="bdo-canvas" />
+
+      <button className={`bdo-sound${needsTap ? ' pulse' : ''}`} onClick={toggleSound} aria-label="Toggle sound">
+        <SoundIcon on={soundOn && !needsTap} />
+        {needsTap && <span>{lang === 'hi' ? 'ध्वनि के लिए टैप करें' : 'Tap for sound'}</span>}
+      </button>
 
       <div className="bdo-scroll">
         <div className="bdo-wrap">
@@ -294,6 +456,10 @@ const css = `
 .bdo-card ul{list-style:none;margin:0;padding:0}
 .bdo-item{position:relative;padding-left:26px;font-size:clamp(14.5px,3vw,17px);line-height:1.75;color:color-mix(in srgb,var(--bm) 88%,white);transform-origin:left center}
 .bdo-item::before{content:'✦';position:absolute;left:0;color:var(--bg)}
+
+.bdo-sound{position:absolute;top:14px;right:14px;z-index:5;display:flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;border:1.5px solid var(--bg);background:var(--bm);color:var(--bg);font-size:14px;font-family:inherit;cursor:pointer;box-shadow:0 4px 14px color-mix(in srgb,var(--bm) 25%,transparent)}
+.bdo-sound.pulse{animation:bdo-pulse 1.6s ease-in-out infinite}
+@keyframes bdo-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 
 @media (prefers-reduced-motion:reduce){.bdo-balloon,.bdo-ring,.bdo-bgstar,.bdo-photo{animation:none}}
 `;
