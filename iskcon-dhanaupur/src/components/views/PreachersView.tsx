@@ -37,23 +37,23 @@ const BIRTHDAY_HI = {
 }
 
 const BIRTHDAY_EN = {
-  name: 'Srimati Madhuri Mohini Mataji',
-  subtitle: '55th Birthday',
-  blessing: 'Hare Krishna ',
-  intro: "Dear devotees, today we are celebrating the 55th birthday of our dear senior devotee, Srimati Madhuri Mohini Mataji.",
+  name: 'श्रीमती माधुरी मोहिनी माताजी',
+  subtitle: '55 वाँ जन्मदिन',
+  blessing: 'हरे कृष्ण ',
+  intro: 'प्रिय भक्तों, आज हम हमारी प्रिय वरिष्ठ भक्तसेविका श्रीमती माधुरी मोहिनी माताजी का 55 वाँ जन्मदिन मना रहे हैं।',
   sections: [
     {
-      title: 'About Mataji',
+      title: 'माताजी के बारे में',
       items: [
-        "Mataji is the wife of Sriman Bhaskar Dubey Prabhuji, and together with her family she has been supporting ISKCON's movement with her body, mind and wealth for more than 20 years. From Mataji we should take inspiration, from her dedication to the service of Guru and Bhagavan and her enthusiasm in serving.",
-        "Her exceptional services, including Deity worship, festivals, kitchen, preaching, Kids Forum, house programs and nagar sankirtan, are highly commendable. All of us devotees appreciate her and offer her our encouragement.",
-        "ISKCON Dhanaupur's devotees feel immensely blessed and fortunate to have the association of a senior, experienced and pure devotee like you. Your varied services, invaluable teachings and inspiring conduct are a guiding light for all of us.",
+        'माताजी श्रीमान भास्कर दूबे प्रभुजी की धर्म पत्नी हैं, और सहपरिवार पिछले 20+ वर्षों से तन, मन और धन से इस्कॉन के आंदोलन में सहयोग प्रदान कर रही हैं। माताजी से हमे गुरु एवं भगवान की सेवा के प्रति समर्पण तथा सेवा करने के उत्साह से प्रेरणा लेनी चाहिए।',
+        'आपके द्वारा की गईं अनन्य सेवाएं जिनमे कुछ हैं विग्रह, उत्सव, किचन, प्रचार, किड्स फोरम, हाउस प्रोग्राम, एवं नगर संकीर्तन आदि अति प्रशंसनीय हैं, हम सब भक्तवृंद सराहना एवं आपका उत्साहवर्धन करते हैं।',
+        'आप जैसे वरिष्ठ, अनुभवी और शुद्ध भक्त का संग पाकर इस्कॉन धनऊपुर भक्तवृंद अत्यंत धन्य एवं सौभाग्यशाली अनुभव करता है, आपके द्वारा की गई विविध सेवाएं, अमूल्य शिक्षाएं एवं प्रेरणादायक आचरण हम सबके लिए मार्गदर्शक हैं।',
       ],
     },
     {
-      title: 'Prayers',
+      title: 'प्रार्थनाएं',
       items: [
-        "We all pray at the lotus feet of Sri Sri Radha ShyamSundar that you may continue to relish bliss at the Lord's feet in this same way, and continue to guide us and bless us with welfare.",
+        'हम सभी श्री श्री राधा श्यामसुंदर भगवान जी के चरणों में प्रार्थना करते हैं की आपका इसी प्रकार श्रीभगवान के चरणों में आनंद प्राप्त करते रहें एवं हम सबका मार्गदर्शन एवं कल्याण करें।',
       ],
     },
   ],
