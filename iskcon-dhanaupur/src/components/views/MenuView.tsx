@@ -187,6 +187,13 @@ const carouselImages = [
   { src: '/alter.jpg', alt: 'Temple Altar' },
 ]
 
+// Temporary switch: set to true to bring back the Upcoming Festivals grid on the home page.
+const SHOW_FESTIVALS = false
+
+// Picture for the Kartik card on the home page. Put the image in /public and set the path,
+// e.g. '/kartik-home.jpg'. While it is null, a placeholder is shown.
+const KARTIK_HOME_IMAGE: string | null = '/Damodara Krishna.jpg'
+
 export default function MenuView({ t, lang, onSelect }: Props) {
   const isHi = lang === 'hi'
   const ff = isHi ? 'Tiro Devanagari Hindi, serif' : 'Cormorant Garamond, serif'
@@ -401,9 +408,57 @@ export default function MenuView({ t, lang, onSelect }: Props) {
       </motion.div>
 
       {/* ------------------------------------------------------------------ */}
+      {/* Kartik Maas card — links directly to /kartik                       */}
+      {/* ------------------------------------------------------------------ */}
+      <div style={{ width: '100%', maxWidth: 560, marginBottom: 28 }}>
+        <Link
+          href="/kartik"
+          style={{
+            display: 'block', overflow: 'hidden',
+            borderRadius: 18, border: '1.5px solid var(--gold)', background: 'var(--maroon)',
+            color: 'var(--gold-lt)', textDecoration: 'none',
+            boxShadow: '0 8px 22px color-mix(in srgb, var(--maroon) 22%, transparent)',
+          }}
+        >
+          <div style={{
+            position: 'relative', width: '100%', aspectRatio: '16/17',
+            background: 'color-mix(in srgb, var(--gold) 18%, transparent)',
+            borderBottom: '1px solid var(--gold)',
+          }}>
+            {KARTIK_HOME_IMAGE ? (
+              <Image
+                src={KARTIK_HOME_IMAGE}
+                alt={isHi ? 'कार्तिक मास' : 'Kartik Maas'}
+                fill
+                sizes="(max-width: 600px) 100vw, 560px"
+                style={{ objectFit: 'cover' }}
+              />
+            ) : (
+              <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Flame size={38} color="var(--gold)" fill="var(--gold)" strokeWidth={0} />
+              </div>
+            )}
+          </div>
+          <div style={{ padding: '16px 18px 18px', display: 'flex', alignItems: 'center', gap: 14 }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontFamily: ff, fontWeight: 700, fontSize: isHi ? 19 : 21, lineHeight: 1.25 }}>
+                {isHi ? 'कार्तिक मास – श्री दामोदर मास' : 'Kartik Maas – Sri Damodara Month'}
+              </div>
+              <div style={{ fontFamily: fb, fontSize: 14.5, lineHeight: 1.55, marginTop: 5, opacity: 0.9 }}>
+                {isHi
+                  ? 'दामोदर लीला, व्रत नियम, दामोदराष्टकम्, दीपदान और कार्तिक वृंदावन धाम यात्रा'
+                  : 'Damodara lila, vrat niyam, Damodarashtakam, deepdan and the Kartik Vrindavan Dham Yatra'}
+              </div>
+            </div>
+            <ArrowRight size={20} color="var(--gold)" style={{ flexShrink: 0 }} />
+          </div>
+        </Link>
+      </div>
+
+      {/* ------------------------------------------------------------------ */}
       {/* Upcoming Sacred Festivals                                          */}
       {/* ------------------------------------------------------------------ */}
-      {FESTIVALS.length > 0 && (
+      {SHOW_FESTIVALS && FESTIVALS.length > 0 && (
         <div style={{ width: '100%', maxWidth: 980, marginBottom: 32 }}>
           <div style={{ textAlign: 'center', marginBottom: 18 }}>
             {/* Blinking pill — this is the attention-grabbing element, placed above the cards */}
