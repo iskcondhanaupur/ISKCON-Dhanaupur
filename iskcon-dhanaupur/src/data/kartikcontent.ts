@@ -61,7 +61,7 @@ export const KARTIK = {
         },
       },
       {
-        head: { en: 'Liberation of Nalakuvara and Manigriva', hi: 'नलकूबर और मणिग्रीव का उद्धार' },
+        head: { en: 'Liberation of Nalakuvera and Manigriva', hi: 'नलकुबेर और मणिग्रीव का उद्धार' },
         body: {
           en: 'Still bound to the mortar, Krishna crawled between two arjuna trees; the mortar got stuck and the trees fell. From them appeared Nalakuvara and Manigriva, sons of Kuvera, who had been cursed by Narada Muni to become trees. Freed, they offered prayers to Krishna and asked only for devotion at His lotus feet (Srimad Bhagavatam 10.10). The Damodarashtakam echoes this prayer: not liberation, but prema-bhakti.',
           hi: 'ऊखल से बँधे हुए ही कृष्ण दो अर्जुन वृक्षों के बीच से निकले; ऊखल अटक गया और दोनों वृक्ष गिर पड़े। उनमें से कुबेर के पुत्र नलकूबर और मणिग्रीव प्रकट हुए, जिन्हें नारद मुनि के शाप से वृक्ष बनना पड़ा था। मुक्त होकर उन्होंने कृष्ण की स्तुति की और केवल उनके चरणकमलों की भक्ति माँगी (श्रीमद्भागवतम् 10.10)। दामोदराष्टकम् की प्रार्थना भी यही है: मोक्ष नहीं, प्रेम-भक्ति।',
