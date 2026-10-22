@@ -1,24 +1,19 @@
-// Kartik Maas page content — bilingual (en / hi).
-// IMPORTANT: Before publishing, get katha, vrat niyam, deepdan vidhi and the
-// Damodarashtakam meanings reviewed by the temple's senior devotees, and
-// cross-check the Sanskrit with Vedabase. Verse meanings below are short
-// paraphrases (not BBT's translation) — replace with BBT-approved text if the
-// temple prefers it.
+
 
 export type Bi = { en: string; hi: string }
 
 export const KARTIK = {
-  // Put real images in /public and set the paths here. null => placeholder shows.
-  heroImage: '/kartik.jpg' as string | null,   // e.g. '/kartik-glories.jpg'
-  yatraPoster: '/Vraja.jpeg' as string | null, // e.g. '/kartik-yatra.jpg'
+  
+  heroImage: '/kartik.jpg' as string | null,   
+  yatraPoster: '/Vraja.jpeg' as string | null, 
 
   contact: {
-    phone: '8127443777',      // confirm
-    whatsapp: '918127443777', // confirm (country code + number)
+    phone: '8127443777',      
+    whatsapp: '918127443777',
   },
 
   hero: {
-    label: { en: 'Kartik Maas 2026', hi: 'कार्तिक मास 2026' },
+    
     title: { en: 'Kartik Maas', hi: 'कार्तिक मास' },
     subtitle: { en: 'Sri Damodara Month', hi: 'श्री दामोदर मास' },
     description: {
@@ -38,10 +33,10 @@ export const KARTIK = {
 
   yatra: {
     title: { en: 'Kartik Special Vrindavan Dham Yatra', hi: 'कार्तिक विशेष वृंदावन धाम यात्रा' },
-    dates: { en: '1 – 5 November 2026', hi: '1 – 5 नवंबर 2026' }, // placeholder — confirm
+    dates: { en: '1 – 5 November 2026', hi: '1 – 5 नवंबर 2026' }, 
     description: {
       en: 'Spend Kartik in the holy dham. Join ISKCON Dhanaupur for a sacred journey to Sri Vrindavan Dham.',
-      hi: 'कार्तिक मास पावन धाम में बिताएँ। इस्कॉन धनौपुर के साथ श्री वृंदावन धाम की पवित्र यात्रा में सम्मिलित हों।',
+      hi: 'कार्तिक मास पावन धाम में बिताएँ। इस्कॉन धनऊपुर के साथ श्री वृंदावन धाम की पवित्र यात्रा में सम्मिलित हों।',
     },
     posterPlaceholder: { en: 'Yatra poster', hi: 'यात्रा पोस्टर' },
     cta: { en: 'Contact Temple to Register', hi: 'पंजीकरण हेतु मंदिर से संपर्क करें' },
@@ -97,10 +92,7 @@ export const KARTIK = {
       { en: 'Serve the temple and devotees: seva, book distribution and charity are especially dear to the Lord.', hi: 'मंदिर और भक्तों की सेवा करें: सेवा, ग्रंथ वितरण और दान भगवान को विशेष प्रिय हैं।' },
     ],
     // TODO(temple): add any food restrictions the temple follows in Kartik (e.g. urad dal) only after confirmation.
-    note: {
-      en: 'For any special vow or diet followed at the temple, please contact the temple.',
-      hi: 'मंदिर में पालन किए जाने वाले विशेष व्रत या आहार नियमों के लिए कृपया मंदिर से संपर्क करें।',
-    },
+    
   },
 
   damodarashtakam: {
@@ -111,8 +103,9 @@ export const KARTIK = {
     },
     verses: [
       {
-        sa: 'नमामीश्वरं सच्चिदानन्दरूपं\nलसत्कुण्डलं गोकुले भ्राजमानम्।\nयशोदाभियोलूखलाद्धावमानं\nपरामृष्टमत्यं ततो द्रुत्य गोप्या॥',
-        tr: 'namāmīśvaraṁ sac-cid-ānanda-rūpaṁ\nlasat-kuṇḍalaṁ gokule bhrājamānam\nyaśodā-bhiyolūkhalād dhāvamānaṁ\nparāmṛṣṭam atyaṁ tato drutya gopyā',
+        // FIXED: last line was "परामृष्टमत्यं ततो द्रुत्य गोप्या" — correct reading is "परामृष्टमत्यन्ततो द्रुत्य गोप्या"
+        sa: 'नमामीश्वरं सच्चिदानन्दरूपं\nलसत्कुण्डलं गोकुले भ्राजमानम्।\nयशोदाभियोलूखलाद्धावमानं\nपरामृष्टमत्यन्ततो द्रुत्य गोप्या॥',
+        tr: 'namāmīśvaraṁ sac-cid-ānanda-rūpaṁ\nlasat-kuṇḍalaṁ gokule bhrājamānam\nyaśodā-bhiyolūkhalād dhāvamānaṁ\nparāmṛṣṭam atyantato drutya gopyā',
         mean: {
           en: 'I bow to Lord Damodara, whose form is eternal, full of knowledge and bliss, whose earrings swing, who shines in Gokula, who ran in fear from the mortar and from mother Yashoda, but was caught by her running swiftly behind Him.',
           hi: 'मैं उन भगवान दामोदर को नमन करता हूँ, जिनका रूप सत्-चित्-आनंदमय है, जिनके कुंडल झूल रहे हैं, जो गोकुल में सुशोभित हैं, जो माता यशोदा के भय से ऊखल से कूदकर भागे, पर उनके द्वारा तेज़ दौड़कर पकड़ लिए गए।',
@@ -199,12 +192,13 @@ export const KARTIK = {
       { part: { en: 'Face', hi: 'मुख' }, count: 3 },
       { part: { en: 'Whole body', hi: 'सम्पूर्ण विग्रह' }, count: 7 },
     ],
-    circlesNote: {
-      en: 'If you are unsure of the order, offering 7 circles around the whole form of the Lord is also considered complete. Practices may vary slightly by temple.',
-      hi: 'यदि क्रम याद न हो, तो भगवान के सम्पूर्ण विग्रह पर 7 बार दीप घुमाना भी पूर्ण माना जाता है। मंदिर के अनुसार पद्धति में थोड़ा अंतर हो सकता है।',
-    },
+
     circlesUnit: { en: 'circles', hi: 'बार' },
-    cta: { en: 'Ask the temple about deepdan timings', hi: 'दीपदान के समय हेतु मंदिर से पूछें' },
+    circlesNote: {
+      en: 'These are the standard arati-style circles used while offering the lamp to Lord Damodara.',
+      hi: 'ये भगवान दामोदर को दीप अर्पित करते समय उपयोग की जाने वाली आरती-शैली की मानक परिक्रमा-गिनती हैं।',
+    },
+    cta: { en: 'Deepdan Timings: 8:00 AM & 7:00 PM', hi: 'दीपदान का समय: सुबह 8 बजे एवं शाम 7 बजे' },
     waText: 'Hare Krishna! Please share the Kartik deepdan timings at the temple.',
   },
 

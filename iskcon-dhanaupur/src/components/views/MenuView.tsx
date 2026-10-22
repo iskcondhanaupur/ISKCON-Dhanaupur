@@ -66,10 +66,7 @@ const CATEGORIES: Category[] = [
   {
     id: 'outreach', label: 'Outreach', labelHi: 'आउटरीच', icon: Users,
     items: [
-      {
-        id: 'outreach-visits', label: 'Visits', labelHi: 'यात्राएं',
-       
-      },
+      { id: 'outreach-visits', label: 'Visits', labelHi: 'यात्राएं' },
       { id: 'outreach-programs', label: 'Jail & School Programs', labelHi: 'जेल एवं विद्यालय कार्यक्रम', comingSoon: true },
     ],
   },
@@ -110,7 +107,7 @@ type FestivalHighlight = {
   dateLabelHi: string  // e.g. '15 अग'
   image: string
   imageFit?: 'cover' | 'contain'
-  imagePosition?: string 
+  imagePosition?: string
   description: string
   descriptionHi: string
   href: string
@@ -132,7 +129,7 @@ const FESTIVALS: FestivalHighlight[] = [
     title: 'Srila Prabhupada Appearance Day', titleHi: 'श्रील प्रभुपाद आविर्भाव दिवस',
     dateLabel: '05 Sept', dateLabelHi: '05 सित',
     image: '/Sp.jpeg',
-     imagePosition: 'center 20%',
+    imagePosition: 'center 20%',
     description: 'Guru puja, glorification and special bhoga offerings.',
     descriptionHi: 'गुरु पूजा, गुणगान, बुक वितरण एवं विशेष भोग अर्पण।',
     href: '/srila-prabhupada-appearance',
@@ -190,10 +187,6 @@ const carouselImages = [
 // Temporary switch: set to true to bring back the Upcoming Festivals grid on the home page.
 const SHOW_FESTIVALS = false
 
-// Picture for the Kartik card on the home page. Put the image in /public and set the path,
-// e.g. '/kartik-home.jpg'. While it is null, a placeholder is shown.
-const KARTIK_HOME_IMAGE: string | null = '/Damodara Krishna.jpg'
-
 export default function MenuView({ t, lang, onSelect }: Props) {
   const isHi = lang === 'hi'
   const ff = isHi ? 'Tiro Devanagari Hindi, serif' : 'Cormorant Garamond, serif'
@@ -225,11 +218,11 @@ export default function MenuView({ t, lang, onSelect }: Props) {
   // finish, then silently (no transition) jump back to the real first slide.
   useEffect(() => {
     if (activeIndex === trackCount - 1) {
-      const t = setTimeout(() => {
+      const timeout = setTimeout(() => {
         setTransitionEnabled(false)
         setActiveIndex(0)
       }, 620)
-      return () => clearTimeout(t)
+      return () => clearTimeout(timeout)
     }
   }, [activeIndex, trackCount])
 
@@ -238,8 +231,7 @@ export default function MenuView({ t, lang, onSelect }: Props) {
   useEffect(() => {
     if (!transitionEnabled) {
       const raf1 = requestAnimationFrame(() => {
-        const raf2 = requestAnimationFrame(() => setTransitionEnabled(true))
-        return () => cancelAnimationFrame(raf2)
+        requestAnimationFrame(() => setTransitionEnabled(true))
       })
       return () => cancelAnimationFrame(raf1)
     }
@@ -294,6 +286,63 @@ export default function MenuView({ t, lang, onSelect }: Props) {
           background: var(--gold);
           width: 22px;
           border-radius: 5px;
+        }
+
+                /* Kartik special card */
+        .kartik-card {
+          position: relative;
+          display: block;
+          overflow: hidden;
+          text-align: center;
+          padding: 16px 18px 16px;
+          border-radius: 22px;
+          border: 1.5px solid var(--gold);
+          text-decoration: none;
+          color: var(--gold-lt);
+          background:
+            radial-gradient(circle at 50% -10%, color-mix(in srgb, var(--gold) 38%, transparent) 0%, transparent 60%),
+            linear-gradient(160deg, var(--maroon) 0%, color-mix(in srgb, var(--maroon) 75%, #000) 100%);
+          box-shadow: 0 10px 26px color-mix(in srgb, var(--maroon) 28%, transparent);
+          transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .kartik-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 16px 34px color-mix(in srgb, var(--maroon) 36%, transparent);
+        }
+        .kartik-card::before {
+          content: '';
+          position: absolute;
+          inset: 5px;
+          border-radius: 17px;
+          border: 1px dashed color-mix(in srgb, var(--gold) 55%, transparent);
+          pointer-events: none;
+        }
+        .kartik-shine {
+          position: absolute;
+          top: 0;
+          left: -60%;
+          width: 40%;
+          height: 100%;
+          background: linear-gradient(100deg, transparent, rgba(255,255,255,0.18), transparent);
+          transform: skewX(-20deg);
+          animation: kartik-shine 5s ease-in-out infinite;
+          pointer-events: none;
+        }
+        .kartik-flame {
+          display: inline-flex;
+          transform-origin: bottom center;
+          animation: kartik-flicker 1.6s ease-in-out infinite;
+        }
+        @keyframes kartik-shine {
+          0% { left: -60%; }
+          55%, 100% { left: 130%; }
+        }
+        @keyframes kartik-flicker {
+          0%, 100% { transform: scale(1) rotate(-3deg); opacity: 1; }
+          50% { transform: scale(1.18) rotate(3deg); opacity: 0.7; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .kartik-shine, .kartik-flame { animation: none; }
         }
 
         /* Festival highlights */
@@ -363,28 +412,7 @@ export default function MenuView({ t, lang, onSelect }: Props) {
           ))}
         </div>
 
-        {/* 60th anniversary button */}
-        <button
-          onClick={() => onSelect('anniversary60')}
-          style={{
-            display: 'inline-block',
-            margin: '0 auto 22px',
-            padding: '10px 22px',
-            borderRadius: 999,
-            border: '1.5px solid var(--gold)',
-            background: 'var(--maroon)',
-            color: 'var(--gold-lt)',
-            fontFamily: ff,
-            fontWeight: 700,
-            fontSize: 15,
-            letterSpacing: '0.02em',
-            cursor: 'pointer',
-          }}
-        >
-          {isHi ? 'इस्कॉन के 60 वर्षों का उत्सव' : 'Celebrating 60 Years of ISKCON'}
-        </button>
-
-        {/* New hero text block */}
+        {/* Hero text block (CTA line merged into the description) */}
         <div style={{ marginBottom: 22 }}>
           <h2 style={{
             fontSize: 'clamp(18px, 3vw, 23px)', fontWeight: 700, color: 'var(--maroon)',
@@ -392,65 +420,63 @@ export default function MenuView({ t, lang, onSelect }: Props) {
           }}>
             {t.hero.templeName}
           </h2>
-          <p style={{ fontSize: 15, color: 'var(--maroon-lt)', fontFamily: fb, lineHeight: 1.75, marginBottom: 14 }}>
-            {t.hero.description}
-          </p>
-          <p style={{ fontSize: 15.5, fontWeight: 600, color: 'var(--gold)', fontFamily: fb }}>
-            {t.hero.cta}
+          <p style={{ fontSize: 15, color: 'var(--maroon-lt)', fontFamily: fb, lineHeight: 1.75 }}>
+            {t.hero.description}{' '}
+            <span style={{ fontWeight: 600 }}>{t.hero.cta}</span>
           </p>
         </div>
 
-        <h1 style={{ fontSize: 'clamp(20px, 3.5vw, 30px)', fontWeight: 700, color: 'var(--maroon)', marginBottom: 6, fontFamily: ff, letterSpacing: '0.02em' }}>
+        <h1 style={{ fontSize: 'clamp(20px, 3.5vw, 30px)', fontWeight: 700, color: 'var(--maroon)', fontFamily: ff, letterSpacing: '0.02em' }}>
           {t.menuTitle}
         </h1>
-        <p style={{ fontSize: 15, color: 'var(--gold)', fontFamily: fb, letterSpacing: '0.04em' }}>{t.menuSubtitle}</p>
         <div style={{ width: 60, height: 1.5, background: 'linear-gradient(to right, transparent, var(--gold), transparent)', margin: '14px auto 0' }} />
       </motion.div>
 
       {/* ------------------------------------------------------------------ */}
-      {/* Kartik Maas card — links directly to /kartik                       */}
+      {/* Kartik Maas — special text-only highlight, links to /kartik        */}
       {/* ------------------------------------------------------------------ */}
-      <div style={{ width: '100%', maxWidth: 560, marginBottom: 28 }}>
-        <Link
-          href="/kartik"
-          style={{
-            display: 'block', overflow: 'hidden',
-            borderRadius: 18, border: '1.5px solid var(--gold)', background: 'var(--maroon)',
-            color: 'var(--gold-lt)', textDecoration: 'none',
-            boxShadow: '0 8px 22px color-mix(in srgb, var(--maroon) 22%, transparent)',
-          }}
-        >
+      <div style={{ width: '100%', maxWidth: 480, marginBottom: 12 }}>
+        <Link href="/kartik" className="kartik-card">
+          <span className="kartik-shine" />
+
+          {/* tiny label */}
           <div style={{
-            position: 'relative', width: '100%', aspectRatio: '16/17',
-            background: 'color-mix(in srgb, var(--gold) 18%, transparent)',
-            borderBottom: '1px solid var(--gold)',
+            display: 'inline-block', fontFamily: fb, fontSize: 10.5, fontWeight: 700,
+            letterSpacing: '0.14em', textTransform: 'uppercase',
+            color: 'var(--maroon)', background: 'var(--gold)',
+            padding: '3px 12px', borderRadius: 999,
           }}>
-            {KARTIK_HOME_IMAGE ? (
-              <Image
-                src={KARTIK_HOME_IMAGE}
-                alt={isHi ? 'कार्तिक मास' : 'Kartik Maas'}
-                fill
-                sizes="(max-width: 600px) 100vw, 560px"
-                style={{ objectFit: 'cover' }}
-              />
-            ) : (
-              <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Flame size={38} color="var(--gold)" fill="var(--gold)" strokeWidth={0} />
-              </div>
-            )}
+            {isHi ? '✦ मास विशेष ✦' : '✦ Month Special ✦'}
           </div>
-          <div style={{ padding: '16px 18px 18px', display: 'flex', alignItems: 'center', gap: 14 }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontFamily: ff, fontWeight: 700, fontSize: isHi ? 19 : 21, lineHeight: 1.25 }}>
-                {isHi ? 'कार्तिक मास – श्री दामोदर मास' : 'Kartik Maas – Sri Damodara Month'}
-              </div>
-              <div style={{ fontFamily: fb, fontSize: 14.5, lineHeight: 1.55, marginTop: 5, opacity: 0.9 }}>
-                {isHi
-                  ? 'दामोदर लीला, व्रत नियम, दामोदराष्टकम्, दीपदान और कार्तिक वृंदावन धाम यात्रा'
-                  : 'Damodara lila, vrat niyam, Damodarashtakam, deepdan and the Kartik Vrindavan Dham Yatra'}
-              </div>
-            </div>
-            <ArrowRight size={20} color="var(--gold)" style={{ flexShrink: 0 }} />
+
+          {/* row of flickering diyas */}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end', gap: 12, margin: '12px 0 6px' }}>
+            {[12, 17, 24, 17, 12].map((size, i) => (
+              <span key={i} className="kartik-flame" style={{ animationDelay: `${i * 0.25}s` }}>
+                <Flame size={size} color="var(--gold)" fill="var(--gold)" strokeWidth={0} />
+              </span>
+            ))}
+          </div>
+
+          <div style={{ fontFamily: ff, fontWeight: 700, fontSize: isHi ? 22 : 23, lineHeight: 1.25, color: 'var(--gold-lt)' }}>
+            {isHi ? 'कार्तिक मास' : 'Kartik Maas'}
+          </div>
+          <div style={{ fontFamily: ff, fontWeight: 600, fontSize: isHi ? 15.5 : 16, marginTop: 2, color: 'var(--gold)', letterSpacing: '0.03em' }}>
+            {isHi ? '— श्री दामोदर मास —' : '— Sri Damodara Month —'}
+          </div>
+          <div style={{ fontFamily: fb, fontSize: 14, marginTop: 8, opacity: 0.92 }}>
+            {isHi ? 'दीप जलाइए, दामोदर को रिझाइए' : 'Light a lamp, win Damodara\'s heart'}
+          </div>
+
+          {/* CTA pill */}
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 12,
+            padding: '7px 18px', borderRadius: 999,
+            background: 'var(--gold)', color: 'var(--maroon)',
+            fontFamily: fb, fontWeight: 700, fontSize: 13.5, letterSpacing: '0.03em',
+          }}>
+            {isHi ? 'कार्तिक मास के बारे में जानें' : 'Know about kartik month'}
+            <ArrowRight size={15} />
           </div>
         </Link>
       </div>
@@ -488,8 +514,6 @@ export default function MenuView({ t, lang, onSelect }: Props) {
               </motion.span>
               {isHi ? 'आगामी उत्सव' : 'Upcoming Festivals'}
             </motion.button>
-
-            
           </div>
 
           <div className="fh-track">
@@ -514,17 +538,17 @@ export default function MenuView({ t, lang, onSelect }: Props) {
                 >
                   <Link href={f.href} style={{ display: 'block', color: 'inherit' }}>
                     <div style={{
-  position: 'relative', width: '100%', aspectRatio: '4/3', overflow: 'hidden',
-  background: f.imageFit === 'contain' ? 'var(--maroon)' : undefined,
-}}>
-  <Image
-    src={f.image}
-    alt={isHi ? f.titleHi : f.title}
-    fill
-    sizes="(max-width: 640px) 70vw, 230px"
-    className="fh-image"
-    style={{ objectFit: f.imageFit || 'cover',  objectPosition: f.imagePosition || 'center', transition: 'transform 0.5s ease' }}
-  />
+                      position: 'relative', width: '100%', aspectRatio: '4/3', overflow: 'hidden',
+                      background: f.imageFit === 'contain' ? 'var(--maroon)' : undefined,
+                    }}>
+                      <Image
+                        src={f.image}
+                        alt={isHi ? f.titleHi : f.title}
+                        fill
+                        sizes="(max-width: 640px) 70vw, 230px"
+                        className="fh-image"
+                        style={{ objectFit: f.imageFit || 'cover', objectPosition: f.imagePosition || 'center', transition: 'transform 0.5s ease' }}
+                      />
                       <div style={{
                         position: 'absolute', inset: 0,
                         background: 'linear-gradient(to top, color-mix(in srgb, var(--maroon) 65%, transparent) 0%, transparent 45%)',
