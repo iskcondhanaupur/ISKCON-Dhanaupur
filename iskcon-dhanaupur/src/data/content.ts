@@ -9,7 +9,7 @@ export const content = {
     langEn: 'English',
     langHi: 'हिन्दी',
 
-    menuTitle: 'How may we serve you?',
+    menuTitle: 'Let us serve you - Get to know more about the Temple!',
     menuSubtitle: 'Sri Sri Radha ShyamSundar Mandir, Dhanaupur',
 
     hero: {
@@ -542,7 +542,7 @@ Scope of services: `
     langEn: 'English',
     langHi: 'हिन्दी',
 
-    menuTitle: 'हम आपकी सेवा कैसे कर सकते हैं?',
+    menuTitle: 'हमें सेवा का मौका दें - मंदिर के बारे में और जानें!',
     menuSubtitle: 'श्री श्री राधा श्यामसुंदर मंदिर, धनऊपुर',
 
     hero: {

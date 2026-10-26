@@ -10,7 +10,7 @@ export default function LanguageView({ onSelect }: Props) {
   return (
     <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 24px', background: '#fbf7f0', overflow: 'hidden' }}>
 
-      {/* Scoped styles — unique class names to ensure isolated rendering */}
+      
       <style>{`
         .idw-corner-wave-tl {
           position: absolute;

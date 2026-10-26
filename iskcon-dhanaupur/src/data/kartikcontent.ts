@@ -4,7 +4,7 @@ export type Bi = { en: string; hi: string }
 
 export const KARTIK = {
   
-  heroImage: '/kartik.jpg' as string | null,   
+  heroImage: '/kartik.png' as string | null,   
   yatraPoster: '/Vraja.jpeg' as string | null, 
 
   contact: {
@@ -173,8 +173,8 @@ export const KARTIK = {
   deepdan: {
     title: { en: 'How to Offer a Deepdan', hi: 'दीपदान करने का तरीका' },
     intro: {
-      en: 'Offer a ghee lamp to Lord Damodara daily during Kartik, in the temple or before the altar or picture at home. The evening is the usual time, or the time fixed by your temple.',
-      hi: 'कार्तिक मास में प्रतिदिन भगवान दामोदर को घी का दीप अर्पित करें, मंदिर में या घर पर वेदी/चित्र के सामने। सामान्यतः संध्या का समय उत्तम है, या वह समय जो आपके मंदिर ने निर्धारित किया हो।',
+      en: 'Offer a ghee lamp to Lord Damodara daily during Kartik, in the temple or before the altar or picture at home. ',
+      hi: 'कार्तिक मास में प्रतिदिन  मंदिर में या घर पर भगवान दामोदर को घी का दीप अर्पित करें।',
     },
     steps: [
       { title: { en: 'Prepare yourself', hi: 'स्वयं को तैयार करें' }, body: { en: 'Bathe, wear clean clothes and wash your hands.', hi: 'स्नान करें, स्वच्छ वस्त्र पहनें और हाथ धोएँ।' } },

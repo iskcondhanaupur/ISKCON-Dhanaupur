@@ -9,16 +9,24 @@ import { KARTIK, Bi } from '@/data/kartikcontent'
 
 interface Props { lang: Lang; onBack: () => void }
 
-// public/images/Damodara Krishna.jpg  (default view, koi tab open na ho tab dikhegi)
-const BG_IMAGE = encodeURI('/Damodara Krishna.jpg')
-
 const CARD_BG = 'var(--parchment)'
+
+// Hero ke "Damodar Maas" subtitle ke neeche wali line (heading + text), Hindi & English
+const HERO_LINE = {
+  title: { hi: 'मास एक लाभ अनेक', en: 'One Month, Many Blessings' } as Bi,
+  text: {
+    hi: 'इस अतिपावन कार्तिक मास में अधिकाधिक नाम जप करें, तपस्या करें, धाम वास करें, दान करें, शुद्ध भक्तों का संग करें और करोड़ों गुना अधिक फल प्राप्त करें',
+    en: 'In this most sacred month of Kartik, chant the holy names as much as possible, perform austerities, reside in the holy dham, give in charity, associate with pure devotees, and gain results millions of times greater.',
+  } as Bi,
+}
 
 const waLink = (text: string) =>
   `https://wa.me/${KARTIK.contact.whatsapp}?text=${encodeURIComponent(text)}`
 
 // Shows the real image if a path is set, otherwise a labelled placeholder.
-function Slot({ src, alt, label, ratio, ff }: { src: string | null; alt: string; label: string; ratio: string; ff: string }) {
+// fit="contain": poori image dikhti hai (crop nahi), aur frame ke khali kone
+// usi image ke blur se bhar jaate hain, isliye frame hamesha filled dikhta hai.
+function Slot({ src, alt, label, ratio, ff, fit = 'cover' }: { src: string | null; alt: string; label: string; ratio: string; ff: string; fit?: 'cover' | 'contain' }) {
   return (
     <div
       style={{
@@ -29,7 +37,19 @@ function Slot({ src, alt, label, ratio, ff }: { src: string | null; alt: string;
       }}
     >
       {src ? (
-        <Image src={src} alt={alt} fill sizes="(max-width: 700px) 100vw, 640px" style={{ objectFit: 'cover' }} />
+        <>
+          {fit === 'contain' && (
+            <Image
+              src={src} alt="" aria-hidden fill sizes="(max-width: 700px) 100vw, 640px"
+              style={{ objectFit: 'cover', filter: 'blur(22px) brightness(0.9)', transform: 'scale(1.15)' }}
+            />
+          )}
+          <Image
+            src={src} alt={alt} fill sizes="(max-width: 700px) 100vw, 860px"
+            priority={fit === 'contain'}
+            style={{ objectFit: fit }}
+          />
+        </>
       ) : (
         <div style={{
           position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column',
@@ -51,8 +71,8 @@ export default function KartikView({ lang, onBack }: Props) {
   const reduce = useReducedMotion()
   const L = (b: Bi) => (isHi ? b.hi : b.en)
 
-  // null = koi tab open nahi (default Damodara Krishna image dikhegi)
-  const [active, setActive] = useState<string | null>(null)
+  // Pehla tab hamesha default open/pressed rehta hai
+  const [active, setActive] = useState<string>(KARTIK.nav[0].id)
 
   const h2: React.CSSProperties = {
     fontFamily: ff, fontWeight: 700, color: 'var(--maroon)',
@@ -75,18 +95,35 @@ export default function KartikView({ lang, onBack }: Props) {
       <PageBackground />
       <style jsx global>{`
         .kt-wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
-        .kt-chips { display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 8px; scrollbar-width: none; }
-        .kt-chips::-webkit-scrollbar { display: none; }
-        .kt-chip {
-          flex-shrink: 0; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--gold);
-          color: var(--maroon); background: var(--parchment); font-size: 14px; font-weight: 600;
-          transition: background .2s, color .2s;
+
+        /* Tabs: PC pe wrap, mobile pe horizontal scroll */
+        .kt-chips { display: flex; flex-wrap: wrap; gap: 10px; padding: 4px 2px 10px; }
+        @media (max-width: 719px) {
+          .kt-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+          .kt-chips::-webkit-scrollbar { display: none; }
         }
-        .kt-chip:hover { background: var(--gold-pale); }
-        .kt-chip:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-        .kt-chip[aria-selected="true"] { background: var(--maroon); color: var(--gold-lt); }
+        .kt-chip {
+          flex-shrink: 0; padding: 9px 20px; border-radius: 999px;
+          border: 1.5px solid color-mix(in srgb, var(--gold) 55%, transparent);
+          color: var(--maroon); background: var(--parchment);
+          font-size: 15px; font-weight: 600; cursor: pointer;
+          box-shadow: 0 2px 0 color-mix(in srgb, var(--gold) 50%, transparent), 0 4px 8px color-mix(in srgb, var(--maroon) 7%, transparent);
+          transition: transform .15s, box-shadow .15s, background .2s, color .2s;
+        }
+        .kt-chip:hover {
+          background: var(--gold-pale); transform: translateY(-1px);
+          box-shadow: 0 3px 0 color-mix(in srgb, var(--gold) 50%, transparent), 0 6px 10px color-mix(in srgb, var(--maroon) 10%, transparent);
+        }
+        .kt-chip:active { transform: translateY(1px); box-shadow: 0 1px 0 color-mix(in srgb, var(--gold) 50%, transparent); }
+        .kt-chip:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+        .kt-chip[aria-selected="true"] {
+          background: color-mix(in srgb, var(--maroon) 82%, var(--parchment)); color: var(--gold-lt);
+          border-color: color-mix(in srgb, var(--gold) 70%, transparent);
+          transform: translateY(1px); box-shadow: 0 1px 0 color-mix(in srgb, var(--gold) 50%, transparent);
+        }
+
         .kt-yatra { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        .kt-vrat { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .kt-vrat { display: grid; grid-template-columns: 1fr; gap: 18px 36px; }
         @media (min-width: 720px) {
           .kt-yatra { grid-template-columns: 1.3fr 1fr; align-items: center; }
           .kt-vrat { grid-template-columns: 1fr 1fr; }
@@ -114,12 +151,20 @@ export default function KartikView({ lang, onBack }: Props) {
             label={L(KARTIK.hero.imagePlaceholder)}
             ratio="16/9"
             ff={fb}
+            fit="contain"
           />
 
           <div style={{ fontFamily: ff, fontSize: 'clamp(20px, 3.5vw, 26px)', color: 'var(--gold)', marginTop: 18, marginBottom: 14 }}>
             {L(KARTIK.hero.subtitle)}
           </div>
-          <p style={{ ...body, maxWidth: 600 }}>{L(KARTIK.hero.description)}</p>
+
+          {/* New line: "मास एक लाभ अनेक" + text */}
+          <div style={{ maxWidth: 600 }}>
+            <div style={{ fontFamily: ff, fontWeight: 700, fontSize: 'clamp(19px, 3vw, 23px)', color: 'var(--maroon)', marginBottom: 6 }}>
+              {L(HERO_LINE.title)}
+            </div>
+            <p style={body}>{L(HERO_LINE.text)}</p>
+          </div>
           <div className="gold-line" />
         </motion.div>
 
@@ -136,9 +181,9 @@ export default function KartikView({ lang, onBack }: Props) {
               role="tab"
               aria-selected={active === n.id}
               aria-controls={`panel-${n.id}`}
-              onClick={() => setActive(active === n.id ? null : n.id)}
+              onClick={() => setActive(n.id)}
               className="kt-chip"
-              style={{ fontFamily: fb, cursor: 'pointer' }}
+              style={{ fontFamily: fb }}
             >
               {L(n.label)}
             </button>
@@ -149,9 +194,9 @@ export default function KartikView({ lang, onBack }: Props) {
         <div style={{ marginTop: 28 }}>
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
-              key={active ?? 'default'}
-              id={`panel-${active ?? 'default'}`}
-              role={active ? 'tabpanel' : undefined}
+              key={active}
+              id={`panel-${active}`}
+              role="tabpanel"
               initial={reduce ? false : { opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={reduce ? undefined : { opacity: 0, height: 0 }}
@@ -159,25 +204,6 @@ export default function KartikView({ lang, onBack }: Props) {
               style={{ overflow: 'hidden' }}
             >
               <div style={{ paddingBottom: 8 }}>
-
-                {/* Default: koi tab open nahi */}
-                {active === null && (
-                  <div style={{
-                    maxWidth: 420, margin: '0 auto', borderRadius: 16, overflow: 'hidden',
-                    border: '2px solid var(--gold)',
-                    boxShadow: '0 8px 24px color-mix(in srgb, var(--maroon) 15%, transparent)',
-                  }}>
-                    <Image
-                      src={BG_IMAGE}
-                      alt="Damodara Krishna"
-                      width={840}
-                      height={1050}
-                      sizes="(max-width: 460px) 100vw, 420px"
-                      priority
-                      style={{ width: '100%', height: 'auto', display: 'block' }}
-                    />
-                  </div>
-                )}
 
                 {/* Yatra */}
                 {active === 'yatra' && (
@@ -224,24 +250,21 @@ export default function KartikView({ lang, onBack }: Props) {
                   </>
                 )}
 
-                {/* Vrat niyam */}
+                {/* Vrat niyam: boxes hata diye, sirf tick + text (invisible table) */}
                 {active === 'vrat' && (
                   <>
                     <h2 style={h2}>{L(KARTIK.vrat.title)}</h2>
                     <p style={intro}>{L(KARTIK.vrat.intro)}</p>
                     <ul className="kt-vrat" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                       {KARTIK.vrat.items.map((it, i) => (
-                        <li key={i} style={{
-                          display: 'flex', gap: 12, alignItems: 'flex-start', padding: '12px 14px',
-                          background: CARD_BG, border: '1px solid var(--border)', borderRadius: 12,
-                        }}>
+                        <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                           <span style={{
                             flexShrink: 0, width: 22, height: 22, borderRadius: '50%', background: 'var(--maroon)',
-                            display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginTop: 2,
+                            display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginTop: 3,
                           }}>
                             <Check size={13} color="var(--gold-lt)" strokeWidth={3} />
                           </span>
-                          <span style={{ ...body, fontSize: 15.5, lineHeight: 1.65 }}>{L(it)}</span>
+                          <span style={{ ...body, fontSize: 16, lineHeight: 1.7 }}>{L(it)}</span>
                         </li>
                       ))}
                     </ul>

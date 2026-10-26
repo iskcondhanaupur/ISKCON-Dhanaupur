@@ -425,12 +425,25 @@ export default function MenuView({ t, lang, onSelect }: Props) {
             <span style={{ fontWeight: 600 }}>{t.hero.cta}</span>
           </p>
         </div>
-
-        <h1 style={{ fontSize: 'clamp(20px, 3.5vw, 30px)', fontWeight: 700, color: 'var(--maroon)', fontFamily: ff, letterSpacing: '0.02em' }}>
-          {t.menuTitle}
-        </h1>
-        <div style={{ width: 60, height: 1.5, background: 'linear-gradient(to right, transparent, var(--gold), transparent)', margin: '14px auto 0' }} />
       </motion.div>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Latest Highlight label (replaces the old divider line above card)  */}
+      {/* ------------------------------------------------------------------ */}
+      <div style={{
+        width: '100%', maxWidth: 480, marginBottom: 14,
+        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12,
+      }}>
+        <span style={{ flex: 1, height: 1.5, background: 'linear-gradient(to right, transparent, var(--gold))' }} />
+        <span style={{
+          fontFamily: ff, fontWeight: 700, fontSize: isHi ? 17 : 17.5,
+          color: 'var(--maroon)', letterSpacing: isHi ? '0.02em' : '0.08em',
+          textTransform: isHi ? 'none' : 'uppercase', whiteSpace: 'nowrap',
+        }}>
+          {isHi ? 'नवीनतम झलक' : 'Latest Highlight'}
+        </span>
+        <span style={{ flex: 1, height: 1.5, background: 'linear-gradient(to left, transparent, var(--gold))' }} />
+      </div>
 
       {/* ------------------------------------------------------------------ */}
       {/* Kartik Maas — special text-only highlight, links to /kartik        */}
@@ -465,7 +478,7 @@ export default function MenuView({ t, lang, onSelect }: Props) {
             {isHi ? '— श्री दामोदर मास —' : '— Sri Damodara Month —'}
           </div>
           <div style={{ fontFamily: fb, fontSize: 14, marginTop: 8, opacity: 0.92 }}>
-            {isHi ? 'दीप जलाइए, दामोदर को रिझाइए' : 'Light a lamp, win Damodara\'s heart'}
+            {isHi ? 'दीप जलाइए, भगवान दामोदर को रिझाइए' : 'Light a lamp, win Sri Damodara\'s heart'}
           </div>
 
           {/* CTA pill */}
@@ -479,6 +492,14 @@ export default function MenuView({ t, lang, onSelect }: Props) {
             <ArrowRight size={15} />
           </div>
         </Link>
+      </div>
+
+      {/* Menu heading + divider — now below the Kartik card */}
+      <div style={{ width: '100%', maxWidth: 560, textAlign: 'center', marginTop: 20, marginBottom: 24 }}>
+        <h1 style={{ fontSize: 'clamp(20px, 3.5vw, 30px)', fontWeight: 700, color: 'var(--maroon)', fontFamily: ff, letterSpacing: '0.02em' }}>
+          {t.menuTitle}
+        </h1>
+        <div style={{ width: 60, height: 1.5, background: 'linear-gradient(to right, transparent, var(--gold), transparent)', margin: '14px auto 0' }} />
       </div>
 
       {/* ------------------------------------------------------------------ */}
