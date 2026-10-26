@@ -5,6 +5,13 @@ import { motion } from 'framer-motion'
 import { Lang } from '@/data/content'
 import LanguageView from '@/components/views/LanguageView'
 
+// ?next= se aaya path sirf internal ho tabhi use karo
+function getNextPath(): string {
+  const next = new URLSearchParams(window.location.search).get('next')
+  if (next && next.startsWith('/') && !next.startsWith('//')) return next
+  return '/menu'
+}
+
 export default function Home() {
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
@@ -12,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     const saved = localStorage.getItem('iskcon-dhanaupur-lang') as Lang | null
     if (saved === 'en' || saved === 'hi') {
-      router.replace('/menu')
+      router.replace(getNextPath())
     } else {
       setMounted(true)
     }
@@ -20,7 +27,7 @@ export default function Home() {
 
   const chooseLang = (l: Lang) => {
     localStorage.setItem('iskcon-dhanaupur-lang', l)
-    router.push('/menu')
+    router.replace(getNextPath())
   }
 
   if (!mounted) return null

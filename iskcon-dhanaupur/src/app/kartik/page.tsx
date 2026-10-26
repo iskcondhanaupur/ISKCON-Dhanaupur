@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import KartikView from '@/components/views/KartikView'
@@ -8,13 +8,19 @@ import { content, Lang } from '@/data/content'
 
 export default function KartikPage() {
   const router = useRouter()
+  const pathname = usePathname()
   const [lang, setLang] = useState<Lang>('en')
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     const saved = localStorage.getItem('iskcon-dhanaupur-lang') as Lang | null
-    if (saved === 'en' || saved === 'hi') setLang(saved)
-    setMounted(true)
+    if (saved === 'en' || saved === 'hi') {
+      setLang(saved)
+      setMounted(true)
+    } else {
+      // language chuni nahi hai -> pehle language page, phir wapas yahin
+      router.replace(`/?next=${encodeURIComponent(pathname)}`)
+    }
   }, [])
 
   const handleLangChange = (l: Lang) => {
