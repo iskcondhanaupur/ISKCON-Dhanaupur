@@ -43,7 +43,7 @@ export default function KartikPage() {
         onMenuSelect={(id) => router.push(`/${id}`)}
       />
       <main style={{ flex: 1, paddingTop: 68 }}>
-        <KartikView lang={lang} onBack={() => router.back()} />
+        <KartikView lang={lang} onBack={() => router.push('/menu')} />
       </main>
       <div className="floating-footer" style={{ borderTop: '1.5px solid #d4c2a5', padding: '32px 24px', textAlign: 'center', background: 'rgba(253,245,230,0.8)' }}>
         <span style={{ fontSize: 13, color: '#a0846c', fontFamily: 'Crimson Text, serif', letterSpacing: '0.06em', display: 'block', lineHeight: '1.6' }}>
