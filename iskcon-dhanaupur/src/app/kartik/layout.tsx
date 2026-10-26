@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/yk.png',
+        url: '/yk.jpg',
         width: 1200,
         height: 630,
         alt: 'Kartik Maas — Sri Damodara Month, ISKCON Dhanaupur',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title,
     description,
-    images: ['/yk.png'],
+    images: ['/yk.jpg'],
   },
 }
 
