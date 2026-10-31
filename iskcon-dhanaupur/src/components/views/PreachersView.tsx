@@ -10,8 +10,8 @@ interface Props { t: any; lang: Lang; onBack: () => void }
 
 // ───────── NEW: Birthday settings (yahan apni details badlo) ─────────
 // 24 ghante ka window. IST (+05:30). Ye time khatam hote hi purana content wapas aa jayega.
-const BIRTHDAY_START = new Date('2026-10-03T09:00:00+05:30').getTime()
-const BIRTHDAY_END = new Date('2026-10-04T09:00:00+05:30').getTime()
+const BIRTHDAY_START = new Date('2026-10-31T09:40:00+05:30').getTime()
+const BIRTHDAY_END = new Date('2026-11-01T10:00:00+05:30').getTime()
 const BIRTHDAY_PHOTO = '/mataji.png' // public/ me photo rakh ke path likho, jaise '/mataji.png'. Khali = photo nahi dikhegi
 const BIRTHDAY_HI = {
   name: 'श्रीमती माधुरी मोहिनी माताजी',
